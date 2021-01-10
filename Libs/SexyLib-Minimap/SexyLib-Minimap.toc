@@ -1,0 +1,11 @@
+## Interface: 11306
+## Title: SexyLib |cFF00FF00Minimap
+## Notes: Minimap module of Sexy Lib
+## Title: SexyLib |cFF00FF00Миникарта
+## Notes-ruRu: Модуль значка у миникарты Sexy Lib
+## Author: Konstantin Shandurenko
+## Version: 1.0.0
+## RequiredDeps: SexyLib-Core
+## SavedVariables: SexyLib_Minimaps
+
+minimap.lua

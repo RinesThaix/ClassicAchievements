@@ -1,0 +1,34 @@
+## Interface: 11306
+## Title: Classic Achievements
+## Notes: Introduces achievements for WoW Classic
+## Notes-ruRu: Добавляет достижения в мир WoW Classic
+## Author: Konstantin Shandurenko
+## Version: 1.0.0
+## SavedVariables: SexyLib_Minimaps
+## SavedVariablesPerCharacter: CA_LocalData
+#@no-lib-strip@
+Libs\libs.xml
+#@end-no-lib-strip@
+
+localization/stubs.lua
+localization/ru.lua
+localization/en.lua
+
+structures/Completion.lua
+structures/Achievements.lua
+structures/Criterias.lua
+Triggers.lua
+AchievementAPI.lua
+ChatLink.lua
+Data.lua
+
+NineSlice.lua
+Backdrop.lua
+Backdrop.xml
+
+AchievementUtil.lua
+
+AchievementUI.lua
+AchievementUI.xml
+
+Minimap.lua

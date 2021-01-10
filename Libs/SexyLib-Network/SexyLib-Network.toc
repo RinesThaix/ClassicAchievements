@@ -1,0 +1,14 @@
+## Interface: 11306
+## Title: SexyLib |cFF00FF00Network
+## Notes: Network module of Sexy Lib
+## Title: SexyLib |cFF00FF00Сеть
+## Notes-ruRu: Модуль сети Sexy Lib
+## Author: Konstantin Shandurenko
+## Version: 1.0.0
+## RequiredDeps: SexyLib-Core, LibStub, AceSerializer-3.0, AceComm-3.0, AceAddon-3.0, LibCompress
+## OptionalDeps: SexyLib-Localization
+
+localization/ru.lua
+localization/en.lua
+
+network.lua
