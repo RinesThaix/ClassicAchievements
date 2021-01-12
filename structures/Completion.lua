@@ -6,7 +6,11 @@ local mapping = {}
 local function Completion(data)
     return {
         getData = function(self)
-            if data == nil then return CA_LocalData else return data end
+            if data == nil then
+                if not CA_LocalData then CA_LocalData = {} end
+                return CA_LocalData
+            end
+            return data
         end,
         AddAchievement = function(self, id)
             if self:getData()[id] then error('achievement completion ' .. id .. ' already present') end
