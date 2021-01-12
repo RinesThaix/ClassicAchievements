@@ -4,6 +4,7 @@
 ## Notes-ruRu: Добавляет достижения в мир WoW Classic
 ## Author: Konstantin Shandurenko
 ## Version: 1.0.0
+## RequiredDeps: SexyLib-Network, SexyLib-Minimap, SexyLib-Localization
 ## SavedVariablesPerCharacter: CA_LocalData
 
 localization/stubs.lua
