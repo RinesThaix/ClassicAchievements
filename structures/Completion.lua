@@ -98,6 +98,8 @@ local function Completion(data)
             AchievementFrameAchievements_Update()
             AchievementAlertSystem:AddAlert(achievement.id)
             PlaySound(SOUNDKIT.UI_IG_STORE_PURCHASE_DELIVERED_TOAST_01)
+
+            ShareAchievement(achievement.id)
         end,
         CompleteCriteria = function(self, achievementID, criteriaID, withQuantity)
             local criteria = self:GetCriteria(achievementID, criteriaID, true)

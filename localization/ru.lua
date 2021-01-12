@@ -3,8 +3,14 @@ SexyLib:InitLocalization('Classic Achievements', {
     achievement_in_progress = '&7%s работает над получением достижения',
 
     MINIMAP_DESCRIPTION_1 = '&7Левая кнопка мыши: &eоткрыть/скрыть окно достижений',
-    MINIMAP_DESCRIPTION_2 = ' ',
-    MINIMAP_DESCRIPTION_3 = '&3С любовью от Махича :)',
+    MINIMAP_DESCRIPTION_2 = '&7Правая кнопка мыши: &eоткрыть настройки аддона',
+    MINIMAP_DESCRIPTION_3 = ' ',
+    MINIMAP_DESCRIPTION_4 = '&3С любовью от Махича :)',
+
+    OPTION_SHARING = 'Делиться достижениями',
+    OPTION_SHARING_DESC = 'Писать ли в чаты сообщения при получении очередного достижения.',
+    GOT_ACHIEVEMENT_MESSAGE_MALE = 'Я получил достижение %s!',
+    GOT_ACHIEVEMENT_MESSAGE_FEMALE = 'Я получила достижение %s!',
 
     CATEGORY_GENERAL = 'Общее',
     CATEGORY_QUESTS = 'Задания',

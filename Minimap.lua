@@ -15,3 +15,8 @@ minimap:SetDescription(description)
 minimap:SetClickHandler(true, false, false, function()
     AchievementFrame_ToggleAchievementFrame()
 end)
+
+minimap:SetClickHandler(false, false, false, function()
+    InterfaceOptionsFrame_OpenToCategory(addon)
+    InterfaceOptionsFrame_OpenToCategory(addon) -- not a bug, two calls required
+end)

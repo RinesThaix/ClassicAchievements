@@ -21,7 +21,6 @@ function GetAchievementLink(achievementID)
         end
         index = index + 1
     end
-
     return string.format('[ClassicAchievement:%d:%s:%d:%d:%d:%d:%d]', achievementID, UnitGUID('player'), finished, month, day, year, criterias)
 end
 
@@ -31,14 +30,33 @@ end
 
 local function filterFunc(_, event, msg, player, l, cs, t, flag, channelId, ...)
     if flag == "GM" or flag == "DEV" or event == "CHAT_MSG_CHANNEL" and type(channelId) == "number" and channelId > 0 then return end
-    if not strstartsWith(msg, '[ClassicAchievement:') or msg:sub(#msg, #msg) ~= ']' then return end
-    local _, aid, guid, finished, month, day, year, criterias = strsplit(':', msg)
-    if criterias == nil then return end
-    criterias = criterias:sub(1, #criterias - 1)
-    local ach = db:GetAchievement(tonumber(aid))
-    if not ach then return end
-    local link = string.format('|cffffff00|Hgarrmission:clach:%d.%s.%d.%d.%d.%d.%d|h[%s]|h|r', aid, guid, finished, month, day, year, criterias, ach.name)
-    return false, link, player, l, cs, t, flag, channelId, ...
+
+    local newMsg, remaining, done = '', msg, false
+    repeat
+        local start, finish, data = remaining:find('%[ClassicAchievement:(%d+:[^%]]+:%d:%d+:%d+:%d+:%d+)%]')
+        if data then
+            local link
+            local aid, guid, finished, month, day, year, criterias = strsplit(':', data)
+            if criterias == nil then link = ''
+            else
+                local ach = db:GetAchievement(tonumber(aid))
+                if not ach then link = ''
+                else
+                    link = string.format('|cffffff00|Hgarrmission:clach:%d.%s.%d.%d.%d.%d.%d|h[%s]|h|r', aid, guid, finished, month, day, year, criterias, ach.name)
+                end
+            end
+            newMsg = newMsg .. remaining:sub(1, start - 1)
+            newMsg = newMsg .. link
+            remaining = remaining:sub(finish + 1)
+        else
+            done = true
+        end
+    until(done)
+    newMsg = newMsg .. remaining
+
+    if newMsg ~= '' then
+        return false, newMsg, player, l, cs, t, flag, channelId, ...
+    end
 end
 
 ChatFrame_AddMessageEventFilter("CHAT_MSG_CHANNEL", filterFunc)
@@ -165,3 +183,18 @@ hooksecurefunc('SetItemRef', function(link)
         ShowTooltip(lines)
     end
 end)
+
+function ShareAchievement(achievementID)
+    if IsSharingAchievementsInChat() then
+        local gender = UnitSex('player')
+        if gender > 1 then
+            if gender == 2 then gender = 'MALE'
+            else gender = 'FEMALE' end
+            local message = SexyLib:Localization('Classic Achievements'):Get('GOT_ACHIEVEMENT_MESSAGE_' .. gender, GetAchievementLink(achievementID))
+            if SexyLib:Util():IsInGuild() then SendChatMessage(message, 'GUILD') end
+            if IsInRaid() then SendChatMessage(message, 'RAID')
+            elseif IsInGroup() then SendChatMessage(message, 'PARTY')
+            else SendChatMessage(message, 'SAY') end
+        end
+    end
+end

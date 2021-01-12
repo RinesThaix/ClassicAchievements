@@ -4,8 +4,14 @@ SexyLib:InitLocalization('Classic Achievements', {
     achievement_in_progress = '&7Achievement in progress by %s',
 
     MINIMAP_DESCRIPTION_1 = '&7Left mouse button: &eopen/hide achievements window',
-    MINIMAP_DESCRIPTION_2 = ' ',
-    MINIMAP_DESCRIPTION_3 = '&3With love from Maxich :)',
+    MINIMAP_DESCRIPTION_2 = '&7Right mouse button: &eopen addon settings',
+    MINIMAP_DESCRIPTION_3 = ' ',
+    MINIMAP_DESCRIPTION_4 = '&3With love from Maxich :)',
+
+    OPTION_SHARING = 'Share achievements',
+    OPTION_SHARING_DESC = 'Whether to write messages in chats when receiving new achievement.',
+    GOT_ACHIEVEMENT_MESSAGE_MALE = 'I\'ve just earned achievement %s!',
+    GOT_ACHIEVEMENT_MESSAGE_FEMALE = 'I\'ve just earned achievement %s!',
 
     CATEGORY_GENERAL = 'General',
     CATEGORY_QUESTS = 'Quests',
