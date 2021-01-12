@@ -1,6 +1,8 @@
 local addon = 'Classic Achievements'
 local loc = SexyLib:Localization(addon)
 
+SexyLib:InitLogger(addon, '&6')
+
 local options = {
     type = 'group',
     args = {

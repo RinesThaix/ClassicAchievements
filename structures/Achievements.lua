@@ -110,7 +110,7 @@ end
 
 local function Tab(id)
     if struct.tabs[id] then error('tab with id ' .. id .. ' already exists') end
-    local result = {
+    struct.tabs[id] = {
         id = id,
         categories = {},
         CreateCategory = function(self, ...)
@@ -124,27 +124,25 @@ local function Tab(id)
         end,
         GetCategories = function(self)
             return self.categories
-        end
-    }
-    local summaryCategory = {
-        id = -1,
-        name = 'summary',
-        parentID = -1,
-        GetAchievement = function(self, id)
-            return struct.achievements[id]
         end,
-        GetAchievements = function(self)
-            local result = {}
-            for _, category in pairs(result.categories) do
-                for id, achievement in pairs(category:GetAchievements()) do
-                    result[id] = achievement
+        summaryCategory = {
+            id = -1,
+            name = 'summary',
+            parentID = -1,
+            GetAchievement = function(self, id)
+                return struct.achievements[id]
+            end,
+            GetAchievements = function(self)
+                local result = {}
+                for _, category in pairs(struct.tabs[id].categories) do
+                    for id, achievement in pairs(category:GetAchievements()) do
+                        result[id] = achievement
+                    end
                 end
+                return result
             end
-            return result
-        end
+        }
     }
-    result.summaryCategory = summaryCategory
-    struct.tabs[id] = result
 end
 
 Tab(struct.TAB_ID_PLAYER)
@@ -165,6 +163,7 @@ function struct:GetTabSpecial(isGuildOrPlayerTab)
 end
 
 function struct:GetCategory(id)
+    if id == -1 then return self:GetSelectedTab():GetCategory(id) end
     return struct.categories[id]
 end
 

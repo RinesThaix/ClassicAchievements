@@ -12,6 +12,9 @@ SexyLib:InitLocalization('Classic Achievements', {
     GOT_ACHIEVEMENT_MESSAGE_MALE = 'Я получил достижение %s!',
     GOT_ACHIEVEMENT_MESSAGE_FEMALE = 'Я получила достижение %s!',
 
+    COMPARE_ACHIEVEMENTS = 'Сравнить достижения',
+    TARGET_DOES_NOT_HAVE_ADDON = 'У цели не установлен аддон.',
+
     CATEGORY_GENERAL = 'Общее',
     CATEGORY_QUESTS = 'Задания',
     CATEGORY_KALIMDOR = 'Калимдор',

@@ -1,9 +1,9 @@
 ## Interface: 11306
 ## Title: Classic Achievements
 ## Notes: Introduces achievements for WoW Classic
-## Notes-ruRu: Добавляет достижения в мир WoW Classic
+## Notes-ruRU: Добавляет достижения в мир WoW Classic
 ## Author: Konstantin Shandurenko
-## Version: 1.0.1
+## Version: 1.0.3
 ## RequiredDeps: SexyLib-Network, SexyLib-Minimap, SexyLib-Localization, LibStub, LibDeflate
 ## OptionalDeps: DBM-Core
 ## SavedVariables: CA_Settings
@@ -31,5 +31,7 @@ BlizzardStuff/AchievementUI.lua
 BlizzardStuff/AchievementUI.xml
 
 Minimap.lua
+Network.lua
+Comparison.lua
 
 Integrations/DBM.lua

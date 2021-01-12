@@ -13,6 +13,9 @@ SexyLib:InitLocalization('Classic Achievements', {
     GOT_ACHIEVEMENT_MESSAGE_MALE = 'I\'ve just earned achievement %s!',
     GOT_ACHIEVEMENT_MESSAGE_FEMALE = 'I\'ve just earned achievement %s!',
 
+    COMPARE_ACHIEVEMENTS = 'Compare achievements',
+    TARGET_DOES_NOT_HAVE_ADDON = 'Target does not have this addon installed.',
+
     CATEGORY_GENERAL = 'General',
     CATEGORY_QUESTS = 'Quests',
     CATEGORY_KALIMDOR = 'Kalimdor',

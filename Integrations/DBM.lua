@@ -1,5 +1,8 @@
 if not DBM or not DBM.LoadMod then return end
 
+local countPulls = {}
+countPulls['449'] = true -- balnazzar from living statholme is bugged in dbm
+
 hooksecurefunc(DBM, 'LoadMod', function(that, initialMod)
     if type(initialMod) ~= 'table' then return end
     local modName = initialMod.modId
@@ -21,6 +24,7 @@ hooksecurefunc(DBM, 'LoadMod', function(that, initialMod)
                 local bossName = mod.id
                 if bossName and savedStats[bossName] then
                     local kills = savedStats[bossName].normalKills
+                    if not kills and countPulls[bossName] then kills = savedStats[bossName].normalPulls end
                     if kills > 0 then
                         for _, mobID in pairs(mobIDs) do
                             CA_Criterias:Trigger(CA_Criterias.TYPE.KILL_NPC, {mobID}, kills, true)

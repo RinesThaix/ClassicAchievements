@@ -117,14 +117,23 @@ function AchievementFrame_ToggleAchievementFrame(toggleStatFrame, toggleGuildVie
 end
 
 function AchievementFrame_DisplayComparison (unit)
-	AchievementFrame.wasShown = nil;
-	AchievementFrameTab_OnClick = AchievementFrameComparisonTab_OnClick;
-	AchievementFrameTab_OnClick(1);
-	AchievementFrame_SetTabs();
-	ShowUIPanel(AchievementFrame);
-	AchievementFrame_ShowSubFrame(AchievementFrameComparison, AchievementFrameSummary);
-	AchievementFrameComparison_SetUnit(unit);
-	AchievementFrameComparison_ForceUpdate();
+	if not unit then return end
+	local name = UnitName(unit)
+	if not name then return end
+	GetAndProcessRemoteAchievementsCompletion(name, function(sender, completion)
+		CA_CompletionManager:SetTarget(completion)
+
+		AchievementFrame.wasShown = nil;
+		AchievementFrameTab_OnClick = AchievementFrameComparisonTab_OnClick;
+		AchievementFrameTab_OnClick(1);
+		AchievementFrame_SetTabs();
+		ShowUIPanel(AchievementFrame);
+		AchievementFrame_ShowSubFrame(AchievementFrameComparison, AchievementFrameSummary);
+		AchievementFrameComparison_SetUnit(unit);
+		AchievementFrameComparison_ForceUpdate();
+	end, function()
+		SexyLib:Logger('Classic Achievements'):LogErrorL('TARGET_DOES_NOT_HAVE_ADDON')
+	end)
 end
 
 function AchievementFrame_OnLoad (self)
@@ -736,7 +745,7 @@ function AchievementFrameCategories_ClearSelection ()
 end
 
 function AchievementFrameComparison_UpdateStatusBars (id)
-	local numAchievements, numCompleted = GetCategoryNumAchievements(id);
+	local numAchievements, numCompleted = GetCategoryNumAchievements(id, true);
 	local name = GetCategoryInfo(id);
 
 	if ( id == ACHIEVEMENT_COMPARISON_SUMMARY_ID ) then
@@ -749,7 +758,7 @@ function AchievementFrameComparison_UpdateStatusBars (id)
 	statusBar.title:SetText(string.format(ACHIEVEMENTS_COMPLETED_CATEGORY, name));
 	statusBar.text:SetText(numCompleted.."/"..numAchievements);
 
-	local friendCompleted = GetComparisonCategoryNumAchievements(id);
+	local friendCompleted = GetComparisonCategoryNumAchievements(id, true);
 
 	statusBar = AchievementFrameComparisonSummaryFriendStatusBar;
 	statusBar:SetMinMaxValues(0, numAchievements);
@@ -2952,7 +2961,7 @@ function AchievementFrameComparison_OnEvent (self, event, ...)
 	elseif event == "UNIT_PORTRAIT_UPDATE" then
 		local updateUnit = ...;
 		if UnitName(updateUnit) == AchievementFrameComparisonHeaderName:GetText() then
-			-- C_AchievementInfo.SetPortraitTexture(AchievementFrameComparisonHeaderPortrait);
+			SetPortraitTexture(AchievementFrameComparisonHeaderPortrait, updateUnit)
 		end
 	end
 
@@ -2960,15 +2969,15 @@ function AchievementFrameComparison_OnEvent (self, event, ...)
 end
 
 function AchievementFrameComparison_SetUnit (unit)
-	ClearAchievementComparisonUnit();
-	SetAchievementComparisonUnit(unit);
+	ClearAchievementComparisonUnit()
+	SetAchievementComparisonUnit(unit)
 
-	AchievementFrameComparisonHeaderPoints:SetText(GetComparisonAchievementPoints());
-	AchievementFrameComparisonHeaderName:SetText(GetUnitName(unit));
-	-- C_AchievementInfo.SetPortraitTexture(AchievementFrameComparisonHeaderPortrait);
-	AchievementFrameComparisonHeaderPortrait.unit = unit;
-	AchievementFrameComparisonHeaderPortrait.race = UnitRace(unit);
-	AchievementFrameComparisonHeaderPortrait.sex = UnitSex(unit);
+	AchievementFrameComparisonHeaderPoints:SetText(GetComparisonAchievementPoints())
+	AchievementFrameComparisonHeaderName:SetText(GetUnitName(unit))
+	SetPortraitTexture(AchievementFrameComparisonHeaderPortrait, unit)
+	AchievementFrameComparisonHeaderPortrait.unit = unit
+	AchievementFrameComparisonHeaderPortrait.race = UnitRace(unit)
+	AchievementFrameComparisonHeaderPortrait.sex = UnitSex(unit)
 end
 
 function AchievementFrameComparison_ClearSelection ()

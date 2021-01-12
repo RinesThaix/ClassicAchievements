@@ -41,20 +41,22 @@ local function IsAchievementVisible(achievement, includeAll)
 end
 
 -- total, completed, incompleted
-function GetCategoryNumAchievements(categoryID, includeAll)
+function GetCategoryNumAchievements(categoryID, includeAll, completion)
     includeAll = includeAll or false
 
     local total, completed, incompleted = 0, 0, 0
 
     local category = db:GetCategory(categoryID)
-    local completion = cmanager:GetLocal()
+    local completion = completion or cmanager:GetLocal()
     if category then
         for aid, achievement in pairs(category:GetAchievements()) do
-            if IsAchievementVisible(achievement, includeAll) then total = total + 1 end
-            if completion:IsAchievementCompleted(aid) then
-                completed = completed + 1
-            else
-                incompleted = incompleted + 1
+            if IsAchievementVisible(achievement, includeAll) then
+                total = total + 1
+                if completion:IsAchievementCompleted(aid) then
+                    completed = completed + 1
+                else
+                    incompleted = incompleted + 1
+                end
             end
         end
     end
@@ -65,9 +67,7 @@ end
 -- title, parentCategoryID, flags = GetCategoryInfo(categoryID)
 function GetCategoryInfo(categoryID)
     local category = db:GetCategory(categoryID)
-    if category then
-        return category.name, category.parentID, 0
-    end
+    if category then return category.name, category.parentID, 0 end
     return '', -1, 0
 end
 
@@ -163,10 +163,9 @@ function GetNumCompletedAchievements(inGuildView)
     local tab = db:GetTabSpecial(inGuildView)
     if tab then
         for _, category in pairs(tab:GetCategories()) do
-            for _, achievement in pairs(category:GetAchievements()) do
-                total = total + 1
-                if completion:IsAchievementCompleted(achievement.id) then completed = completed + 1 end
-            end
+            local t, c = GetCategoryNumAchievements(category.id, true, completion)
+            total = total + t
+            completed = completed + c
         end
     end
     return total, completed
@@ -308,7 +307,7 @@ end
 -- return completed, month, day, year
 function GetAchievementComparisonInfo(id)
     local completion = cmanager:GetTarget()
-    if completion:IsAchievementCompleted(id) then
+    if not completion:IsAchievementCompleted(id) then
         return false, nil, nil, nil
     else
         local time = completion:GetAchievementCompletionTime(id)
@@ -318,21 +317,8 @@ function GetAchievementComparisonInfo(id)
 end
 
 function GetComparisonCategoryNumAchievements(categoryID, includeAll)
-    includeAll = includeAll or false
-
-    local completed = 0
-
-    local category = db:GetCategory(categoryID)
-    local completion = cmanager:GetTarget()
-    if category then
-        for aid, _ in pairs(category:GetAchievements()) do
-            if completion:IsAchievementCompleted(aid) then
-                completed = completed + 1
-            end
-        end
-    end
-
-    return total, completed, incompleted
+    local _, completed = GetCategoryNumAchievements(categoryID, includeAll, cmanager:GetTarget())
+    return completed
 end
 
 function GetComparisonAchievementPoints()
