@@ -42,7 +42,7 @@ local function filterFunc(_, event, msg, player, l, cs, t, flag, channelId, ...)
                 local ach = db:GetAchievement(tonumber(aid))
                 if not ach then link = ''
                 else
-                    link = string.format('|cffffff00|Hgarrmission:clach:%d.%s.%d.%d.%d.%d.%d|h[%s]|h|r', aid, guid, finished, month, day, year, criterias, ach.name)
+                    link = string.format('|cffffff00|Hgarrmission:clach:%d#%s#%d#%d#%d#%d#%d|h[%s]|h|r', aid, guid, finished, month, day, year, criterias, ach.name)
                 end
             end
             newMsg = newMsg .. remaining:sub(1, start - 1)
@@ -54,6 +54,7 @@ local function filterFunc(_, event, msg, player, l, cs, t, flag, channelId, ...)
     until(done)
     newMsg = newMsg .. remaining
 
+    TEST = newMsg
     if newMsg ~= '' then
         return false, newMsg, player, l, cs, t, flag, channelId, ...
     end
@@ -103,7 +104,7 @@ local shownAchievementID = 0
 hooksecurefunc('SetItemRef', function(link)
     local linkType, addon, params = strsplit(':', link)
     if linkType ~= 'garrmission' or addon ~= 'clach' then return end
-    local aid, guid, finished, month, day, year, criterias = strsplit('.', params)
+    local aid, guid, finished, month, day, year, criterias = strsplit('#', params)
     aid, finished, month, day, year, criterias = tonumber(aid), tonumber(finished), tonumber(month), tonumber(day), tonumber(year), tonumber(criterias)
     local ach = db:GetAchievement(aid)
     if ach == nil then return end
