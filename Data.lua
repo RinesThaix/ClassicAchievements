@@ -19,7 +19,7 @@ do
 end
 
 ach = general:CreateAchievement('AN_BANK', 'AD_BANK', 10, 'bank', true)
-ach:AddCriteria(criterias:Create('AC_BANK', criterias.TYPE.BANK_SLOTS, nil, 7))
+ach:AddCriteria(criterias:Create('AC_BANK', criterias.TYPE.BANK_SLOTS, nil, 6))
 
 do
     previous = nil
@@ -91,7 +91,7 @@ do
     questsKalimdor:add('DUROTAR', 835)
     questsKalimdor:add('BARRENS', {888, 902})
     questsKalimdor:add('STONETALON', 1096)
-    questsKalimdor:add('DESOLACE', {6027, 1439})
+    questsKalimdor:add('DESOLACE', 6027)
     questsKalimdor:add('THOUSAND_NEEDLES', 1189)
     questsKalimdor:add('DUSTWALLOW', 1203)
     questsKalimdor:add('FELWOOD', {5165, 5385})
@@ -129,7 +129,7 @@ local createPvE = function(category)
                 if npcID > 0 then
                     ach:AddCriteria(criterias:CreateL('AC_' .. instanceName .. i, criterias.TYPE.KILL_NPC, {npcID}))
                 else
-                    ach:AddCriteria(criterias:Create(nil, criterias.TYPE.KILL_NPC, {npcID}))
+                    ach:AddCriteria(criterias:Create(nil, criterias.TYPE.KILL_NPC, {-npcID}))
                 end
             end
         else
@@ -227,8 +227,8 @@ do
     local aq20 = create('AQ20', 'aq20', 15339).id
     local zg = create('ZULGURUB', 'zulgurub', 14834).id
     local ragnaros = create('RAGNAROS', 'ragnaros', 11502, 20).id
-    local bwl = create('BLACK_WING_LAIR', 'bwl', 11583, 30).id
-    local aq40 = create('AQ40', 'aq40', 15727, 40).id
+    local bwl = create('BLACK_WING_LAIR', 'bwl', 11583, 20).id
+    local aq40 = create('AQ40', 'aq40', 15727, 20).id
     local nx1 = create('NAXXRAMAS_SPIDERS', '-Inv_Trinket_Naxxramas04', 15952).id
     local nx2 = create('NAXXRAMAS_PLAGUE', '-Spell_Shadow_Deathcoil', 16011).id
     local nx3 = create('NAXXRAMAS_MILITARY', '-Inv_Sword_2h_AshbringerCorrupt', {-16062, -16063, -16064, -16065}).id

@@ -62,7 +62,6 @@ SexyLib:InitLocalization('Classic Achievements', {
     DESOLACE_1 = 'Desolace',
     DESOLACE_2 = 'Desolace',
     QUEST_6027 = 'Book of the Ancients',
-    QUEST_1439 = 'Search for Tyranis',
 
     DUSTWALLOW_1 = 'Dustwallow marsh',
     DUSTWALLOW_2 = 'Dustwallow marsh',

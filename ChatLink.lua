@@ -54,7 +54,6 @@ local function filterFunc(_, event, msg, player, l, cs, t, flag, channelId, ...)
     until(done)
     newMsg = newMsg .. remaining
 
-    TEST = newMsg
     if newMsg ~= '' then
         return false, newMsg, player, l, cs, t, flag, channelId, ...
     end

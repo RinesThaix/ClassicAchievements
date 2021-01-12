@@ -1057,11 +1057,11 @@
 					<Anchor point="BOTTOM" relativeTo="$parentRewardBackground" relativePoint="TOP" x="0" y="0"/>
 				</Anchors>
 			</Frame>
-			<CheckButton name="$parentTracked" hidden="true" inherits="AchievementCheckButtonTemplate" parentKey="tracked">
+			<!-- <CheckButton name="$parentTracked" hidden="true" inherits="AchievementCheckButtonTemplate" parentKey="tracked">
 				<Anchors>
 					<Anchor point="TOPLEFT" x="12" y="-66"/>
 				</Anchors>
-			</CheckButton>
+			</CheckButton> -->
 		</Frames>
 	</Button>
 	<Frame name="ComparisonPlayerTemplate" inherits="TooltipBorderBackdropTemplate" virtual="true">

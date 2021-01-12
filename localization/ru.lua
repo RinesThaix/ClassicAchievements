@@ -61,7 +61,6 @@ SexyLib:InitLocalization('Classic Achievements', {
     DESOLACE_1 = 'Пустошах',
     DESOLACE_2 = 'Пустошей',
     QUEST_6027 = 'Книга Древних',
-    QUEST_1439 = 'Поиски Тираниса',
 
     DUSTWALLOW_1 = 'Пылевых топях',
     DUSTWALLOW_2 = 'Пылевых топей',

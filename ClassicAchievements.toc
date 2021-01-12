@@ -4,7 +4,8 @@
 ## Notes-ruRu: Добавляет достижения в мир WoW Classic
 ## Author: Konstantin Shandurenko
 ## Version: 1.0.1
-## RequiredDeps: SexyLib-Network, SexyLib-Minimap, SexyLib-Localization
+## RequiredDeps: SexyLib-Network, SexyLib-Minimap, SexyLib-Localization, LibStub, LibDeflate
+## OptionalDeps: DBM-Core
 ## SavedVariables: CA_Settings
 ## SavedVariablesPerCharacter: CA_LocalData
 
@@ -22,13 +23,13 @@ AchievementAPI.lua
 ChatLink.lua
 Data.lua
 
-NineSlice.lua
-Backdrop.lua
-Backdrop.xml
-
-AchievementUtil.lua
-
-AchievementUI.lua
-AchievementUI.xml
+BlizzardStuff/NineSlice.lua
+BlizzardStuff/Backdrop.lua
+BlizzardStuff/Backdrop.xml
+BlizzardStuff/AchievementUtil.lua
+BlizzardStuff/AchievementUI.lua
+BlizzardStuff/AchievementUI.xml
 
 Minimap.lua
+
+Integrations/DBM.lua

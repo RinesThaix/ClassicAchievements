@@ -942,9 +942,9 @@ function AchievementFrameAchievements_ClearSelection ()
 			button.highlight:Hide();
 		end
 		button.selected = nil;
-		if ( not button.tracked:GetChecked() ) then
-			button.tracked:Hide();
-		end
+		-- if ( not button.tracked:GetChecked() ) then
+		-- 	button.tracked:Hide();
+		-- end
 		button.description:Show();
 		button.hiddenDescription:Hide();
 	end
@@ -1096,9 +1096,9 @@ function AchievementButton_Collapse (self)
 	AchievementButton_UpdatePlusMinusTexture(self);
 	self:SetHeight(ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT);
 	self.background:SetTexCoord(0, 1, 1-(ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT / 256), 1);
-	if ( not self.tracked:GetChecked() ) then
-		self.tracked:Hide();
-	end
+	-- if ( not self.tracked:GetChecked() ) then
+	-- 	self.tracked:Hide();
+	-- end
 	self.tabard:Hide();
 	self.guildCornerL:Hide();
 	self.guildCornerR:Hide();
@@ -1357,12 +1357,12 @@ function AchievementButton_DisplayAchievement (button, category, achievement, se
 		if ( IsTrackedAchievement(id) ) then
 			button.check:Show();
 			button.label:SetWidth(button.label:GetStringWidth() + 4); -- This +4 here is to fudge around any string width issues that arize from resizing a string set to its string width. See bug 144418 for an example.
-			button.tracked:SetChecked(true);
-			button.tracked:Show();
+			-- button.tracked:SetChecked(true);
+			-- button.tracked:Show();
 		else
 			button.check:Hide();
-			button.tracked:SetChecked(false);
-			button.tracked:Hide();
+			-- button.tracked:SetChecked(false);
+			-- button.tracked:Hide();
 		end
 
 		AchievementButton_UpdatePlusMinusTexture(button);
@@ -1382,7 +1382,7 @@ function AchievementButton_DisplayAchievement (button, category, achievement, se
 			button:Expand(height);
 		end
 		if ( not completed or (not wasEarnedByMe and not isGuild) ) then
-			button.tracked:Show();
+			-- button.tracked:Show();
 		end
 	elseif ( button.selected ) then
 		button.selected = nil;
