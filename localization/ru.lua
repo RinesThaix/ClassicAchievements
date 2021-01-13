@@ -1,3 +1,4 @@
+if GetLocale() ~= 'ruRU' then return end
 SexyLib:InitLocalization('Classic Achievements', {
     achievement_earned = '&aДостижение получено %s %d/%d/%d',
     achievement_in_progress = '&7%s работает над получением достижения',

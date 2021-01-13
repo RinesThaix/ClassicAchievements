@@ -107,6 +107,20 @@ local function updateProfessions()
     triggerProfessions(secondary, TYPE.REACH_SECONDARY_PROFESSION_LEVEL)
 end
 
+local function updateItemsInInventory()
+    local items = {}
+    for i = 0, NUM_BAG_SLOTS do
+        for j = 1, GetContainerNumSlots(i) do
+            local _, quantity, _, _, _, _, _, _, _, itemID = GetContainerItemInfo(i, j)
+            if itemID and quantity then
+                if not items[itemID] then items[itemID] = 0 end
+                items[itemID] = items[itemID] + quantity
+            end
+        end
+    end
+    for id, quantity in pairs(items) do trigger(TYPE.OBTAIN_ITEM, {id}, quantity, true) end
+end
+
 C_Timer.After(5, function()
     local kills, _, maxRank = GetPVPLifetimeStats()
     local _, maxRank = GetPVPRankInfo(maxRank)
@@ -120,7 +134,11 @@ C_Timer.After(5, function()
     updateBankSlots()
     updateReputations()
     updateProfessions()
+    updateItemsInInventory()
 end)
+
+local ITEM_CREATION_PATTERN = LOOT_ITEM_CREATED_SELF:gsub("%%s","%(.*%)")
+local ITEM_CREATION_PATTERN_MULTIPLE = LOOT_ITEM_CREATED_SELF_MULTIPLE:gsub('%%s', '%(.*%)'):gsub('%%d', '%(%%d%+%)')
 
 local events = {
     COMBAT_LOG_EVENT_UNFILTERED = function()
@@ -154,6 +172,26 @@ local events = {
     end,
     SKILL_LINES_CHANGED = function()
         C_Timer.After(1, updateProfessions)
+    end,
+    CHAT_MSG_LOOT = function(msg, initiator, langName, channelName, playerName, flags)
+        if flag == 'GM' or flag == 'DEV' then return end
+        if not playerName then playerName = initiator end
+        if not playerName or playerName ~= UnitName('player') then return end
+
+        C_Timer.After(1, updateItemsInInventory)
+
+        local item, quantity = msg:match(ITEM_CREATION_PATTERN_MULTIPLE)
+        if not item then
+            item = msg:match(ITEM_CREATION_PATTERN)
+            if not item then return end
+            quantity = 1
+        else
+            quantity = tonumber(quantity)
+        end
+        A = item
+        local id = tonumber(item:match("\124Hitem:(%d+):"))
+        if not id then return end
+        trigger(TYPE.CRAFT_ITEM, {id}, quantity)
     end
 }
 local eventsHandler = CreateFrame('FRAME', 'ClassicAchievementsEventHandlingFrame')
