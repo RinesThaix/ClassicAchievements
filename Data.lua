@@ -367,6 +367,76 @@ do
     add(809, 'SHENDRALAR', 30)
 end
 
+local battlegrounds = tab:CreateCategory('CATEGORY_BATTLEGROUNDS', pvp.id, true)
+
+do
+    local function add(factionID, factionName, points, icon)
+        local ach = battlegrounds:CreateAchievement(loc:Get('AN_' .. factionName), loc:Get('AD_' .. factionName), points or 10, icon or string.lower(factionName))
+        ach:AddCriteria(criterias:Create(nil, criterias.TYPE.REACH_REPUTATION, {factionID, 8}))
+        return ach
+    end
+
+    local ach1 = add(510, 'DEFILERS', 10, '-Inv_Jewelry_Amulet_07')
+    ach1:SetHordeOnly()
+    local ach2 = add(729, 'FROSTWOLF_CLAN', 10, '-Inv_Jewelry_FrostwolfTrinket_05')
+    ach2:SetHordeOnly()
+    local ach3 = add(889, 'WARSONG_OUTRIDERS', 10, '-Inv_Misc_Rune_07')
+    ach3:SetHordeOnly()
+    ach = battlegrounds:CreateAchievement(loc:Get('AN_HORDE_PVP_FRACTIONS'), loc:Get('AD_HORDE_PVP_FRACTIONS'), 10, '-Inv_Bannerpvp_01')
+    ach:AddCriteria(criterias:Create(ach1.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach1.id}))
+    ach:AddCriteria(criterias:Create(ach2.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach2.id}))
+    ach:AddCriteria(criterias:Create(ach3.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach3.id}))
+    ach:SetHordeOnly()
+
+    ach1 = add(509, 'LEAGUE_OF_ARATHOR', 10, '-Ability_Warrior_Revenge')
+    ach1:SetAllianceOnly()
+    ach2 = add(730, 'STORMSPIKE_GUARD', 10, '-Inv_Jewelry_Stormpiketrinket_05')
+    ach2:SetAllianceOnly()
+    ach3 = add(890, 'SILVERWING_SENTINELS', 10, '-Ability_Racial_Shadowmeld')
+    ach3:SetAllianceOnly()
+    ach = battlegrounds:CreateAchievement(loc:Get('AN_ALLIANCE_PVP_FRACTIONS'), loc:Get('AD_ALLIANCE_PVP_FRACTIONS'), 10, '-Inv_Bannerpvp_02')
+    ach:AddCriteria(criterias:Create(ach1.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach1.id}))
+    ach:AddCriteria(criterias:Create(ach2.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach2.id}))
+    ach:AddCriteria(criterias:Create(ach3.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach3.id}))
+    ach:SetAllianceOnly()
+    
+    add = function(npcID, name, icon)
+        local ach = pvp:CreateAchievement(loc:Get('AN_' .. name .. '_SLAYER'), loc:Get('AD_' .. name .. '_SLAYER'), 10, icon)
+        ach:AddCriteria(criterias:Create(nil, criterias.TYPE.KILL_NPC, {npcID}))
+        return ach
+    end
+    
+    ach1 = add(1748, 'BOLVAR', '-Spell_Arcane_TeleportStormwind')
+    ach1:SetHordeOnly()
+    ach2 = add(2784, 'MAGNI', '-Spell_Arcane_TeleportIronforge')
+    ach2:SetHordeOnly()
+    ach3 = add(7937, 'MEKKATORQUE', '-Inv_Misc_Wrench_01')
+    ach3:SetHordeOnly()
+    local ach4 = add(7999, 'TYRANDE', '-Spell_Arcane_TeleportDarnassus')
+    ach4:SetHordeOnly()
+    ach = pvp:CreateAchievement(loc:Get('AN_ALLIANCE_KINGS_SLAYER'), loc:Get('AD_ALLIANCE_KINGS_SLAYER'), 10, '-Ability_Warrior_Warcry')
+    ach:AddCriteria(criterias:Create(ach1.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach1.id}))
+    ach:AddCriteria(criterias:Create(ach2.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach2.id}))
+    ach:AddCriteria(criterias:Create(ach3.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach3.id}))
+    ach:AddCriteria(criterias:Create(ach4.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach4.id}))
+    ach:SetHordeOnly()
+
+    ach1 = add(4949, 'THRALL', '-Spell_Arcane_TeleportOrgrimmar')
+    ach1:SetAllianceOnly()
+    ach2 = add(10540, 'VOLJIN', '-Spell_Nature_Astralrecalgroup')
+    ach2:SetAllianceOnly()
+    ach3 = add(10181, 'SYLVANAS', '-Spell_Arcane_TeleportUndercity')
+    ach3:SetAllianceOnly()
+    ach4 = add(3057, 'CAIRNE', '-Spell_Arcane_TeleportThunderBluff')
+    ach4:SetAllianceOnly()
+    ach = pvp:CreateAchievement(loc:Get('AN_HORDE_KINGS_SLAYER'), loc:Get('AD_HORDE_KINGS_SLAYER'), 10, '-Spell_Nature_Thunderclap')
+    ach:AddCriteria(criterias:Create(ach1.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach1.id}))
+    ach:AddCriteria(criterias:Create(ach2.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach2.id}))
+    ach:AddCriteria(criterias:Create(ach3.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach3.id}))
+    ach:AddCriteria(criterias:Create(ach4.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach4.id}))
+    ach:SetAllianceOnly()
+end
+
 -- local exploration = tab:CreateCategory('CATEGORY_EXPLORATION', nil, true)
 
 -- local explorationKalimdor = tab:CreateCategory('CATEGORY_KALIMDOR', exploration.id, true)
