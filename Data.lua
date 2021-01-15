@@ -367,34 +367,39 @@ do
     add(809, 'SHENDRALAR', 30)
 end
 
-local battlegrounds = tab:CreateCategory('CATEGORY_BATTLEGROUNDS', pvp.id, true)
+local alterac = tab:CreateCategory('CATEGORY_BG_ALTERAC', pvp.id, true)
+local alteracID = 1459
+local warsong = tab:CreateCategory('CATEGORY_BG_WARSONG', pvp.id, true)
+local warsongID = 1460
+local arathi = tab:CreateCategory('CATEGORY_BG_ARATHI', pvp.id, true)
+local arathiID = 1461
 
 do
-    local function add(factionID, factionName, points, icon)
-        local ach = battlegrounds:CreateAchievement(loc:Get('AN_' .. factionName), loc:Get('AD_' .. factionName), points or 10, icon or string.lower(factionName))
+    local function add(category, factionID, factionName, points, icon)
+        local ach = category:CreateAchievement(loc:Get('AN_' .. factionName), loc:Get('AD_' .. factionName), points or 10, icon or string.lower(factionName))
         ach:AddCriteria(criterias:Create(nil, criterias.TYPE.REACH_REPUTATION, {factionID, 8}))
         return ach
     end
 
-    local ach1 = add(510, 'DEFILERS', 10, '-Inv_Jewelry_Amulet_07')
+    local ach1 = add(arathi, 510, 'DEFILERS', 10, '-Inv_Jewelry_Amulet_07')
     ach1:SetHordeOnly()
-    local ach2 = add(729, 'FROSTWOLF_CLAN', 10, '-Inv_Jewelry_FrostwolfTrinket_05')
+    local ach2 = add(alterac, 729, 'FROSTWOLF_CLAN', 10, '-Inv_Jewelry_FrostwolfTrinket_05')
     ach2:SetHordeOnly()
-    local ach3 = add(889, 'WARSONG_OUTRIDERS', 10, '-Inv_Misc_Rune_07')
+    local ach3 = add(warsong, 889, 'WARSONG_OUTRIDERS', 10, '-Inv_Misc_Rune_07')
     ach3:SetHordeOnly()
-    ach = battlegrounds:CreateAchievement(loc:Get('AN_HORDE_PVP_FRACTIONS'), loc:Get('AD_HORDE_PVP_FRACTIONS'), 10, '-Inv_Bannerpvp_01')
+    ach = pvp:CreateAchievement(loc:Get('AN_HORDE_PVP_FRACTIONS'), loc:Get('AD_HORDE_PVP_FRACTIONS'), 10, '-Inv_Bannerpvp_01')
     ach:AddCriteria(criterias:Create(ach1.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach1.id}))
     ach:AddCriteria(criterias:Create(ach2.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach2.id}))
     ach:AddCriteria(criterias:Create(ach3.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach3.id}))
     ach:SetHordeOnly()
 
-    ach1 = add(509, 'LEAGUE_OF_ARATHOR', 10, '-Ability_Warrior_Revenge')
+    ach1 = add(arathi, 509, 'LEAGUE_OF_ARATHOR', 10, '-Ability_Warrior_Revenge')
     ach1:SetAllianceOnly()
-    ach2 = add(730, 'STORMSPIKE_GUARD', 10, '-Inv_Jewelry_Stormpiketrinket_05')
+    ach2 = add(alterac, 730, 'STORMSPIKE_GUARD', 10, '-Inv_Jewelry_Stormpiketrinket_05')
     ach2:SetAllianceOnly()
-    ach3 = add(890, 'SILVERWING_SENTINELS', 10, '-Ability_Racial_Shadowmeld')
+    ach3 = add(warsong, 890, 'SILVERWING_SENTINELS', 10, '-Ability_Racial_Shadowmeld')
     ach3:SetAllianceOnly()
-    ach = battlegrounds:CreateAchievement(loc:Get('AN_ALLIANCE_PVP_FRACTIONS'), loc:Get('AD_ALLIANCE_PVP_FRACTIONS'), 10, '-Inv_Bannerpvp_02')
+    ach = pvp:CreateAchievement(loc:Get('AN_ALLIANCE_PVP_FRACTIONS'), loc:Get('AD_ALLIANCE_PVP_FRACTIONS'), 10, '-Inv_Bannerpvp_02')
     ach:AddCriteria(criterias:Create(ach1.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach1.id}))
     ach:AddCriteria(criterias:Create(ach2.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach2.id}))
     ach:AddCriteria(criterias:Create(ach3.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach3.id}))
@@ -435,6 +440,95 @@ do
     ach:AddCriteria(criterias:Create(ach3.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach3.id}))
     ach:AddCriteria(criterias:Create(ach4.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach4.id}))
     ach:SetAllianceOnly()
+
+    ach = pvp:CreateAchievement(loc:Get('AN_RACES_KILLER'), loc:Get('AD_ALLIANCE_RACES_KILLER'), 20, '-Ability_Gouge')
+    for _, race in pairs({'HUMAN', 'NIGHTELF', 'DWARF', 'GNOME'}) do
+        ach:AddCriteria(criterias:CreateL('AC_' .. race .. '_KILLED', criterias.TYPE.KILL_PLAYER_OF_RACE, {race}))
+    end
+    ach:SetHordeOnly()
+
+    ach = pvp:CreateAchievement(loc:Get('AN_RACES_KILLER'), loc:Get('AD_HORDE_RACES_KILLER'), 20, '-Ability_Gouge')
+    for _, race in pairs({'ORC', 'TROLL', 'SCOURGE', 'TAUREN'}) do
+        ach:AddCriteria(criterias:CreateL('AC_' .. race .. '_KILLED', criterias.TYPE.KILL_PLAYER_OF_RACE, {race}))
+    end
+    ach:SetAllianceOnly()
+
+    ach = pvp:CreateAchievement(loc:Get('AN_CLASSES_KILLER'), loc:Get('AD_CLASSES_KILLER'), 20, '-Ability_Cheapshot')
+    for _, class in pairs({'WARRIOR', 'HUNTER', 'ROGUE', 'PRIEST', 'MAGE', 'WARLOCK', 'DRUID', 'PALADIN'}) do
+        ach:AddCriteria(criterias:CreateL('AC_' .. class .. '_KILLED', criterias.TYPE.KILL_PLAYER_OF_CLASS, {class}))
+    end
+    ach:SetHordeOnly()
+
+    ach = pvp:CreateAchievement(loc:Get('AN_CLASSES_KILLER'), loc:Get('AD_CLASSES_KILLER'), 20, '-Ability_Cheapshot')
+    for _, class in pairs({'WARRIOR', 'HUNTER', 'ROGUE', 'PRIEST', 'MAGE', 'WARLOCK', 'DRUID', 'SHAMAN'}) do
+        ach:AddCriteria(criterias:CreateL('AC_' .. class .. '_KILLED', criterias.TYPE.KILL_PLAYER_OF_CLASS, {class}))
+    end
+    ach:SetAllianceOnly()
+end
+
+do
+    local function _add(category, mapID, mapName, typeName, type, additionalParam, amounts, icon)
+        previous = nil
+        for _, amount in pairs(amounts) do
+            local name, desc
+            if amount == 1 then
+                name = loc:Get('AN_' .. mapName .. '_' .. typeName)
+                desc = loc:Get('AD_' .. mapName .. '_' .. typeName)
+            else
+                name = loc:Get('AN_' .. mapName .. '_' .. typeName .. 'S', amount)
+                desc = loc:Get('AD_' .. mapName .. '_' .. typeName .. 'S', amount)
+            end
+            ach = category:CreateAchievement(name, desc, 10, icon)
+            local params = {mapID}
+            if additionalParam then params[2] = additionalParam end
+            if amount == 1 then desc = nil end
+            ach:AddCriteria(criterias:Create(desc, type, params, amount))
+            if previous then previous:SetNext(ach) end
+            previous = ach
+        end
+        return ach
+    end
+
+    local function add(category, mapID, mapName, icon)
+        return _add(category, mapID, mapName, 'WIN', criterias.TYPE.BATTLEFIELD_WINS, nil, {1, 5, 10, 25, 50}, icon)
+    end
+
+    add(alterac, alteracID, 'ALTERAC', '-Spell_Frost_Frostbrand')
+    add(warsong, warsongID, 'WARSONG', '-Inv_Axe_16')
+    add(arathi, arathiID, 'ARATHI', '-Inv_Sword_39')
+
+    add = function(typeName, type, additionalParam, amounts, icon)
+        return _add(alterac, alteracID, 'ALTERAC', typeName, type, additionalParam, amounts, icon)
+    end
+
+    add('KILLING_BLOW', criterias.TYPE.BATTLEFIELD_SCORE_MAX, 1, {10, 25, 50, 100}, '-Spell_Shadow_Summonimp')
+    add('GRAVEYARD_ASSAULT', criterias.TYPE.BATTLEFIELD_STAT_MAX, 1, {1, 2, 3, 4}, '-Spell_Holy_Divinespirit')
+    add('GRAVEYARD_DEFEND', criterias.TYPE.BATTLEFIELD_STAT_MAX, 1, {1, 2, 5, 8}, '-Spell_Holy_Prayerofspirit')
+    add('TOWER_ASSAULT', criterias.TYPE.BATTLEFIELD_STAT_MAX, 3, {1, 2, 3, 4}, '-Ability_Thunderbolt')
+    add('TOWER_DEFEND', criterias.TYPE.BATTLEFIELD_STAT_MAX, 4, {1, 2, 4, 6}, '-Inv_Shield_05')
+    add('MINE_CAPTURE', criterias.TYPE.BATTLEFIELD_STAT_MAX, 5, {1, 2, 3, 4}, '-Inv_Pick_01')
+
+    add = function(typeName, type, additionalParam, amounts, icon)
+        return _add(warsong, warsongID, 'WARSONG', typeName, type, additionalParam, amounts, icon)
+    end
+
+    add('KILL', criterias.TYPE.BATTLEFIELD_SCORE_MAX, 2, {10, 25, 50, 75}, '-Ability_Rogue_Eviscerate')
+    add('FLAG_CAPTURE', criterias.TYPE.BATTLEFIELD_STAT_MAX, 1, {1, 2, 3}, '-Inv_Banner_03')
+    add('FLAG_RETURN', criterias.TYPE.BATTLEFIELD_STAT_MAX, 2, {1, 3, 5}, '-Spell_Nature_Reincarnation')
+
+    add = function(typeName, type, additionalParam, amounts, icon)
+        return _add(arathi, arathiID, 'ARATHI', typeName, type, additionalParam, amounts, icon)
+    end
+
+    add('BASE_ASSAULT', criterias.TYPE.BATTLEFIELD_STAT_MAX, 1, {1, 2, 3, 4}, '-Ability_Eyeoftheowl')
+    add('BASE_DEFEND', criterias.TYPE.BATTLEFIELD_STAT_MAX, 2, {1, 2, 4, 6}, '-Inv_Shield_06')
+
+    add = function(typeName, type, param, amounts, icon)
+        return _add(pvp, param, 'BGS', typeName, type, nil, amounts, icon)
+    end
+
+    add('KILLING_BLOW', criterias.TYPE.BATTLEFIELDS_SCORE, 1, {100, 250, 500, 750, 1000}, '-Spell_Shadow_Unholyfrenzy')
+    add('KILL', criterias.TYPE.BATTLEFIELDS_SCORE, 2, {100, 250, 500, 750, 1000}, '-Ability_Warrior_Innerrage')
 end
 
 -- local exploration = tab:CreateCategory('CATEGORY_EXPLORATION', nil, true)

@@ -140,6 +140,39 @@ end)
 local ITEM_CREATION_PATTERN = LOOT_ITEM_CREATED_SELF:gsub("%%s","%(.*%)")
 local ITEM_CREATION_PATTERN_MULTIPLE = LOOT_ITEM_CREATED_SELF_MULTIPLE:gsub('%%s', '%(.*%)'):gsub('%%d', '%(%%d%+%)')
 
+local function handleBattlefieldsEvent()
+    if not InActiveBattlefield() then return end
+    local winner = GetBattlefieldWinner()
+    if not winner then return end
+    
+    local mapID = C_Map.GetBestMapForUnit('player')
+    if mapID ~= 1459 and mapID ~= 1460 and mapID ~= 1461 then return end
+
+    local numStats, numScores = GetNumBattlefieldStats(), GetNumBattlefieldScores()
+    local myName = UnitName('player')
+    for i = 1, numScores do
+        local name, killingBlows, honorableKills = GetBattlefieldScore(i)
+        if name == myName then
+            local scores = {killingBlows, honorableKills}
+            for j = 1, numStats do
+                local stat = GetBattlefieldStatData(i, j)
+                trigger(TYPE.BATTLEFIELD_STAT_MAX, {mapID, j}, stat, true)
+            end
+            for j, score in pairs(scores) do
+                trigger(TYPE.BATTLEFIELD_SCORE_MAX, {mapID, j}, score, true)
+                trigger(TYPE.BATTLEFIELDS_SCORE, {j}, score)
+            end
+            break
+        end
+    end
+
+    local myFaction = UnitFactionGroup('player')
+    if myFaction == 'Horde' then myFaction = 0 else myFaction = 1 end
+    if winner == myFaction then
+        trigger(TYPE.BATTLEFIELD_WINS, {mapID}, 1)
+    end
+end
+
 local events = {
     COMBAT_LOG_EVENT_UNFILTERED = function()
         local timestamp, type, hideCaster, sourceGUID, sourceName, sourceFlags, sourceFlags2, targetGUID, targetName, targetFlags, targetFlags2 = select(1, CombatLogGetCurrentEventInfo())
@@ -150,6 +183,10 @@ local events = {
             elseif isPlayer(targetGUID) then
                 local kills = GetPVPLifetimeStats()
                 trigger(TYPE.KILL_PLAYERS, nil, kills, true)
+
+                local _, className, _, raceName = GetPlayerInfoByGUID(targetGUID)
+                trigger(TYPE.KILL_PLAYER_OF_CLASS, {string.upper(className)}, 1)
+                trigger(TYPE.KILL_PLAYER_OF_RACE, {string.upper(raceName)}, 1)
             end
         end
     end,
@@ -192,7 +229,8 @@ local events = {
         local id = tonumber(item:match("\124Hitem:(%d+):"))
         if not id then return end
         trigger(TYPE.CRAFT_ITEM, {id}, quantity)
-    end
+    end,
+    UPDATE_BATTLEFIELD_SCORE = handleBattlefieldsEvent
 }
 local eventsHandler = CreateFrame('FRAME', 'ClassicAchievementsEventHandlingFrame')
 eventsHandler:SetScript('OnEvent', function(self, event, ...)

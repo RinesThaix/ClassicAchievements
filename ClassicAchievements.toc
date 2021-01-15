@@ -3,7 +3,7 @@
 ## Notes: Introduces achievements for WoW Classic
 ## Notes-ruRU: Добавляет достижения в мир WoW Classic
 ## Author: Konstantin Shandurenko
-## Version: 1.0.4
+## Version: 1.0.5
 ## RequiredDeps: SexyLib-Network, SexyLib-Minimap, SexyLib-Localization, LibStub, LibDeflate
 ## OptionalDeps: DBM-Core
 ## SavedVariables: CA_Settings
@@ -19,10 +19,10 @@ structures/Completion.lua
 structures/Achievements.lua
 structures/Criterias.lua
 Triggers.lua
-AchievementAPI.lua
 ChatLink.lua
 Data.lua
 
+BlizzardStuff/ApiMocks.lua
 BlizzardStuff/NineSlice.lua
 BlizzardStuff/Backdrop.lua
 BlizzardStuff/Backdrop.xml

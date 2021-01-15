@@ -114,8 +114,8 @@ local function Completion(data)
         SetCriteriaProgression = function(self, achievementID, criteriaID, value, requiredQuantity)
             value = min(value, requiredQuantity)
             local criteria = self:GetCriteria(achievementID, criteriaID, true)
-            if criteria[2] == value or criteria[2] == requiredQuantity then return false end
-            criteria[2] = min(value, requiredQuantity)
+            if criteria[2] >= value or criteria[2] == requiredQuantity then return false end
+            criteria[2] = value
             if criteria[2] == requiredQuantity then
                 return self:CompleteCriteria(achievementID, criteriaID)
             end
