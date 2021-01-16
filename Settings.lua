@@ -10,8 +10,16 @@ local options = {
             name = loc:Get('OPTION_SHARING'),
             desc = loc:Get('OPTION_SHARING_DESC'),
             type = 'toggle',
+            width = 2,
             set = function(info, val) CA_Settings.sharing = val end,
             get = function(info) return CA_Settings.sharing end
+        },
+        updateMapExploration = {
+            name = loc:Get('OPTION_UPDATE_MAP_EXPLORATION'),
+            desc = loc:Get('OPTION_UPDATE_MAP_EXPLORATION'),
+            type = 'execute',
+            width = 2,
+            func = function() ClassicAchievements_UpdateExploredAreas() end
         }
     }
 }

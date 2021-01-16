@@ -10,6 +10,9 @@ SexyLib:InitLocalization('Classic Achievements', {
 
     OPTION_SHARING = 'Делиться достижениями',
     OPTION_SHARING_DESC = 'Писать ли в чаты сообщения при получении очередного достижения.',
+    OPTION_UPDATE_MAP_EXPLORATION = 'Проверить исследованные локации',
+    OPTION_UPDATE_MAP_EXPLORATION_DESC = 'Засчитывает для достижений уже исследованные локации.',
+
     GOT_ACHIEVEMENT_MESSAGE_MALE = 'Я получил достижение %s!',
     GOT_ACHIEVEMENT_MESSAGE_FEMALE = 'Я получила достижение %s!',
 
@@ -516,5 +519,13 @@ SexyLib:InitLocalization('Classic Achievements', {
     AN_PROFS_SECONDARY = 'И жрец, и жнец',
     AD_PROFS_SECONDARY = 'Повысьте навык владения всеми второстепенными профессиями до 300.',
     AN_PROFS_FIVE = 'Гений гениален во всем',
-    AD_PROFS_FIVE = 'Добейтесь указанных ниже достижений, связанных с профессиями.'
+    AD_PROFS_FIVE = 'Добейтесь указанных ниже достижений, связанных с профессиями.',
+
+    AN_EXPLORE_AZEROTH = 'Исследователь Азерота',
+    AD_EXPLORE_AZEROTH = 'Исследуйте мир Азерота!',
+    AN_EXPLORE_KALIMDOR = 'Исследователь Калимдора',
+    AD_EXPLORE_KALIMDOR = 'Исследуйте перечисленные ниже локации Калимдора.',
+    AN_EXPLORE_EASTERN_KINGDOMS = 'Исследователь Восточных Королевств',
+    AD_EXPLORE_EASTERN_KINGDOMS = 'Исследуйте перечисленные ниже локации Восточных Королевств.',
+    AD_EXPLORE = '%s: перечисленные ниже зоны локации исследованы.'
 })

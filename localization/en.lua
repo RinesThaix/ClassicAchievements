@@ -10,6 +10,9 @@ SexyLib:InitLocalization('Classic Achievements', {
 
     OPTION_SHARING = 'Share achievements',
     OPTION_SHARING_DESC = 'Whether to write messages in chats when receiving new achievement.',
+    OPTION_UPDATE_MAP_EXPLORATION = 'Check explored locations',
+    OPTION_UPDATE_MAP_EXPLORATION_DESC = 'Counts already explored locations for achievements.',
+
     GOT_ACHIEVEMENT_MESSAGE_MALE = 'I\'ve just earned achievement %s!',
     GOT_ACHIEVEMENT_MESSAGE_FEMALE = 'I\'ve just earned achievement %s!',
 
@@ -516,5 +519,13 @@ SexyLib:InitLocalization('Classic Achievements', {
     AN_PROFS_SECONDARY = 'Both the priest and the reaper',
     AD_PROFS_SECONDARY = 'Raise the skill of all secondary professions to 300 at the same time.',
     AN_PROFS_FIVE = 'Genius is brilliant in everything',
-    AD_PROFS_FIVE = 'Earn profession achievements listed below.'
+    AD_PROFS_FIVE = 'Earn profession achievements listed below.',
+
+    AN_EXPLORE_AZEROTH = 'Azeroth Explorer',
+    AD_EXPLORE_AZEROTH = 'Explore the world of Azeroth!',
+    AN_EXPLORE_KALIMDOR = 'Kalimdor Explorer',
+    AD_EXPLORE_KALIMDOR = 'Explore locations of Kalimdor listed below.',
+    AN_EXPLORE_EASTERN_KINGDOMS = 'Eastern Kingdoms Explorer',
+    AD_EXPLORE_EASTERN_KINGDOMS = 'Explore locations of Eastern Kingdoms listed below.',
+    AD_EXPLORE = 'Explore %s.'
 })

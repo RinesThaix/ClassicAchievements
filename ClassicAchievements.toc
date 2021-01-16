@@ -3,7 +3,7 @@
 ## Notes: Introduces achievements for WoW Classic
 ## Notes-ruRU: Добавляет достижения в мир WoW Classic
 ## Author: Konstantin Shandurenko
-## Version: 1.0.5
+## Version: 1.0.6
 ## RequiredDeps: SexyLib-Network, SexyLib-Minimap, SexyLib-Localization, LibStub, LibDeflate
 ## OptionalDeps: DBM-Core
 ## SavedVariables: CA_Settings
@@ -12,6 +12,10 @@
 localization/stubs.lua
 localization/ru.lua
 localization/en.lua
+
+DB/AreaTable.lua
+DB/AreaTableLocale_ruRU.lua
+DB/AreaTableLocale_enUS.lua
 
 Settings.lua
 

@@ -114,7 +114,7 @@ local function Completion(data)
         SetCriteriaProgression = function(self, achievementID, criteriaID, value, requiredQuantity)
             value = min(value, requiredQuantity)
             local criteria = self:GetCriteria(achievementID, criteriaID, true)
-            if criteria[2] >= value or criteria[2] == requiredQuantity then return false end
+            if criteria and criteria[2] and (criteria[2] >= value or criteria[2] == requiredQuantity) then return false end
             criteria[2] = value
             if criteria[2] == requiredQuantity then
                 return self:CompleteCriteria(achievementID, criteriaID)
@@ -149,6 +149,7 @@ local function Completion(data)
             if not achievementIDs then return end
             for _, achievementID in pairs(achievementIDs) do
                 if self:SetCriteriaProgression(achievementID, criteriaID, count, requiredQuantity) then
+                    AchievementFrame_ForceUpdate()
                     local achievement = CA_Database:GetAchievement(achievementID)
                     if achievement and self:AreAllCriteriasCompleted(achievement) then
                         self:completeAchievementGracefully(achievement)
@@ -161,6 +162,7 @@ local function Completion(data)
             if not achievementIDs then return end
             for _, achievementID in pairs(achievementIDs) do
                 if self:IncrementCriteriaProgression(achievementID, criteriaID, requiredQuantity, count) then
+                    AchievementFrame_ForceUpdate()
                     local achievement = CA_Database:GetAchievement(achievementID)
                     if achievement and self:AreAllCriteriasCompleted(achievement) then
                         self:completeAchievementGracefully(achievement)

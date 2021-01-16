@@ -531,11 +531,78 @@ do
     add('KILL', criterias.TYPE.BATTLEFIELDS_SCORE, 2, {100, 250, 500, 750, 1000}, '-Ability_Warrior_Innerrage')
 end
 
--- local exploration = tab:CreateCategory('CATEGORY_EXPLORATION', nil, true)
+local exploration = tab:CreateCategory('CATEGORY_EXPLORATION', nil, true)
 
--- local explorationKalimdor = tab:CreateCategory('CATEGORY_KALIMDOR', exploration.id, true)
+local exploreAzeroth = exploration:CreateAchievement('AN_EXPLORE_AZEROTH', 'AD_EXPLORE_AZEROTH', 30, '-Inv_Misc_Map_01', true)
+local explorationKalimdor = tab:CreateCategory('CATEGORY_KALIMDOR', exploration.id, true)
+local explorationEasternKingdoms = tab:CreateCategory('CATEGORY_EASTERN_KINGDOMS', exploration.id, true)
 
--- local explorationEasternKingdoms = tab:CreateCategory('CATEGORY_EASTERN_KINGDOMS', exploration.id, true)
+do
+
+    local global = explorationKalimdor:CreateAchievement('AN_EXPLORE_KALIMDOR', 'AD_EXPLORE_KALIMDOR', 20, string.lower('kalimdor'), true)
+    local function add(areaID, areaIDs, icon)
+        local areaName = AreaTableLocale[areaID]
+        ach = explorationKalimdor:CreateAchievement(areaName, loc:Get('AD_EXPLORE', areaName), 10, icon or string.lower(AreaTable[areaID][3]))
+        for _, childrenID in pairs(areaIDs) do
+            ach:AddCriteria(criterias:Create(AreaTableLocale[childrenID], criterias.TYPE.EXPLORE_AREA, {childrenID}))
+        end
+        global:AddCriteria(criterias:Create(ach.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach.id}))
+    end
+
+    add(331, {441, 414, 2301, 413, 417, 416, 424, 415, 421, 418, 426, 419, 431, 422, 438, 430, 434, 437})
+    add(16, {1228, 1230, 2497, 1229, 1226, 1219, 1220, 1225, 1216, 1237, 1236, 1235, 1221, 1231, 1232, 1234, 1256, 1233, 1227})
+    add(148, {443, 444, 456, 446, 447, 448, 450, 449, 442})
+    add(405, {608, 603, 599, 2407, 609, 2405, 607, 596, 2408, 606, 602, 604, 2198, 2406, 2404})
+    add(14, {367, 366, 368, 372, 362, 816, 369, 370, 817, 1637, 363})
+    add(15, {502, 496, 2302, 509, 511, 2079, 513}, 'dustwallow')
+    add(361, {1998, 1762, 2618, 1767, 1765, 1766, 2481, 1763, 2479, 2480, 2478, 1761})
+    add(357, {1137, 1111, 1114, 1113, 1108, 1119, 1105, 2577, 2522, 1106, 1099, 1101, 1103, 1100, 1121, 1120})
+    add(493, {656}, '-Spell_Arcane_TeleportMoonglade')
+    add(215, {818, 220, 396, 222, 360, 821, 820, 224, 404, 397, 819, 225, 1638, 398})
+    add(1377, {3425, 2743, 2744, 2737, 2740})
+    add(406, {2537, 2539, 1076, 2540, 2541, 461, 460, 465, 464, 467, 2538}, 'stonetalon')
+    add(440, {979, 976, 977, 1937, 1336, 986, 1939, 985, 982, 1938, 1940, 983, 984, 981, 992, 987, 980, 990, 2300, 978})
+    add(141, {736, 186, 261, 259, 478, 260, 264, 266, 1657, 702, 188}, 'darnassus')
+    add(17, {382, 1703, 384, 383, 386, 1702, 1704, 379, 1699, 380, 388, 392, 391, 385, 1697, 387, 1700, 1698, 378, 390, 1701, 359, 1717, 1316, 381}, 'barrens')
+    add(400, {2097, 483, 484, 481, 2303, 439, 480, 482, 485}, 'thousand_needles')
+    add(490, {543, 539, 540, 1942, 1943, 538, 537}, 'ungoro')
+    add(618, {2243, 2251, 2253, 2245, 2255, 2250, 2247, 2244, 2242, 2241, 2249, 2256, 2246})
+    exploreAzeroth:AddCriteria(criterias:Create(global.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {global.id}))
+
+    global = explorationEasternKingdoms:CreateAchievement('AN_EXPLORE_EASTERN_KINGDOMS', 'AD_EXPLORE_EASTERN_KINGDOMS', 20, string.lower('eastern_kingdoms'), true)
+    add = function(areaID, areaIDs, icon)
+        local areaName = AreaTableLocale[areaID]
+        ach = explorationEasternKingdoms:CreateAchievement(areaName, loc:Get('AD_EXPLORE', areaName), 10, icon or string.lower(AreaTable[areaID][3]))
+        for _, childrenID in pairs(areaIDs) do
+            ach:AddCriteria(criterias:Create(AreaTableLocale[childrenID], criterias.TYPE.EXPLORE_AREA, {childrenID}))
+        end
+        global:AddCriteria(criterias:Create(ach.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach.id}))
+    end
+
+    add(36, {1679, 282, 279, 1682, 1357, 1677, 1683, 278, 1681, 281, 1678, 280, 1680, 284, 1684}, 'alterac_mountains')
+    add(45, {313, 334, 1857, 1858, 327, 324, 880, 335, 320, 316, 317, 336, 315, 314, 321, 333}, 'arathi')
+    add(3, {342, 339, 1879, 345, 337, 344, 1878, 340, 338, 1877, 346, 1898, 341, 1897})
+    add(4, {1457, 1438, 1440, 72, 1441, 1439, 73, 2517, 1437}, 'blasted_lands')
+    add(46, {2418, 249, 2417, 2420, 253, 250, 2421, 252, 254, 255}, 'burning_steppes')
+    add(41, {2561, 2562, 2697}, 'deadwind_pass')
+    add(1, {801, 800, 131, 802, 804, 138, 212, 803, 808, 134, 137, 135, 136, 77, 211, 806, 809, 133}, 'dun_morogh')
+    add(10, {536, 94, 492, 93, 856, 245, 242, 241, 121, 42, 1098, 799, 1097})
+    add(139, {2260, 2261, 2263, 2258, 2262, 2622, 2264, 1234, 2266, 2268, 2623, 2270, 2271, 2624, 2272, 2273, 2275, 2276, 2627, 2277, 2279, 2619}, 'eastern_plaguelands')
+    add(12, {87, 9, 1519, 57, 797, 60, 62, 91, 798, 88, 86, 18}, 'elwynn_forest')
+    add(267, {272, 1056, 290, 275, 294, 289, 286, 271, 288, 295, 896, 285}, 'hillsbrad')
+    add(38, {146, 143, 149, 838, 147, 142, 936, 144, 923, 924, 556}, 'loch_modan')
+    add(44, {68, 1002, 1001, 95, 97, 70, 997, 996, 71, 1000, 69}, 'redridge_mountains')
+    add(51, {246, 1957, 1444, 1958, 247, 1959, 1442}, 'searing_gorge')
+    add(130, {927, 240, 226, 928, 172, 237, 228, 213, 229, 233, 236, 204, 230, 231, 238}, 'silverpine_forest')
+    add(33, {100, 117, 99, 101, 43, 1738, 1737, 1739, 311, 477, 310, 128, 1741, 103, 127, 129, 105, 1740, 37, 125, 123, 104, 122, 102, 297, 19, 35}, 'stranglethorn_valley')
+    add(8, {116, 657, 1780, 1798, 75, 74, 1797, 1778, 76, 300, 1777}, 'swamp_of_sorrows')
+    add(47, {1882, 348, 350, 1885, 1883, 353, 1886, 1884, 356, 355, 1917, 351, 307, 354}, 'hinterlands')
+    add(85, {156, 154, 810, 157, 166, 811, 164, 159, 165, 162, 459, 167, 812, 160, 1497, 152}, 'tirisfal_glades')
+    add(28, {2298, 197, 193, 813, 199, 200, 202, 192, 190, 201, 198, 2620, 2297}, 'western_plaguelands')
+    add(40, {107, 108, 916, 109, 918, 111, 917, 113, 219, 20, 115, 921, 922, 920})
+    add(11, {1018, 1022, 118, 1024, 1023, 309, 205, 1036, 836, 1025, 1020, 1016, 1017, 1037, 150}, 'wetlands')
+    exploreAzeroth:AddCriteria(criterias:Create(global.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {global.id}))
+end
 
 -- local events = tab:CreateCategory('CATEGORY_EVENTS', nil, true)
 

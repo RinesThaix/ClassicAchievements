@@ -121,6 +121,22 @@ local function updateItemsInInventory()
     for id, quantity in pairs(items) do trigger(TYPE.OBTAIN_ITEM, {id}, quantity, true) end
 end
 
+local AREA_COORD_ADDITION = 0.025
+function ClassicAchievements_UpdateExploredAreas()
+    for mapID = 1411, 1458 do
+        if C_Map.GetMapInfo(mapID) then
+            for x = 0, 1, AREA_COORD_ADDITION do
+                for y = 0, 1, AREA_COORD_ADDITION do
+                    local areaIDs = C_MapExplorationInfo.GetExploredAreaIDsAtPosition(mapID, CreateVector2D(x, y))
+                    if areaIDs then
+                        trigger(TYPE.EXPLORE_AREA, {areaIDs[1]}, 1, true)
+                    end
+                end
+            end
+        end
+    end
+end
+
 C_Timer.After(5, function()
     local kills, _, maxRank = GetPVPLifetimeStats()
     local _, maxRank = GetPVPRankInfo(maxRank)
@@ -140,38 +156,8 @@ end)
 local ITEM_CREATION_PATTERN = LOOT_ITEM_CREATED_SELF:gsub("%%s","%(.*%)")
 local ITEM_CREATION_PATTERN_MULTIPLE = LOOT_ITEM_CREATED_SELF_MULTIPLE:gsub('%%s', '%(.*%)'):gsub('%%d', '%(%%d%+%)')
 
-local function handleBattlefieldsEvent()
-    if not InActiveBattlefield() then return end
-    local winner = GetBattlefieldWinner()
-    if not winner then return end
-    
-    local mapID = C_Map.GetBestMapForUnit('player')
-    if mapID ~= 1459 and mapID ~= 1460 and mapID ~= 1461 then return end
-
-    local numStats, numScores = GetNumBattlefieldStats(), GetNumBattlefieldScores()
-    local myName = UnitName('player')
-    for i = 1, numScores do
-        local name, killingBlows, honorableKills = GetBattlefieldScore(i)
-        if name == myName then
-            local scores = {killingBlows, honorableKills}
-            for j = 1, numStats do
-                local stat = GetBattlefieldStatData(i, j)
-                trigger(TYPE.BATTLEFIELD_STAT_MAX, {mapID, j}, stat, true)
-            end
-            for j, score in pairs(scores) do
-                trigger(TYPE.BATTLEFIELD_SCORE_MAX, {mapID, j}, score, true)
-                trigger(TYPE.BATTLEFIELDS_SCORE, {j}, score)
-            end
-            break
-        end
-    end
-
-    local myFaction = UnitFactionGroup('player')
-    if myFaction == 'Horde' then myFaction = 0 else myFaction = 1 end
-    if winner == myFaction then
-        trigger(TYPE.BATTLEFIELD_WINS, {mapID}, 1)
-    end
-end
+local ZONE_EXPLORED_PATTERN = ERR_ZONE_EXPLORED:gsub('%%s', '%(.*%)')
+local ZONE_EXPLORED2_PATTERN = ERR_ZONE_EXPLORED_XP:gsub('%%s', '%(.*%)'):gsub('%%d', '%%d')
 
 local events = {
     COMBAT_LOG_EVENT_UNFILTERED = function()
@@ -230,7 +216,49 @@ local events = {
         if not id then return end
         trigger(TYPE.CRAFT_ITEM, {id}, quantity)
     end,
-    UPDATE_BATTLEFIELD_SCORE = handleBattlefieldsEvent
+    UPDATE_BATTLEFIELD_SCORE = function()
+        if not InActiveBattlefield() then return end
+        local winner = GetBattlefieldWinner()
+        if not winner then return end
+        
+        local mapID = C_Map.GetBestMapForUnit('player')
+        if mapID ~= 1459 and mapID ~= 1460 and mapID ~= 1461 then return end
+
+        local numStats, numScores = GetNumBattlefieldStats(), GetNumBattlefieldScores()
+        local myName = UnitName('player')
+        for i = 1, numScores do
+            local name, killingBlows, honorableKills = GetBattlefieldScore(i)
+            if name == myName then
+                local scores = {killingBlows, honorableKills}
+                for j = 1, numStats do
+                    local stat = GetBattlefieldStatData(i, j)
+                    trigger(TYPE.BATTLEFIELD_STAT_MAX, {mapID, j}, stat, true)
+                end
+                for j, score in pairs(scores) do
+                    trigger(TYPE.BATTLEFIELD_SCORE_MAX, {mapID, j}, score, true)
+                    trigger(TYPE.BATTLEFIELDS_SCORE, {j}, score)
+                end
+                break
+            end
+        end
+
+        local myFaction = UnitFactionGroup('player')
+        if myFaction == 'Horde' then myFaction = 0 else myFaction = 1 end
+        if winner == myFaction then
+            trigger(TYPE.BATTLEFIELD_WINS, {mapID}, 1)
+        end
+    end,
+    UI_INFO_MESSAGE = function(type, message)
+        if type ~= 372 then return end
+        local areaName = message:match(ZONE_EXPLORED_PATTERN)
+        if not areaName then areaName = message:match(ZONE_EXPLORED2_PATTERN) end
+        if not areaName then return end
+        for areaID, name in pairs(AreaTableLocale) do
+            if name == areaName then
+                trigger(TYPE.EXPLORE_AREA, {areaID}, 1, true)
+            end
+        end
+    end
 }
 local eventsHandler = CreateFrame('FRAME', 'ClassicAchievementsEventHandlingFrame')
 eventsHandler:SetScript('OnEvent', function(self, event, ...)
