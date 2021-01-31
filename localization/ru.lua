@@ -19,6 +19,9 @@ SexyLib:InitLocalization('Classic Achievements', {
     COMPARE_ACHIEVEMENTS = 'Сравнить достижения',
     TARGET_DOES_NOT_HAVE_ADDON = 'У цели не установлен аддон.',
 
+    UPDATING_EXPLORED_AREAS = 'Обновляю информацию об исследованных локациях. Это займет несколько секунд.',
+    UPDATED_EXPLORED_AREAS = '&aИнформация об исследованных локациях обновлена!',
+
     CATEGORY_GENERAL = 'Общее',
     CATEGORY_QUESTS = 'Задания',
     CATEGORY_KALIMDOR = 'Калимдор',
@@ -360,7 +363,7 @@ SexyLib:InitLocalization('Classic Achievements', {
     AN_TIMBERMAW_HOLD = 'Не из дерева, но с брюхом',
     AD_TIMBERMAW_HOLD = 'Добейтесь превознесения с Древобрюхами.',
     AN_PIRATES = 'Йар-р-р!',
-    AD_PIRATES = 'Добейтесь превознесения с Пиратами Кровавого Паруса.',
+    AD_PIRATES = 'Добейтесь уважения с Пиратами Кровавого Паруса.',
     AN_SHENDRALAR = 'Я тебе говорил, что такое безумие?',
     AD_SHENDRALAR = 'Добейтесь превознесения с Шен\'дралар.',
 

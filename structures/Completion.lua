@@ -3,6 +3,13 @@ CA_CompletionManager = {}
 local struct = CA_CompletionManager
 local mapping = {}
 
+local requiresUpdate = false
+C_Timer.NewTicker(1, function()
+    if not requiresUpdate then return end
+    requiresUpdate = false
+    AchievementFrame_ForceUpdate()
+end)
+
 local function Completion(data)
     return {
         getData = function(self)
@@ -137,6 +144,7 @@ local function Completion(data)
             if not achievementIDs then return end
             for _, achievementID in pairs(achievementIDs) do
                 if self:CompleteCriteria(achievementID, criteriaID) then
+                    requiresUpdate = true
                     local achievement = CA_Database:GetAchievement(achievementID)
                     if achievement and self:AreAllCriteriasCompleted(achievement) then
                         self:completeAchievementGracefully(achievement)
@@ -149,7 +157,7 @@ local function Completion(data)
             if not achievementIDs then return end
             for _, achievementID in pairs(achievementIDs) do
                 if self:SetCriteriaProgression(achievementID, criteriaID, count, requiredQuantity) then
-                    AchievementFrame_ForceUpdate()
+                    requiresUpdate = true
                     local achievement = CA_Database:GetAchievement(achievementID)
                     if achievement and self:AreAllCriteriasCompleted(achievement) then
                         self:completeAchievementGracefully(achievement)
@@ -162,7 +170,7 @@ local function Completion(data)
             if not achievementIDs then return end
             for _, achievementID in pairs(achievementIDs) do
                 if self:IncrementCriteriaProgression(achievementID, criteriaID, requiredQuantity, count) then
-                    AchievementFrame_ForceUpdate()
+                    requiresUpdate = true
                     local achievement = CA_Database:GetAchievement(achievementID)
                     if achievement and self:AreAllCriteriasCompleted(achievement) then
                         self:completeAchievementGracefully(achievement)

@@ -351,9 +351,9 @@ do
     end
     ach:SetAllianceOnly()
 
-    local function add(factionID, factionName, points, icon)
+    local function add(factionID, factionName, points, icon, reputationLevel)
         local ach = reputation:CreateAchievement(loc:Get('AN_' .. factionName), loc:Get('AD_' .. factionName), points or 10, icon or string.lower(factionName))
-        ach:AddCriteria(criterias:Create(nil, criterias.TYPE.REACH_REPUTATION, {factionID, 8}))
+        ach:AddCriteria(criterias:Create(nil, criterias.TYPE.REACH_REPUTATION, {factionID, reputationLevel or 8}))
     end
 
     add(749, 'HYDRAXIANS')
@@ -363,7 +363,7 @@ do
     add(529, 'ARGENT_DAWN', 20)
     add(576, 'TIMBERMAW_HOLD')
     add(909, 'DARKMOON_FAIRE', 20, '-Inv_Misc_MissileLarge_Red')
-    add(87, 'PIRATES', 30, '-Inv_Helmet_66')
+    add(87, 'PIRATES', 30, '-Inv_Helmet_66', 6)
     add(809, 'SHENDRALAR', 30)
 end
 
@@ -538,7 +538,6 @@ local explorationKalimdor = tab:CreateCategory('CATEGORY_KALIMDOR', exploration.
 local explorationEasternKingdoms = tab:CreateCategory('CATEGORY_EASTERN_KINGDOMS', exploration.id, true)
 
 do
-
     local global = explorationKalimdor:CreateAchievement('AN_EXPLORE_KALIMDOR', 'AD_EXPLORE_KALIMDOR', 20, string.lower('kalimdor'), true)
     local function add(areaID, areaIDs, icon)
         local areaName = AreaTableLocale[areaID]

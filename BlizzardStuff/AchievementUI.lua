@@ -169,7 +169,7 @@ function AchievementFrame_OnHide (self)
 	AchievementFrame_ClearTextures();
 end
 
-function AchievementFrame_ForceUpdate ()
+function AchievementFrame_ForceUpdate()
 	if ( AchievementFrameAchievements:IsShown() ) then
 		AchievementFrameAchievements_ForceUpdate();
 	elseif ( AchievementFrameStats:IsShown() ) then

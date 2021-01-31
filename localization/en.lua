@@ -19,6 +19,9 @@ SexyLib:InitLocalization('Classic Achievements', {
     COMPARE_ACHIEVEMENTS = 'Compare achievements',
     TARGET_DOES_NOT_HAVE_ADDON = 'Target does not have this addon installed.',
 
+    UPDATING_EXPLORED_AREAS = 'Updating locations exploration data. This action will take a few seconds.',
+    UPDATED_EXPLORED_AREAS = '&aInformation about explored locations has been updated!',
+
     CATEGORY_GENERAL = 'General',
     CATEGORY_QUESTS = 'Quests',
     CATEGORY_KALIMDOR = 'Kalimdor',
@@ -360,7 +363,7 @@ SexyLib:InitLocalization('Classic Achievements', {
     AN_TIMBERMAW_HOLD = 'Not made of wood, but with a belly',
     AD_TIMBERMAW_HOLD = 'Reach Exalted with Timbermaw.',
     AN_PIRATES = 'Yar-r-r!',
-    AD_PIRATES = 'Reach Exalted with the Bloodsail Pirates.',
+    AD_PIRATES = 'Reach Honored with the Bloodsail Buccaneers.',
     AN_SHENDRALAR = 'Did I tell you what madness is?',
     AD_SHENDRALAR = 'Reach Exalted with Shen\'dralar.',
 

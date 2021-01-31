@@ -43,8 +43,10 @@ local function updateReputations()
     for factionIndex = 1, GetNumFactions() do
         local name, description, standingId, bottomValue, topValue, earnedValue, atWarWith, canToggleAtWar, isHeader, isCollapsed, hasRep, isWatched, isChild, factionID = GetFactionInfo(factionIndex)
         if not isHeader then
-            trigger(TYPE.REACH_REPUTATION, {factionID, standingId}, 1, true)
-            totals[standingId] = (totals[standingId] or 0) + 1
+            for level = 1, standingId do
+                trigger(TYPE.REACH_REPUTATION, {factionID, level}, 1, true)
+                totals[level] = (totals[level] or 0) + 1
+            end
         end
     end
     for standingId, total in pairs(totals) do
@@ -121,9 +123,11 @@ local function updateItemsInInventory()
     for id, quantity in pairs(items) do trigger(TYPE.OBTAIN_ITEM, {id}, quantity, true) end
 end
 
-local AREA_COORD_ADDITION = 0.025
-function ClassicAchievements_UpdateExploredAreas()
-    for mapID = 1411, 1458 do
+local AREA_COORD_ADDITION = 0.01
+local updatingExploredAreas = false
+
+local function updateExploredAreas(mapIDs)
+    for _, mapID in pairs(mapIDs) do
         if C_Map.GetMapInfo(mapID) then
             for x = 0, 1, AREA_COORD_ADDITION do
                 for y = 0, 1, AREA_COORD_ADDITION do
@@ -134,6 +138,38 @@ function ClassicAchievements_UpdateExploredAreas()
                 end
             end
         end
+    end
+end
+
+function ClassicAchievements_UpdateExploredAreas()
+    if updatingExploredAreas then return end
+    updatingExploredAreas = true
+
+    SexyLib:Logger('Classic Achievements'):LogInfoL('UPDATING_EXPLORED_AREAS')
+    local callback = function()
+        updatingExploredAreas = false
+        SexyLib:Logger('Classic Achievements'):LogInfoL('UPDATED_EXPLORED_AREAS')
+    end
+
+    local mapIDs = {}
+    for mapID = 1411, 1458 do
+        mapIDs[#mapIDs + 1] = mapID
+        if #mapIDs == 10 then
+            local batch = mapIDs
+            mapIDs = {}
+            local previous = callback
+            callback = function()
+                updateExploredAreas(batch)
+                C_Timer.After(1, previous)
+            end
+        end
+    end
+    
+    if #mapIDs > 0 then
+        updateExploredAreas(mapIDs)
+        C_Timer.After(1, callback)
+    else
+        callback()
     end
 end
 
