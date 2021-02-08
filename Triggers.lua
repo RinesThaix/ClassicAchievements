@@ -69,8 +69,16 @@ ClassicAchievementsProfessions = {
     SKINNING = {12, true}
 }
 
+ClassicAchievementsSkills = {
+    UNARMED = 13
+}
+
 for idx, data in pairs(ClassicAchievementsProfessions) do
     ClassicAchievementsProfessions[idx] = {data[1], data[2], loc:Get('PROF_' .. idx)}
+end
+
+for idx, data in pairs(ClassicAchievementsSkills) do
+    ClassicAchievementsSkills[idx] = {data, loc:Get('SKILL_' .. idx)}
 end
 
 local function triggerProfessions(array, type)
@@ -103,6 +111,12 @@ local function updateProfessions()
                     break
                 end
             end
+            for idx, data in pairs(ClassicAchievementsSkills) do
+                if data[2] == skillName then
+                    trigger(TYPE.REACH_PROFESSION_LEVEL, {data[1], points}, 1, true)
+                    break
+                end
+            end
         end
     end
     triggerProfessions(main, TYPE.REACH_MAIN_PROFESSION_LEVEL)
@@ -120,7 +134,36 @@ local function updateItemsInInventory()
             end
         end
     end
-    for id, quantity in pairs(items) do trigger(TYPE.OBTAIN_ITEM, {id}, quantity, true) end
+    for id, quantity in pairs(items) do
+        trigger(TYPE.OBTAIN_ITEM, {id}, quantity, true)
+        if id == 22589 or id == 22630 or id == 22631 or id == 22632 then
+            trigger(TYPE.ATIESH, nil, 1, true)
+        end
+    end
+end
+
+local function updateGear()
+    for idx, name in pairs(CA_Criterias.GEAR_SLOT) do
+        if name == 'WEAPON' then name = 'MAINHAND'
+        elseif name == 'FIRST_RING' then name = 'FINGER0'
+        elseif name == 'SECOND_RING' then name = 'FINGER1'
+        elseif name == 'FIRST_TRINKET' then name = 'TRINKET0'
+        elseif name == 'SECOND_TRINKET' then name = 'TRINKET1'
+        elseif name == 'CLOAK' then name = 'BACK' end
+        
+        local slotID = GetInventorySlotInfo(name .. 'SLOT')
+        local itemLink = GetInventoryItemLink('player', slotID)
+        if itemLink then
+            local _, _, quality = GetItemInfo(itemLink)
+            if quality ~= nil then
+                if quality <= 6 then
+                    for q = 2, quality do trigger(TYPE.GEAR_QUALITY, {idx, q}, 1, true) end
+                else
+                    trigger(TYPE.GEAR_QUALITY, {idx, quality}, 1, true)
+                end
+            end
+        end
+    end
 end
 
 local AREA_COORD_ADDITION = 0.01
@@ -182,11 +225,15 @@ C_Timer.After(5, function()
     local level = UnitLevel('player')
     for lvl = 1, level do trigger(TYPE.REACH_LEVEL, {lvl}, 1, true) end
 
+    trigger(TYPE.NOT_WORKING, nil, 1, true)
     updateQuests()
     updateBankSlots()
     updateReputations()
     updateProfessions()
     updateItemsInInventory()
+    updateGear()
+
+    CA_CompletionManager:GetLocal():RecheckAchievements()
 end)
 
 local ITEM_CREATION_PATTERN = LOOT_ITEM_CREATED_SELF:gsub("%%s","%(.*%)")
@@ -294,6 +341,9 @@ local events = {
                 trigger(TYPE.EXPLORE_AREA, {areaID}, 1, true)
             end
         end
+    end,
+    PLAYER_EQUIPMENT_CHANGED = function()
+        C_Timer.After(1, updateGear)
     end
 }
 local eventsHandler = CreateFrame('FRAME', 'ClassicAchievementsEventHandlingFrame')

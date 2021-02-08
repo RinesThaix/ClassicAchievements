@@ -9,5 +9,5 @@ network:NewChannel(CHANNEL_COMPLETION, 'WHISPER', function(sender, _, callbackID
 end)
 
 function GetAndProcessRemoteAchievementsCompletion(playerName, successCallback, timeoutCallback)
-    network:SendWithCallback(CHANNEL_COMPLETION, playerName, false, successCallback, 1, timeoutCallback)
+    network:SendWithCallback(CHANNEL_COMPLETION, playerName, false, successCallback, 10, timeoutCallback)
 end

@@ -12,9 +12,9 @@ struct.TYPE = {
     KILL_PLAYERS = 6,
     KILL_PLAYER_OF_RACE = 7,
     KILL_PLAYER_OF_CLASS = 8,
-    KILL_PLAYER_OF_RANK = 9, -- not supported yet
+    ATIESH = 9,
     REACH_PVP_RANK = 10,
-    GET_HONOR = 11, -- not supported yet
+    NOT_WORKING = 11,
     REACH_PROFESSION_LEVEL = 12,
     REACH_MAIN_PROFESSION_LEVEL = 13,
     REACH_SECONDARY_PROFESSION_LEVEL = 14,
@@ -29,7 +29,8 @@ struct.TYPE = {
     BATTLEFIELD_STAT_MAX = 23,
     BATTLEFIELD_SCORE_MAX = 24,
     BATTLEFIELDS_SCORE = 25,
-    BATTLEFIELD_WINS = 26
+    BATTLEFIELD_WINS = 26,
+    GEAR_QUALITY = 27
 }
 
 struct.dataLengths = {
@@ -41,10 +42,10 @@ struct.dataLengths = {
     [struct.TYPE.KILL_PLAYERS] = 0,
     [struct.TYPE.KILL_PLAYER_OF_RACE] = 1, -- race name uppercased
     [struct.TYPE.KILL_PLAYER_OF_CLASS] = 1, -- class name uppercased
-    [struct.TYPE.KILL_PLAYER_OF_RANK] = 1,
+    [struct.TYPE.ATIESH] = 0,
     [struct.TYPE.REACH_PVP_RANK] = 1, -- pvp rank index
-    [struct.TYPE.GET_HONOR] = 1,
-    [struct.TYPE.REACH_PROFESSION_LEVEL] = 2, -- profession index from ClassicAchievementsProfessions, skill level
+    [struct.TYPE.NOT_WORKING] = 0,
+    [struct.TYPE.REACH_PROFESSION_LEVEL] = 2, -- profession index from ClassicAchievementsProfessions or ClassicAchievementsSkills, skill level
     [struct.TYPE.REACH_MAIN_PROFESSION_LEVEL] = 1, -- skill level
     [struct.TYPE.REACH_SECONDARY_PROFESSION_LEVEL] = 1, -- skill level
     [struct.TYPE.CRAFT_ITEM] = 1, -- itemID
@@ -58,13 +59,32 @@ struct.dataLengths = {
     [struct.TYPE.BATTLEFIELD_STAT_MAX] = 2, -- mapID (1459 - alterac, 1460 - warsong, 1461 - arathi), statID
     [struct.TYPE.BATTLEFIELD_SCORE_MAX] = 2, -- mapID, scoreID: 1 for killing blows, 2 for honorable kills, 3 for deaths
     [struct.TYPE.BATTLEFIELDS_SCORE] = 1, -- scoreID
-    [struct.TYPE.BATTLEFIELD_WINS] = 1 -- mapID
+    [struct.TYPE.BATTLEFIELD_WINS] = 1, -- mapID
+    [struct.TYPE.GEAR_QUALITY] = 2 -- first argument is slot id, second one is from Enum.ItemQuality
 }
 
 struct.criterias = {}
 for _, type in pairs(struct.TYPE) do
     struct.criterias[type] = {}
 end
+
+struct.GEAR_SLOT = {
+    'HEAD',
+    'NECK',
+    'SHOULDER',
+    'CHEST',
+    'WAIST',
+    'LEGS',
+    'FEET',
+    'WRIST',
+    'HANDS',
+    'FIRST_RING',
+    'SECOND_RING',
+    'FIRST_TRINKET',
+    'SECOND_TRINKET',
+    'CLOAK',
+    'WEAPON'
+}
 
 local completion = CA_CompletionManager:GetLocal()
 local lastID = 0
@@ -130,4 +150,8 @@ function struct:Trigger(type, data, count, const)
             completion:CompleteCriteriaGlobally(criteria.id)
         end
     end
+end
+
+function struct:skip()
+    lastID = lastID + 1
 end

@@ -22,6 +22,24 @@ SexyLib:InitLocalization('Classic Achievements', {
     UPDATING_EXPLORED_AREAS = 'Обновляю информацию об исследованных локациях. Это займет несколько секунд.',
     UPDATED_EXPLORED_AREAS = '&aИнформация об исследованных локациях обновлена!',
 
+    NOT_WORKING = 'не работает',
+
+    GEAR_SLOT_HEAD = 'Головной убор',
+    GEAR_SLOT_NECK = 'Ожерелье',
+    GEAR_SLOT_SHOULDER = 'Наплечники',
+    GEAR_SLOT_CHEST = 'Нагрудный доспех',
+    GEAR_SLOT_WAIST = 'Пояс',
+    GEAR_SLOT_LEGS = 'Штаны',
+    GEAR_SLOT_FEET = 'Ботинки',
+    GEAR_SLOT_WRIST = 'Наручи',
+    GEAR_SLOT_HANDS = 'Перчатки',
+    GEAR_SLOT_FIRST_RING = 'Первое кольцо',
+    GEAR_SLOT_SECOND_RING = 'Второе кольцо',
+    GEAR_SLOT_FIRST_TRINKET = 'Первая серьга',
+    GEAR_SLOT_SECOND_TRINKET = 'Вторая серьга',
+    GEAR_SLOT_CLOAK = 'Плащ',
+    GEAR_SLOT_WEAPON = 'Оружие',
+
     CATEGORY_GENERAL = 'Общее',
     CATEGORY_QUESTS = 'Задания',
     CATEGORY_KALIMDOR = 'Калимдор',
@@ -506,6 +524,7 @@ SexyLib:InitLocalization('Classic Achievements', {
     PROF_HERBALISM = 'Травничество',
     PROF_MINING = 'Горное дело',
     PROF_SKINNING = 'Снятие шкур',
+    SKILL_UNARMED = 'Рукопашный бой',
 
     AN_PROFS_ONE = 'Мастер',
     AD_PROFS_ONE = 'Повысьте навык владения любой основной профессией до 300.',
@@ -523,6 +542,8 @@ SexyLib:InitLocalization('Classic Achievements', {
     AD_PROFS_SECONDARY = 'Повысьте навык владения всеми второстепенными профессиями до 300.',
     AN_PROFS_FIVE = 'Гений гениален во всем',
     AD_PROFS_FIVE = 'Добейтесь указанных ниже достижений, связанных с профессиями.',
+    AN_UNARMED_SKILL = 'Кому зуботычину?',
+    AD_UNARMED_SKILL = 'Повысьте навык рукопашного боя до 300.',
 
     AN_EXPLORE_AZEROTH = 'Исследователь Азерота',
     AD_EXPLORE_AZEROTH = 'Исследуйте мир Азерота!',
@@ -530,5 +551,23 @@ SexyLib:InitLocalization('Classic Achievements', {
     AD_EXPLORE_KALIMDOR = 'Исследуйте перечисленные ниже локации Калимдора.',
     AN_EXPLORE_EASTERN_KINGDOMS = 'Исследователь Восточных Королевств',
     AD_EXPLORE_EASTERN_KINGDOMS = 'Исследуйте перечисленные ниже локации Восточных Королевств.',
-    AD_EXPLORE = '%s: перечисленные ниже зоны локации исследованы.'
+    AD_EXPLORE = '%s: перечисленные ниже зоны локации исследованы.',
+
+    AN_SULFURAS = 'Сальфарас, рука Рагнароса',
+    AD_SULFURAS = 'Владелец Сальфараса, руки Рагнароса.',
+    AN_THUNDER_FURY = 'Громовая ярость, благословенный клинок Искателя ветра',
+    AD_THUNDER_FURY = 'Владелец Громовой ярости, благословенного клинка Искателя ветра.',
+    AN_ATIESH = 'Атиеш, большой посох Стража',
+    AD_ATIESH = 'Владелец Атиеша, большого посоха Стража.',
+    AN_BLACK_SCARAB = 'Повелитель Скарабеев',
+    AD_BLACK_SCARAB = 'Владелец черного киражского боевого танка.',
+    AN_RED_SCARAB = 'Почему? Потому что он красный!',
+    AD_RED_SCARAB = 'Владелец красного киражского боевого танка.',
+    
+    AN_UNCOMMON_GEAR = 'Уже не такой обычный',
+    AD_UNCOMMON_GEAR = 'Экипируйте себя предметами необычного качества или выше.',
+    AN_RARE_GEAR = 'Просто превосходный боец',
+    AD_RARE_GEAR = 'Экипируйте себя предметами редкого (превосходного) качества или выше.',
+    AN_EPIC_GEAR = 'Эпическое снаряжение',
+    AD_EPIC_GEAR = 'Экипируйте себя предметами эпического качества или выше.'
 })

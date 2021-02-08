@@ -5,6 +5,8 @@ local loc = SexyLib:Localization('Classic Achievements')
 local tab = db:GetTab(db.TAB_ID_PLAYER)
 local ach, previous = nil
 
+local featsOfStrength = tab:CreateCategory('CATEGORY_FEATS_OF_STRENGTH', nil, true, 99)
+
 -- GENERAL --
 local general = tab:CreateCategory('CATEGORY_GENERAL', nil, true)
 
@@ -538,7 +540,7 @@ local explorationKalimdor = tab:CreateCategory('CATEGORY_KALIMDOR', exploration.
 local explorationEasternKingdoms = tab:CreateCategory('CATEGORY_EASTERN_KINGDOMS', exploration.id, true)
 
 do
-    local global = explorationKalimdor:CreateAchievement('AN_EXPLORE_KALIMDOR', 'AD_EXPLORE_KALIMDOR', 20, string.lower('kalimdor'), true)
+    local global = exploration:CreateAchievement('AN_EXPLORE_KALIMDOR', 'AD_EXPLORE_KALIMDOR', 20, string.lower('kalimdor'), true)
     local function add(areaID, areaIDs, icon)
         local areaName = AreaTableLocale[areaID]
         ach = explorationKalimdor:CreateAchievement(areaName, loc:Get('AD_EXPLORE', areaName), 10, icon or string.lower(AreaTable[areaID][3]))
@@ -568,12 +570,16 @@ do
     add(618, {2243, 2251, 2253, 2245, 2255, 2250, 2247, 2244, 2242, 2241, 2249, 2256, 2246})
     exploreAzeroth:AddCriteria(criterias:Create(global.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {global.id}))
 
-    global = explorationEasternKingdoms:CreateAchievement('AN_EXPLORE_EASTERN_KINGDOMS', 'AD_EXPLORE_EASTERN_KINGDOMS', 20, string.lower('eastern_kingdoms'), true)
+    global = exploration:CreateAchievement('AN_EXPLORE_EASTERN_KINGDOMS', 'AD_EXPLORE_EASTERN_KINGDOMS', 20, string.lower('eastern_kingdoms'), true)
     add = function(areaID, areaIDs, icon)
         local areaName = AreaTableLocale[areaID]
         ach = explorationEasternKingdoms:CreateAchievement(areaName, loc:Get('AD_EXPLORE', areaName), 10, icon or string.lower(AreaTable[areaID][3]))
         for _, childrenID in pairs(areaIDs) do
-            ach:AddCriteria(criterias:Create(AreaTableLocale[childrenID], criterias.TYPE.EXPLORE_AREA, {childrenID}))
+            if childrenID < 0 then
+                ach:AddCriteria(criterias:Create(AreaTableLocale[-childrenID] .. ' (' .. loc:Get('NOT_WORKING') .. ')', criterias.TYPE.NOT_WORKING))
+            else
+                ach:AddCriteria(criterias:Create(AreaTableLocale[childrenID], criterias.TYPE.EXPLORE_AREA, {childrenID}))
+            end
         end
         global:AddCriteria(criterias:Create(ach.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach.id}))
     end
@@ -584,7 +590,7 @@ do
     add(4, {1457, 1438, 1440, 72, 1441, 1439, 73, 2517, 1437}, 'blasted_lands')
     add(46, {2418, 249, 2417, 2420, 253, 250, 2421, 252, 254, 255}, 'burning_steppes')
     add(41, {2561, 2562, 2697}, 'deadwind_pass')
-    add(1, {801, 800, 131, 802, 804, 138, 212, 803, 808, 134, 137, 135, 136, 77, 211, 806, 809, 133}, 'dun_morogh')
+    add(1, {801, 800, -131, 802, 804, 138, 212, 803, 808, 134, 137, 135, 136, -77, 211, 806, 809, 133}, 'dun_morogh')
     add(10, {536, 94, 492, 93, 856, 245, 242, 241, 121, 42, 1098, 799, 1097})
     add(139, {2260, 2261, 2263, 2258, 2262, 2622, 2264, 1234, 2266, 2268, 2623, 2270, 2271, 2624, 2272, 2273, 2275, 2276, 2627, 2277, 2279, 2619}, 'eastern_plaguelands')
     add(12, {87, 9, 1519, 57, 797, 60, 62, 91, 798, 88, 86, 18}, 'elwynn_forest')
@@ -599,12 +605,45 @@ do
     add(85, {156, 154, 810, 157, 166, 811, 164, 159, 165, 162, 459, 167, 812, 160, 1497, 152}, 'tirisfal_glades')
     add(28, {2298, 197, 193, 813, 199, 200, 202, 192, 190, 201, 198, 2620, 2297}, 'western_plaguelands')
     add(40, {107, 108, 916, 109, 918, 111, 917, 113, 219, 20, 115, 921, 922, 920})
-    add(11, {1018, 1022, 118, 1024, 1023, 309, 205, 1036, 836, 1025, 1020, 1016, 1017, 1037, 150}, 'wetlands')
+    add(11, {1018, 1022, 118, 1024, 1023, 309, 205, 1036, -836, 1025, 1020, 1016, 1017, 1037, 150}, 'wetlands')
     exploreAzeroth:AddCriteria(criterias:Create(global.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {global.id}))
 end
 
--- local events = tab:CreateCategory('CATEGORY_EVENTS', nil, true)
+do
+    ach = featsOfStrength:CreateAchievement('AN_SULFURAS', 'AD_SULFURAS', 0, '-Inv_Hammer_Unique_Sulfuras', true)
+    ach:AddCriteria(criterias:Create(nil, criterias.TYPE.OBTAIN_ITEM, {17182}))
 
-local featsOfStrength = tab:CreateCategory('CATEGORY_FEATS_OF_STRENGTH', nil, true, 99)
+    ach = featsOfStrength:CreateAchievement('AN_THUNDER_FURY', 'AD_THUNDER_FURY', 0, '-Inv_Sword_39', true)
+    ach:AddCriteria(criterias:Create(nil, criterias.TYPE.OBTAIN_ITEM, {19019}))
+
+    ach = featsOfStrength:CreateAchievement('AN_BLACK_SCARAB', 'AD_BLACK_SCARAB', 0, '-Inv_Misc_QirajiCrystal_05', true)
+    ach:AddCriteria(criterias:Create(nil, criterias.TYPE.OBTAIN_ITEM, {21176}))
+
+    ach = featsOfStrength:CreateAchievement('AN_RED_SCARAB', 'AD_RED_SCARAB', 0, '-Inv_Misc_QirajiCrystal_02', true)
+    ach:AddCriteria(criterias:Create(nil, criterias.TYPE.OBTAIN_ITEM, {21321}))
+
+    ach = featsOfStrength:CreateAchievement('AN_ATIESH', 'AD_ATIESH', 0, '-Inv_Staff_Medivh', true)
+    ach:AddCriteria(criterias:Create(nil, criterias.TYPE.ATIESH))
+end
+
+do
+    ach = general:CreateAchievement('AN_UNARMED_SKILL', 'AD_UNARMED_SKILL', 10, '-Ability_GolemThunderClap', true)
+    ach:AddCriteria(criterias:Create(nil, criterias.TYPE.REACH_PROFESSION_LEVEL, {ClassicAchievementsSkills.UNARMED, 300}))
+
+    local function add(previous, qualityName, quality, icon)
+        local ach = general:CreateAchievement('AN_' .. qualityName .. '_GEAR', 'AD_' .. qualityName .. '_GEAR', 10, icon, true)
+        for idx, name in pairs(criterias.GEAR_SLOT) do
+            ach:AddCriteria(criterias:CreateL('GEAR_SLOT_' .. name, criterias.TYPE.GEAR_QUALITY, {idx, quality}))
+        end
+        if previous then previous:SetNext(ach) end
+        return ach
+    end
+
+    ach = add(nil, 'UNCOMMON', 2, '-Inv_Enchant_EssenceNetherSmall')
+    ach = add(ach, 'RARE', 3, '-Spell_Frost_WizardMark')
+    ach = add(ach, 'EPIC', 4, '-Inv_Enchant_ShardNexusLarge')
+end
+
+-- local events = tab:CreateCategory('CATEGORY_EVENTS', nil, true)
 
 CA_CompletionManager:PostLoad(db:GetTab(db.TAB_ID_PLAYER):GetCategories())

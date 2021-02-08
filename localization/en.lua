@@ -22,6 +22,24 @@ SexyLib:InitLocalization('Classic Achievements', {
     UPDATING_EXPLORED_AREAS = 'Updating locations exploration data. This action will take a few seconds.',
     UPDATED_EXPLORED_AREAS = '&aInformation about explored locations has been updated!',
 
+    NOT_WORKING = 'not working',
+
+    GEAR_SLOT_HEAD = 'Headdress',
+    GEAR_SLOT_NECK = 'Necklace',
+    GEAR_SLOT_SHOULDER = 'Shoulders',
+    GEAR_SLOT_CHEST = 'Chest armor',
+    GEAR_SLOT_WAIST = 'Waist',
+    GEAR_SLOT_LEGS = 'Leggings',
+    GEAR_SLOT_FEET = 'Boots',
+    GEAR_SLOT_WRIST = 'Wrist',
+    GEAR_SLOT_HANDS = 'Gloves',
+    GEAR_SLOT_FIRST_RING = 'First ring',
+    GEAR_SLOT_SECOND_RING = 'Second ring',
+    GEAR_SLOT_FIRST_TRINKET = 'First trinket',
+    GEAR_SLOT_SECOND_TRINKET = 'Second trinket',
+    GEAR_SLOT_CLOAK = 'Cloak',
+    GEAR_SLOT_WEAPON = 'Weapon',
+
     CATEGORY_GENERAL = 'General',
     CATEGORY_QUESTS = 'Quests',
     CATEGORY_KALIMDOR = 'Kalimdor',
@@ -506,6 +524,7 @@ SexyLib:InitLocalization('Classic Achievements', {
     PROF_HERBALISM = 'Herbalism',
     PROF_MINING = 'Mining',
     PROF_SKINNING = 'Skinning',
+    SKILL_UNARMED = 'Unarmed',
 
     AN_PROFS_ONE = 'Master',
     AD_PROFS_ONE = 'Raise the skill of any main profession to 300.',
@@ -523,6 +542,8 @@ SexyLib:InitLocalization('Classic Achievements', {
     AD_PROFS_SECONDARY = 'Raise the skill of all secondary professions to 300 at the same time.',
     AN_PROFS_FIVE = 'Genius is brilliant in everything',
     AD_PROFS_FIVE = 'Earn profession achievements listed below.',
+    AN_UNARMED_SKILL = 'Did Somebody Order a Knuckle Sandwich?',
+    AD_UNARMED_SKILL = 'Raise the skill of unarmed combat to 300.',
 
     AN_EXPLORE_AZEROTH = 'Azeroth Explorer',
     AD_EXPLORE_AZEROTH = 'Explore the world of Azeroth!',
@@ -530,5 +551,23 @@ SexyLib:InitLocalization('Classic Achievements', {
     AD_EXPLORE_KALIMDOR = 'Explore locations of Kalimdor listed below.',
     AN_EXPLORE_EASTERN_KINGDOMS = 'Eastern Kingdoms Explorer',
     AD_EXPLORE_EASTERN_KINGDOMS = 'Explore locations of Eastern Kingdoms listed below.',
-    AD_EXPLORE = 'Explore %s.'
+    AD_EXPLORE = 'Explore %s.',
+
+    AN_SULFURAS = 'Sulfuras, Hand of Ragnaros',
+    AD_SULFURAS = 'Wielder of Sulfuras, Hand of Ragnaros.',
+    AN_THUNDER_FURY = 'Thunderfury, Blessed Blade of the Windseeker',
+    AD_THUNDER_FURY = 'Wielder of Thunderfury, Blessed Blade of the Windseeker.',
+    AN_ATIESH = 'Atiesh, Greatstaff of the Guardian',
+    AD_ATIESH = 'Wielder of Atiesh, Greatstaff of the Guardian.',
+    AN_BLACK_SCARAB = 'Scarab Lord',
+    AD_BLACK_SCARAB = 'Wielder of Black Qiraji Resonating Crystal.',
+    AN_RED_SCARAB = 'Why? Because It\'s Red!',
+    AD_RED_SCARAB = 'Wielder of Red Qiraji Resonating Crystal.',
+    
+    AN_UNCOMMON_GEAR = 'Not so ordinary anymore',
+    AD_UNCOMMON_GEAR = 'Equip yourself with items of uncommon or higher quality.',
+    AN_RARE_GEAR = 'Superior',
+    AD_RARE_GEAR = 'Equip yourself with items of rare (superior) or higher quality.',
+    AN_EPIC_GEAR = 'Epic',
+    AD_EPIC_GEAR = 'Equip yourself with items of epic or higher quality.'
 })

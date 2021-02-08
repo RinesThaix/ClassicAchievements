@@ -20,7 +20,7 @@ local function Completion(data)
             return data
         end,
         AddAchievement = function(self, id)
-            if self:getData()[id] then error('achievement completion ' .. id .. ' already present') end
+            if self:getData()[id] then error('achievement completion ' .. id .. ' is already present') end
             self:getData()[id] = {false, 0, {}}
             return self:getData()[id]
         end,
@@ -29,7 +29,7 @@ local function Completion(data)
             if not achievement then
                 achievement = self:AddAchievement(achievementID)
             end
-            if achievement[3][criteriaID] then error('achievement criteria completion ' .. achievementID .. '/' .. criteriaID .. ' already present') end
+            if achievement[3][criteriaID] then error('achievement criteria completion ' .. achievementID .. '/' .. criteriaID .. ' is already present') end
             local criteria = {false}
             achievement[3][criteriaID] = criteria
             
@@ -172,6 +172,16 @@ local function Completion(data)
                 if self:IncrementCriteriaProgression(achievementID, criteriaID, requiredQuantity, count) then
                     requiresUpdate = true
                     local achievement = CA_Database:GetAchievement(achievementID)
+                    if achievement and self:AreAllCriteriasCompleted(achievement) then
+                        self:completeAchievementGracefully(achievement)
+                    end
+                end
+            end
+        end,
+        RecheckAchievements = function(self)
+            for id, data in pairs(self:getData()) do
+                if data[1] == false then
+                    local achievement = CA_Database:GetAchievement(id)
                     if achievement and self:AreAllCriteriasCompleted(achievement) then
                         self:completeAchievementGracefully(achievement)
                     end
