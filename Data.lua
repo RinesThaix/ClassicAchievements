@@ -545,12 +545,16 @@ do
         local areaName = AreaTableLocale[areaID]
         ach = explorationKalimdor:CreateAchievement(areaName, loc:Get('AD_EXPLORE', areaName), 10, icon or string.lower(AreaTable[areaID][3]))
         for _, childrenID in pairs(areaIDs) do
-            ach:AddCriteria(criterias:Create(AreaTableLocale[childrenID], criterias.TYPE.EXPLORE_AREA, {childrenID}))
+            if childrenID < 0 then
+                ach:AddCriteria(criterias:Create(AreaTableLocale[-childrenID] .. ' (' .. loc:Get('NOT_WORKING') .. ')', criterias.TYPE.NOT_WORKING))
+            else
+                ach:AddCriteria(criterias:Create(AreaTableLocale[childrenID], criterias.TYPE.EXPLORE_AREA, {childrenID}))
+            end
         end
         global:AddCriteria(criterias:Create(ach.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ach.id}))
     end
 
-    add(331, {441, 414, 2301, 413, 417, 416, 424, 415, 421, 418, 426, 419, 431, 422, 438, 430, 434, 437})
+    add(331, {441, 414, 2301, 413, 417, 416, 424, 415, 421, 418, 426, 419, -431, 422, 438, 430, 434, 437})
     add(16, {1228, 1230, 2497, 1229, 1226, 1219, 1220, 1225, 1216, 1237, 1236, 1235, 1221, 1231, 1232, 1234, 1256, 1233, 1227})
     add(148, {443, 444, 456, 446, 447, 448, 450, 449, 442})
     add(405, {608, 603, 599, 2407, 609, 2405, 607, 596, 2408, 606, 602, 604, 2198, 2406, 2404})
