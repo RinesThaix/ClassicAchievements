@@ -242,6 +242,8 @@ local ITEM_CREATION_PATTERN_MULTIPLE = LOOT_ITEM_CREATED_SELF_MULTIPLE:gsub('%%s
 local ZONE_EXPLORED_PATTERN = ERR_ZONE_EXPLORED:gsub('%%s', '%(.*%)')
 local ZONE_EXPLORED2_PATTERN = ERR_ZONE_EXPLORED_XP:gsub('%%s', '%(.*%)'):gsub('%%d', '%%d')
 
+local canGetBattlegroundsAchievement = false
+
 local events = {
     COMBAT_LOG_EVENT_UNFILTERED = function()
         local timestamp, type, hideCaster, sourceGUID, sourceName, sourceFlags, sourceFlags2, targetGUID, targetName, targetFlags, targetFlags2 = select(1, CombatLogGetCurrentEventInfo())
@@ -300,9 +302,10 @@ local events = {
         trigger(TYPE.CRAFT_ITEM, {id}, quantity)
     end,
     UPDATE_BATTLEFIELD_SCORE = function()
-        if not InActiveBattlefield() then return end
+        if not InActiveBattlefield() or not canGetBattlegroundsAchievement then return end
         local winner = GetBattlefieldWinner()
         if not winner then return end
+        canGetBattlegroundsAchievement = false
         
         local mapID = C_Map.GetBestMapForUnit('player')
         if mapID ~= 1459 and mapID ~= 1460 and mapID ~= 1461 then return end
@@ -344,6 +347,9 @@ local events = {
     end,
     PLAYER_EQUIPMENT_CHANGED = function()
         C_Timer.After(1, updateGear)
+    end,
+    PLAYER_ENTERING_WORLD = function()
+        canGetBattlegroundsAchievement = true
     end
 }
 local eventsHandler = CreateFrame('FRAME', 'ClassicAchievementsEventHandlingFrame')

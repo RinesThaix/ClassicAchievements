@@ -628,7 +628,7 @@ end
 
 do
     ach = general:CreateAchievement('AN_UNARMED_SKILL', 'AD_UNARMED_SKILL', 10, '-Ability_GolemThunderClap', true)
-    ach:AddCriteria(criterias:Create(nil, criterias.TYPE.REACH_PROFESSION_LEVEL, {ClassicAchievementsSkills.UNARMED, 300}))
+    ach:AddCriteria(criterias:Create(nil, criterias.TYPE.REACH_PROFESSION_LEVEL, {ClassicAchievementsSkills.UNARMED[1], 300}))
 
     local function add(previous, qualityName, quality, icon)
         local ach = general:CreateAchievement('AN_' .. qualityName .. '_GEAR', 'AD_' .. qualityName .. '_GEAR', 10, icon, true)
