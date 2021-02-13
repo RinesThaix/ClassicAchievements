@@ -299,9 +299,7 @@ local events = {
             quantity = tonumber(quantity)
         end
         local id = tonumber(item:match("\124Hitem:(%d+):"))
-        print(id)
         if not id then return end
-        print(id, quantity)
         trigger(TYPE.CRAFT_ITEM, {id}, quantity)
     end,
     UPDATE_BATTLEFIELD_SCORE = function()

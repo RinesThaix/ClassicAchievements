@@ -2,10 +2,7 @@ SexyLib:InitLocalization('Classic Achievements', {
     achievement_earned = '&aAchievement earned by %s on %d/%d/%d',
     achievement_in_progress = '&7Achievement in progress by %s',
 
-    MINIMAP_DESCRIPTION_1 = '&7Left mouse button: &eopen/hide achievements window',
-    MINIMAP_DESCRIPTION_2 = '&7Right mouse button: &eopen addon settings',
-    MINIMAP_DESCRIPTION_3 = ' ',
-    MINIMAP_DESCRIPTION_4 = '&3With love from Maxich :)',
+    ICON_DESCRIPTION = '&7Left mouse button: &eopen/hide achievements window\n&7Right mouse button: &eopen Classic Achievements settings\n\n&3With love from Maxich :)',
 
     OPTION_SHARING = 'Share achievements',
     OPTION_SHARING_DESC = 'Whether to write messages in chats when receiving new achievement.',
@@ -597,9 +594,9 @@ SexyLib:InitLocalization('Classic Achievements', {
     AD_EPIC_GEAR = 'Equip yourself with items of epic or higher quality.',
 
     AN_STOCKING_UP = 'Stocking up',
-    AN_STOCKING_UP = 'Craft 100 heavy runecloth bandages.',
+    AD_STOCKING_UP = 'Craft 100 heavy runecloth bandages.',
     AC_STOCKING_UP = 'Crafted 100 heavy runecloth bandages',
     AN_STOCKING_UP_2 = 'Stocking up with usury',
-    AN_STOCKING_UP_2 = 'Craft 500 heavy runecloth bandages.',
+    AD_STOCKING_UP_2 = 'Craft 500 heavy runecloth bandages.',
     AC_STOCKING_UP_2 = 'Crafted 500 heavy runecloth bandages'
 })

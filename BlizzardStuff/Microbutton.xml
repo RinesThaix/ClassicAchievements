@@ -1,0 +1,22 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Button name="AchievementMicroButton" inherits="MainMenuBarMicroButton" parent="UIParent">
+		<Anchors>
+			<Anchor point="BOTTOMLEFT" relativeTo="QuestLogMicroButton" relativePoint="BOTTOMRIGHT">
+				<Offset>
+					<AbsDimension x="-3" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnLoad>
+				LoadMicroButtonTextures(self, "Achievement")
+				self.tooltipText = MicroButtonTooltipText(ACHIEVEMENT_BUTTON, "CLASSIC_ACHIEVEMENT")
+				self.newbieText = SexyLib:Localization('Classic Achievements'):Get('ICON_DESCRIPTION')
+			</OnLoad>
+			<OnEvent>
+				self.tooltipText = MicroButtonTooltipText(ACHIEVEMENT_BUTTON, "CLASSIC_ACHIEVEMENT")
+			</OnEvent>
+		</Scripts>
+	</Button>
+</Ui>

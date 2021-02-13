@@ -8,7 +8,6 @@ C_Timer.NewTicker(1, function()
     if not requiresUpdate then return end
     requiresUpdate = false
     AchievementFrame_ForceUpdate()
-    print('force updated')
 end)
 
 local function Completion(data)

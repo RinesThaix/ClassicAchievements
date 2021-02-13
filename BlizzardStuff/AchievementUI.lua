@@ -114,6 +114,7 @@ function AchievementFrame_ToggleAchievementFrame(toggleStatFrame, toggleGuildVie
 		AchievementFrame_SetTabs();
 		AchievementFrameTab_OnClick(3);
 	end
+	UpdateMicroButtons()
 end
 
 function AchievementFrame_DisplayComparison (unit)

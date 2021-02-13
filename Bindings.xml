@@ -1,0 +1,6 @@
+
+<Bindings>
+	<Binding name='CLASSIC_ACHIEVEMENT' header='BLANK_CLASSIC_ACHIEVEMENTS' category='BINDING_HEADER_INTERFACE' default='Y'>
+		AchievementFrame_ToggleAchievementFrame()
+	</Binding>
+</Bindings>
