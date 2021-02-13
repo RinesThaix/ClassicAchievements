@@ -1,4 +1,3 @@
-if SexyLib:IsLocalizationPresent('Classic Achievements') then return end
 SexyLib:InitLocalization('Classic Achievements', {
     achievement_earned = '&aAchievement earned by %s on %d/%d/%d',
     achievement_in_progress = '&7Achievement in progress by %s',
@@ -12,6 +11,8 @@ SexyLib:InitLocalization('Classic Achievements', {
     OPTION_SHARING_DESC = 'Whether to write messages in chats when receiving new achievement.',
     OPTION_UPDATE_MAP_EXPLORATION = 'Check explored locations',
     OPTION_UPDATE_MAP_EXPLORATION_DESC = 'Counts already explored locations for achievements.',
+    OPTION_RESET_ACHIEVEMENTS = 'Reset achievements',
+    OPTION_RESET_ACHIEVEMENTS_DESC = 'Reset all achievements progressions on this character. This can not be undone!',
 
     GOT_ACHIEVEMENT_MESSAGE_MALE = 'I\'ve just earned achievement %s!',
     GOT_ACHIEVEMENT_MESSAGE_FEMALE = 'I\'ve just earned achievement %s!',
@@ -526,6 +527,12 @@ SexyLib:InitLocalization('Classic Achievements', {
     PROF_SKINNING = 'Skinning',
     SKILL_UNARMED = 'Unarmed',
 
+    AN_PROFS_JOURNEYMAN = 'Journeyman',
+    AD_PROFS_JOURNEYMAN = 'Raise the skill of any main profession to 75.',
+    AN_PROFS_EXPERT = 'Expert',
+    AD_PROFS_EXPERT = 'Raise the skill of any main profession to 150.',
+    AN_PROFS_ARTISAN = 'Artisan',
+    AD_PROFS_ARTISAN = 'Raise the skill of any main profession to 225.',
     AN_PROFS_ONE = 'Master',
     AD_PROFS_ONE = 'Raise the skill of any main profession to 300.',
     AN_PROFS_TWO = 'Handyman',
@@ -569,5 +576,12 @@ SexyLib:InitLocalization('Classic Achievements', {
     AN_RARE_GEAR = 'Superior',
     AD_RARE_GEAR = 'Equip yourself with items of rare (superior) or higher quality.',
     AN_EPIC_GEAR = 'Epic',
-    AD_EPIC_GEAR = 'Equip yourself with items of epic or higher quality.'
+    AD_EPIC_GEAR = 'Equip yourself with items of epic or higher quality.',
+
+    AN_STOCKING_UP = 'Stocking up',
+    AN_STOCKING_UP = 'Craft 100 heavy runecloth bandages.',
+    AC_STOCKING_UP = 'Crafted 100 heavy runecloth bandages',
+    AN_STOCKING_UP_2 = 'Stocking up with usury',
+    AN_STOCKING_UP_2 = 'Craft 500 heavy runecloth bandages.',
+    AC_STOCKING_UP_2 = 'Crafted 500 heavy runecloth bandages'
 })

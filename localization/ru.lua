@@ -1,5 +1,5 @@
 if GetLocale() ~= 'ruRU' then return end
-SexyLib:InitLocalization('Classic Achievements', {
+SexyLib:Localization('Classic Achievements'):Add({
     achievement_earned = '&aДостижение получено %s %d/%d/%d',
     achievement_in_progress = '&7%s работает над получением достижения',
 
@@ -12,6 +12,8 @@ SexyLib:InitLocalization('Classic Achievements', {
     OPTION_SHARING_DESC = 'Писать ли в чаты сообщения при получении очередного достижения.',
     OPTION_UPDATE_MAP_EXPLORATION = 'Проверить исследованные локации',
     OPTION_UPDATE_MAP_EXPLORATION_DESC = 'Засчитывает для достижений уже исследованные локации.',
+    OPTION_RESET_ACHIEVEMENTS = 'Сбросить достижения',
+    OPTION_RESET_ACHIEVEMENTS_DESC = 'Обнуляет весь прогресс достижений на этом персонаже. Это действие необратимо!',
 
     GOT_ACHIEVEMENT_MESSAGE_MALE = 'Я получил достижение %s!',
     GOT_ACHIEVEMENT_MESSAGE_FEMALE = 'Я получила достижение %s!',
@@ -350,7 +352,7 @@ SexyLib:InitLocalization('Classic Achievements', {
     AN_REPS_7 = 'Высокочтимый',
     AD_REPS = 'Добейтесь превознесения с %d фракциями.',
     AC_REPS = 'Превознесение с %d фракциями.',
-    AR_REPS = 'Негласной звание сродни названию достижения!',
+    AR_REPS = 'Негласное звание сродни названию достижения!',
 
     AN_HORDE_REPS = 'Знамя Орды',
     AD_HORDE_REPS = 'Добейтесь превознесения с указанными ниже фракциями Орды.',
@@ -526,18 +528,42 @@ SexyLib:InitLocalization('Classic Achievements', {
     PROF_SKINNING = 'Снятие шкур',
     SKILL_UNARMED = 'Рукопашный бой',
 
+    AN_PROFS_JOURNEYMAN = 'Подмастерье',
+    AD_PROFS_JOURNEYMAN = 'Повысьте навык владения любой основной профессией до 75.',
+    AN_PROFS_EXPERT = 'Искусник',
+    AD_PROFS_EXPERT = 'Повысьте навык владения любой основной профессией до 150.',
+    AN_PROFS_ARTISAN = 'Умелец',
+    AD_PROFS_ARTISAN = 'Повысьте навык владения любой основной профессией до 225.',
     AN_PROFS_ONE = 'Мастер',
     AD_PROFS_ONE = 'Повысьте навык владения любой основной профессией до 300.',
     AN_PROFS_TWO = 'Мастер на все руки',
     AD_PROFS_TWO = 'Повысьте навык владения двумя любыми основными профессиями до 300.',
     AC_PROFS_TWO = 'Навык владения двумя любыми основными профессиями повышен до 300.',
 
-    AN_PROFS_FIRST_AID = 'Полевой врач',
-    AD_PROFS_FIRST_AID = 'Повысьте навык владения первой помощью до 300.',
-    AN_PROFS_FISHING = 'Именитый рыболов',
-    AD_PROFS_FISHING = 'Повысьте навык рыбной ловли до 300.',
-    AN_PROFS_COOKING = 'Шеф',
-    AD_PROFS_COOKING = 'Повысьте навык кулинарии до 300.',
+    AN_FIRST_AID_JOURNEYMAN = 'Начинающий врач',
+    AD_FIRST_AID_JOURNEYMAN = 'Повысьте навык владения первой помощью до 75.',
+    AN_FIRST_AID_EXPERT = 'Искусный врач',
+    AD_FIRST_AID_EXPERT = 'Повысьте навык владения первой помощью до 150.',
+    AN_FIRST_AID_ARTISAN = 'Умелый врач',
+    AD_FIRST_AID_ARTISAN = 'Повысьте навык владения первой помощью до 225.',
+    AN_FIRST_AID_MASTER = 'Полевой врач',
+    AD_FIRST_AID_MASTER = 'Повысьте навык владения первой помощью до 300.',
+    AN_FISHING_JOURNEYMAN = 'Начинающий рыболов',
+    AD_FISHING_JOURNEYMAN = 'Повысьте навык рыбной ловли до 75.',
+    AN_FISHING_EXPERT = 'Искусный рыболов',
+    AD_FISHING_EXPERT = 'Повысьте навык рыбной ловли до 150.',
+    AN_FISHING_ARTISAN = 'Умелый рыболов',
+    AD_FISHING_ARTISAN = 'Повысьте навык рыбной ловли до 225.',
+    AN_FISHING_MASTER = 'Именитый рыболов',
+    AD_FISHING_MASTER = 'Повысьте навык рыбной ловли до 300.',
+    AN_COOKING_JOURNEYMAN = 'Кулинар-подмастерье',
+    AD_COOKING_JOURNEYMAN = 'Повысьте навык кулинарии до 75.',
+    AN_COOKING_EXPERT = 'Искусный кулинар',
+    AD_COOKING_EXPERT = 'Повысьте навык кулинарии до 150.',
+    AN_COOKING_ARTISAN = 'Умелый кулинар',
+    AD_COOKING_ARTISAN = 'Повысьте навык кулинарии до 225.',
+    AN_COOKING_MASTER = 'Шеф',
+    AD_COOKING_MASTER = 'Повысьте навык кулинарии до 300.',
     AN_PROFS_SECONDARY = 'И жрец, и жнец',
     AD_PROFS_SECONDARY = 'Повысьте навык владения всеми второстепенными профессиями до 300.',
     AN_PROFS_FIVE = 'Гений гениален во всем',
@@ -569,5 +595,12 @@ SexyLib:InitLocalization('Classic Achievements', {
     AN_RARE_GEAR = 'Просто превосходный боец',
     AD_RARE_GEAR = 'Экипируйте себя предметами редкого (превосходного) качества или выше.',
     AN_EPIC_GEAR = 'Эпическое снаряжение',
-    AD_EPIC_GEAR = 'Экипируйте себя предметами эпического качества или выше.'
+    AD_EPIC_GEAR = 'Экипируйте себя предметами эпического качества или выше.',
+
+    AN_STOCKING_UP = 'Запасаемся',
+    AD_STOCKING_UP = 'Создайте 100 плотных бинтов из рунной ткани.',
+    AC_STOCKING_UP = 'Создано 100 плотных бинтов из рунной ткани',
+    AN_STOCKING_UP_2 = 'Запасаемся с лихвой',
+    AD_STOCKING_UP_2 = 'Создайте 500 плотных бинтов из рунной ткани.',
+    AC_STOCKING_UP_2 = 'Создано 500 плотных бинтов из рунной ткани'
 })

@@ -293,6 +293,9 @@ do
 end
 
 local professions = tab:CreateCategory('CATEGORY_PROFESSIONS', nil, true)
+local cooking = tab:CreateCategory('PROF_COOKING', professions.id, true, 17)
+local fishing = tab:CreateCategory('PROF_FISHING', professions.id, true, 18)
+local firstAid = tab:CreateCategory('PROF_FIRST_AID', professions.id, true, 19)
 
 do
     ach = professions:CreateAchievement(loc:Get('AN_PROFS_ONE'), loc:Get('AD_PROFS_ONE'), 10, '-Inv_Misc_Note_01')
@@ -302,19 +305,19 @@ do
     twoMains:AddCriteria(criterias:Create(loc:Get('AC_PROFS_TWO'), criterias.TYPE.REACH_MAIN_PROFESSION_LEVEL, {300}, 2))
     ach:SetNext(twoMains)
 
-    local firstAid = professions:CreateAchievement(loc:Get('AN_PROFS_FIRST_AID'), loc:Get('AD_PROFS_FIRST_AID'), 10, '-Inv_Fabric_Wool_01')
-    firstAid:AddCriteria(criterias:Create(nil, criterias.TYPE.REACH_PROFESSION_LEVEL, {ClassicAchievementsProfessions.FIRST_AID[1], 300}))
+    local firstAidAch = firstAid:CreateAchievement('AN_FIRST_AID_MASTER', 'AD_FIRST_AID_MASTER', 10, '-Inv_Fabric_Wool_01', true)
+    firstAidAch:AddCriteria(criterias:Create(nil, criterias.TYPE.REACH_PROFESSION_LEVEL, {ClassicAchievementsProfessions.FIRST_AID[1], 300}))
 
-    local fishing = professions:CreateAchievement(loc:Get('AN_PROFS_FISHING'), loc:Get('AD_PROFS_FISHING'), 10, 'profs_fishing')
-    fishing:AddCriteria(criterias:Create(nil, criterias.TYPE.REACH_PROFESSION_LEVEL, {ClassicAchievementsProfessions.FISHING[1], 300}))
+    local fishingAch = fishing:CreateAchievement('AN_FISHING_MASTER', 'AD_FISHING_MASTER', 10, 'profs_fishing', true)
+    fishingAch:AddCriteria(criterias:Create(nil, criterias.TYPE.REACH_PROFESSION_LEVEL, {ClassicAchievementsProfessions.FISHING[1], 300}))
 
-    local cooking = professions:CreateAchievement(loc:Get('AN_PROFS_COOKING'), loc:Get('AD_PROFS_COOKING'), 10, 'profs_cooking')
-    cooking:AddCriteria(criterias:Create(nil, criterias.TYPE.REACH_PROFESSION_LEVEL, {ClassicAchievementsProfessions.COOKING[1], 300}))
+    local cookingAch = cooking:CreateAchievement('AN_COOKING_MASTER', 'AD_COOKING_MASTER', 10, 'profs_cooking', true)
+    cookingAch:AddCriteria(criterias:Create(nil, criterias.TYPE.REACH_PROFESSION_LEVEL, {ClassicAchievementsProfessions.COOKING[1], 300}))
 
     local secondary = professions:CreateAchievement(loc:Get('AN_PROFS_SECONDARY'), loc:Get('AD_PROFS_SECONDARY'), 10, '-Inv_Scroll_03')
-    secondary:AddCriteria(criterias:Create(firstAid.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {firstAid.id}))
-    secondary:AddCriteria(criterias:Create(fishing.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {fishing.id}))
-    secondary:AddCriteria(criterias:Create(cooking.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {cooking.id}))
+    secondary:AddCriteria(criterias:Create(firstAidAch.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {firstAidAch.id}))
+    secondary:AddCriteria(criterias:Create(fishingAch.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {fishingAch.id}))
+    secondary:AddCriteria(criterias:Create(cookingAch.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {cookingAch.id}))
     
     ach = professions:CreateAchievement(loc:Get('AN_PROFS_FIVE'), loc:Get('AD_PROFS_FIVE'), 20, '-Spell_Magic_GreaterBlessingOfKings')
     ach:AddCriteria(criterias:Create(twoMains.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {twoMains.id}))
@@ -565,7 +568,7 @@ do
     add(493, {656}, '-Spell_Arcane_TeleportMoonglade')
     add(215, {818, 220, 396, 222, 360, 821, 820, 224, 404, 397, 819, 225, 1638, 398})
     add(1377, {3425, 2743, 2744, 2737, 2740})
-    add(406, {2537, 2539, 1076, 2540, 2541, 461, 460, 465, 464, 467, 2538}, 'stonetalon')
+    add(406, {2537, 2539, 1076, 2540, -2541, 461, 460, 465, 464, 467, 2538}, 'stonetalon')
     add(440, {979, 976, 977, 1937, 1336, 986, 1939, 985, 982, 1938, 1940, 983, 984, 981, 992, 987, 980, 990, 2300, 978})
     add(141, {736, 186, 261, 259, 478, 260, 264, 266, 1657, 702, 188}, 'darnassus')
     add(17, {382, 1703, 384, 383, 386, 1702, 1704, 379, 1699, 380, 388, 392, 391, 385, 1697, 387, 1700, 1698, 378, 390, 1701, 359, 1717, 1316, 381}, 'barrens')
@@ -646,6 +649,46 @@ do
     ach = add(nil, 'UNCOMMON', 2, '-Inv_Enchant_EssenceNetherSmall')
     ach = add(ach, 'RARE', 3, '-Spell_Frost_WizardMark')
     ach = add(ach, 'EPIC', 4, '-Inv_Enchant_ShardNexusLarge')
+end
+
+tab:SkipCategories(3)
+
+do
+    ach = professions:CreateAchievement('AN_PROFS_JOURNEYMAN', 'AD_PROFS_JOURNEYMAN', 10, '-Inv_Misc_Note_01', true)
+    ach:AddCriteria(criterias:Create(nil, criterias.TYPE.REACH_MAIN_PROFESSION_LEVEL, {75}))
+    previous = ach
+    ach = professions:CreateAchievement('AN_PROFS_EXPERT', 'AD_PROFS_EXPERT', 10, '-Inv_Misc_Note_01', true)
+    ach:AddCriteria(criterias:Create(nil, criterias.TYPE.REACH_MAIN_PROFESSION_LEVEL, {150}))
+    previous:SetNext(ach)
+    previous = ach
+    ach = professions:CreateAchievement('AN_PROFS_ARTISAN', 'AD_PROFS_ARTISAN', 10, '-Inv_Misc_Note_01', true)
+    ach:AddCriteria(criterias:Create(nil, criterias.TYPE.REACH_MAIN_PROFESSION_LEVEL, {225}))
+    previous:SetNext(ach)
+    ach:SetNext(db:GetAchievement(116))
+    previous = nil
+
+    local levels = {{'JOURNEYMAN', 75}, {'EXPERT', 150}, {'ARTISAN', 225}}
+    local function add(category, name, icon, masterID)
+        local previous
+        for _, level in pairs(levels) do
+            local ach = category:CreateAchievement('AN_' .. name .. '_' .. level[1], 'AD_' .. name .. '_' .. level[1], 10, icon, true)
+            ach:AddCriteria(criterias:Create(nil, criterias.TYPE.REACH_PROFESSION_LEVEL, {ClassicAchievementsProfessions[name][1], level[2]}))
+            if previous then previous:SetNext(ach) end
+            previous = ach
+        end
+        previous:SetNext(db:GetAchievement(masterID))
+    end
+    add(firstAid, 'FIRST_AID', '-Inv_Fabric_Wool_01', 118)
+    add(fishing, 'FISHING', 'profs_fishing', 119)
+    add(cooking, 'COOKING', 'profs_cooking', 120)
+
+    ach = firstAid:CreateAchievement('AN_STOCKING_UP', 'AD_STOCKING_UP', 10, '-Inv_Misc_Bandage_11', true)
+    ach:AddCriteria(criterias:CreateL('AC_STOCKING_UP', criterias.TYPE.CRAFT_ITEM, {14530}, 100))
+    previous = ach
+    ach = firstAid:CreateAchievement('AN_STOCKING_UP_2', 'AD_STOCKING_UP_2', 10, '-Inv_Misc_Bandage_12', true)
+    ach:AddCriteria(criterias:CreateL('AC_STOCKING_UP_2', criterias.TYPE.CRAFT_ITEM, {14530}, 500))
+    previous:SetNext(ach)
+    previous = nil
 end
 
 -- local events = tab:CreateCategory('CATEGORY_EVENTS', nil, true)

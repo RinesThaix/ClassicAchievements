@@ -20,6 +20,16 @@ local options = {
             type = 'execute',
             width = 2,
             func = function() ClassicAchievements_UpdateExploredAreas() end
+        },
+        resetAchievements = {
+            name = loc:Get('OPTION_RESET_ACHIEVEMENTS'),
+            desc = loc:Get('OPTION_RESET_ACHIEVEMENTS_DESC'),
+            type = 'execute',
+            width = 2,
+            func = function()
+                CA_CompletionManager:GetLocal():Reset()
+                ClassicAchievements_performInitialCheck()
+            end
         }
     }
 }

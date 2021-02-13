@@ -86,10 +86,10 @@ local function triggerProfessions(array, type)
     if size == 0 then return end
     if size == 1 then trigger(type, array, 1, true) end
     table.sort(array, function(a, b) return a < b end)
-    trigger(type, {array[1]}, size, true)
+    for lvl = 1, array[1] do trigger(type, {lvl}, size, true) end
     for i = 2, size do
         if array[i - 1] ~= array[i] then
-            trigger(type, {array[i]}, size - i + 1, true)
+            for lvl = 1, array[i] do trigger(type, {lvl}, size - i + 1, true) end
         end
     end
 end
@@ -102,7 +102,7 @@ local function updateProfessions()
             points = min(300, points - tempPoints)
             for idx, data in pairs(ClassicAchievementsProfessions) do
                 if data[3] == skillName then
-                    trigger(TYPE.REACH_PROFESSION_LEVEL, {data[1], points}, 1, true)
+                    for ps = 1, points do trigger(TYPE.REACH_PROFESSION_LEVEL, {data[1], ps}, 1, true) end
                     if data[2] then
                         main[#main + 1] = points
                     else
@@ -113,7 +113,7 @@ local function updateProfessions()
             end
             for idx, data in pairs(ClassicAchievementsSkills) do
                 if data[2] == skillName then
-                    trigger(TYPE.REACH_PROFESSION_LEVEL, {data[1], points}, 1, true)
+                    for ps = 1, points do trigger(TYPE.REACH_PROFESSION_LEVEL, {data[1], ps}, 1, true) end
                     break
                 end
             end
@@ -216,7 +216,7 @@ function ClassicAchievements_UpdateExploredAreas()
     end
 end
 
-C_Timer.After(5, function()
+function ClassicAchievements_performInitialCheck()
     local kills, _, maxRank = GetPVPLifetimeStats()
     local _, maxRank = GetPVPRankInfo(maxRank)
     trigger(TYPE.KILL_PLAYERS, nil, kills, true)
@@ -234,7 +234,9 @@ C_Timer.After(5, function()
     updateGear()
 
     CA_CompletionManager:GetLocal():RecheckAchievements()
-end)
+end
+
+C_Timer.After(5, ClassicAchievements_performInitialCheck)
 
 local ITEM_CREATION_PATTERN = LOOT_ITEM_CREATED_SELF:gsub("%%s","%(.*%)")
 local ITEM_CREATION_PATTERN_MULTIPLE = LOOT_ITEM_CREATED_SELF_MULTIPLE:gsub('%%s', '%(.*%)'):gsub('%%d', '%(%%d%+%)')
@@ -296,9 +298,10 @@ local events = {
         else
             quantity = tonumber(quantity)
         end
-        A = item
         local id = tonumber(item:match("\124Hitem:(%d+):"))
+        print(id)
         if not id then return end
+        print(id, quantity)
         trigger(TYPE.CRAFT_ITEM, {id}, quantity)
     end,
     UPDATE_BATTLEFIELD_SCORE = function()

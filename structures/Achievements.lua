@@ -118,6 +118,11 @@ local function Tab(id)
             self.categories[result.id] = result
             return result
         end,
+        SkipCategories = function(self, count)
+            for i = 1, (count or 1) do
+                lastCategoryID = lastCategoryID + 1
+            end
+        end,
         GetCategory = function(self, id)
             if id == -1 then return self.summaryCategory end
             return self.categories[id]

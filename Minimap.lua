@@ -1,6 +1,6 @@
 local addon = 'Classic Achievements'
 
-SexyLib:InitMinimap(addon)
+SexyLib:InitMinimap(addon, nil, "hud-microbutton-Achievement-Up", false)
 
 local minimap, loc = SexyLib:Minimap(addon), SexyLib:Localization(addon)
 

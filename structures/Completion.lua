@@ -8,6 +8,7 @@ C_Timer.NewTicker(1, function()
     if not requiresUpdate then return end
     requiresUpdate = false
     AchievementFrame_ForceUpdate()
+    print('force updated')
 end)
 
 local function Completion(data)
@@ -170,13 +171,13 @@ local function Completion(data)
             if not achievementIDs then return end
             for _, achievementID in pairs(achievementIDs) do
                 if self:IncrementCriteriaProgression(achievementID, criteriaID, requiredQuantity, count) then
-                    requiresUpdate = true
                     local achievement = CA_Database:GetAchievement(achievementID)
                     if achievement and self:AreAllCriteriasCompleted(achievement) then
                         self:completeAchievementGracefully(achievement)
                     end
                 end
             end
+            requiresUpdate = true
         end,
         RecheckAchievements = function(self)
             for id, data in pairs(self:getData()) do
@@ -187,6 +188,10 @@ local function Completion(data)
                     end
                 end
             end
+        end,
+        Reset = function(self)
+            CA_LocalData = {}
+            data = CA_LocalData
         end
     }
 end
