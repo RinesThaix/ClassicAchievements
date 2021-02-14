@@ -302,6 +302,19 @@ local events = {
         if not id then return end
         trigger(TYPE.CRAFT_ITEM, {id}, quantity)
     end,
+    LOOT_OPENED = function()
+        if not IsFishingLoot() then return end
+        for slot = 1, GetNumLootItems() do
+            if LootSlotHasItem(slot) then
+                local _, _, quantity = GetLootSlotInfo(slot)
+                local link = GetLootSlotLink(slot)
+                if link then
+                    local id = tonumber(link:match("\124Hitem:(%d+):"))
+                    if id then trigger(TYPE.FISH_AN_ITEM, {id}, quantity) end
+                end
+            end
+        end
+    end,
     UPDATE_BATTLEFIELD_SCORE = function()
         if not InActiveBattlefield() or not canGetBattlegroundsAchievement then return end
         local winner = GetBattlefieldWinner()
@@ -351,6 +364,27 @@ local events = {
     end,
     PLAYER_ENTERING_WORLD = function()
         canGetBattlegroundsAchievement = true
+    end,
+    TRADE_SKILL_UPDATE = function()
+        local profession = GetTradeSkillLine()
+        for _, data in pairs(ClassicAchievementsProfessions) do
+            if profession == data[3] then
+                local total = 0
+                for i = 1, GetNumTradeSkills() do
+                    local _, type = GetTradeSkillInfo(i)
+                    if type ~= 'header' then
+                        total = total + 1
+                        local link = GetTradeSkillItemLink(i)
+                        if link then
+                            local id = tonumber(link:match("\124Hitem:(%d+):"))
+                            if id then trigger(TYPE.LEARN_PROFESSION_RECIPE, {data[1], id}) end
+                        end
+                    end
+                end
+                trigger(TYPE.LEARN_PROFESSION_RECIPES, {data[1]}, total, true)
+                break
+            end
+        end
     end
 }
 local eventsHandler = CreateFrame('FRAME', 'ClassicAchievementsEventHandlingFrame')

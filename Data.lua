@@ -689,6 +689,104 @@ do
     ach:AddCriteria(criterias:CreateL('AC_STOCKING_UP_2', criterias.TYPE.CRAFT_ITEM, {14530}, 500))
     previous:SetNext(ach)
     previous = nil
+
+    ach = fishing:CreateAchievement('AN_FISHING_ROD', 'AD_FISHING_ROD', 10, '-Inv_FishingPole_01', true)
+    ach:AddCriteria(criterias:Create(nil, criterias.TYPE.OBTAIN_ITEM, {19970}))
+    ach = fishing:CreateAchievement('AN_FISHING_TRINKET', 'AD_FISHING_TRINKET', 10, '-Trade_Fishing', true)
+    ach:AddCriteria(criterias:Create(nil, criterias.TYPE.OBTAIN_ITEM, {19979}))
+
+    local function add(name, icon, ids)
+        local ach = fishing:CreateAchievement('AN_FISHING_' .. name, 'AD_FISHING_' .. name, 10, icon, true)
+        if #ids == 1 then
+            ach:AddCriteria(criterias:Create(nil, criterias.TYPE.FISH_AN_ITEM, ids))
+        else
+            for _, itemID in pairs(ids) do
+                local criteria = criterias:Create('itemID ' .. itemID, criterias.TYPE.FISH_AN_ITEM, {itemID})
+                ach:AddCriteria(criteria)
+    
+                local item = Item:CreateFromItemID(itemID)
+                item:ContinueOnItemLoad(function()
+                    criteria.name = item:GetItemName()
+                end)
+            end
+        end
+        return ach
+    end
+
+    add('COLLECTION', '-Inv_Misc_MonsterHead_01', {19975, 6291, 6643, 6645, 6522, 6358, 21071, 6359, 8365, 21153, 13755, 13422, 13757, 13754, 13758, 13756, 13760, 13759, 13890, 13889, 13893, 13888, 12238, 19806, 19805, 19803})
+    add('WATER', '-Spell_Nature_Acid_01', {7080})
+    add('RUM', '-Inv_Drink_04', {21151, 20709})
+    add('RING', '-Inv_Jewelry_Ring_03', {8350})
+    add('SKULL', '-Inv_Misc_Bone_DwarfSkull_01', {6301})
+
+    local snapper = add('SNAPPER', '-Inv_Misc_Fish_33', {6292, 6294, 6295})
+    local seaBass = add('SEA_BASS', '-Inv_Misc_Fish_06', {13876, 13877, 13878, 13879, 13880})
+    local salmon = add('SALMON', '-Inv_Misc_Fish_02', {13901, 13902, 13903, 13904, 13905, 13906})
+    local lobster = add('LOBSTER', '-Inv_Misc_Fish_14', {13907, 13908, 13909, 13910, 13911, 13912, 13913})
+    ach = fishing:CreateAchievement('AN_FISHING_BIG_SIZE', 'AD_FISHING_BIG_SIZE', 20, '-Inv_Misc_Fish_04', true)
+    ach:AddCriteria(criterias:Create(snapper.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {snapper.id}))
+    ach:AddCriteria(criterias:Create(seaBass.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {seaBass.id}))
+    ach:AddCriteria(criterias:Create(salmon.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {salmon.id}))
+    ach:AddCriteria(criterias:Create(lobster.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {lobster.id}))
+    ach:SetRewardText(loc:Get('AR_FISHING_BIG_SIZE'))
+
+    previous = nil
+    for _, count in pairs({30, 50, 60, 70, 80}) do
+        local ach = cooking:CreateAchievement(loc:Get('AN_COOKING_RECIPES_' .. count), loc:Get('AD_COOKING_RECIPES', count), 10, '-Inv_Misc_Food_14')
+        ach:AddCriteria(criterias:Create(loc:Get('AC_COOKING_RECIPES', count), criterias.TYPE.LEARN_PROFESSION_RECIPES, {ClassicAchievementsProfessions.COOKING[1]}, count))
+        if previous then previous:SetNext(ach) end
+        if count == 80 then
+            ach:SetRewardText(loc:Get('AR_COOKING_RECIPES'))
+        end
+        previous = ach
+    end
+    previous = nil
+
+    local function add(name, icon, itemID, count, points)
+        local ach = cooking:CreateAchievement(loc:Get('AN_COOKING_' .. name), 'create itemID ' .. itemID, points or 10, icon)
+        ach:AddCriteria(criterias:Create(loc:Get('AC_COOKING_CREATE', count), criterias.TYPE.CRAFT_ITEM, {itemID}, count))
+
+        local item = Item:CreateFromItemID(itemID)
+        item:ContinueOnItemLoad(function()
+            ach.description = loc:Get('AD_COOKING_CREATE', item:GetItemName(), count)
+        end)
+        return ach
+    end
+
+    local soup = add('SOUP', '-Inv_Drink_17', 13931, 100)
+    local dessert = add('DESSERT', '-Inv_Misc_Food_63', 18254, 100)
+    local squid = add('SQUID', '-Inv_Misc_Fish_13', 13928, 100)
+    local dumplings = add('DUMPLINGS', '-Inv_Misc_Food_64', 20452, 100)
+    ach = cooking:CreateAchievement('AN_COOKING_BIG_TABLE', 'AD_COOKING_BIG_TABLE', 20, '-Inv_Misc_Food_49', true)
+    ach:AddCriteria(criterias:Create(soup.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {soup.id}))
+    ach:AddCriteria(criterias:Create(dessert.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {dessert.id}))
+    ach:AddCriteria(criterias:Create(squid.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {squid.id}))
+    ach:AddCriteria(criterias:Create(dumplings.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {dumplings.id}))
+
+    add('CHOPS', '-Inv_Misc_Food_65', 21023, 20, 20)
+end
+
+local worldBosses = tab:CreateCategory('CATEGORY_WORLD_BOSSES', pve.id, true)
+
+do
+    local function add(name, creatureID, icon)
+        local ach = worldBosses:CreateAchievement('AN_WB_' .. name, 'AD_WB_' .. name, 10, icon, true)
+        ach:AddCriteria(criterias:Create(nil, criterias.TYPE.KILL_NPC, {creatureID}))
+        return ach
+    end
+
+    add('AZUREGOS', 6109, 'azuregos')
+    add('KAZZAK', 12397, 'kazzak')
+    local ysondre = add('YSONDRE', 14887, 'ysondre')
+    local lethon = add('LETHON', 14888, 'lethon')
+    local emeriss = add('EMERISS', 14889, 'emeriss')
+    local taerar = add('TAERAR', 14890, 'taerar')
+    ach = worldBosses:CreateAchievement('AN_WB_EMERALD_DRAGONS', 'AD_WB_EMERALD_DRAGONS', 20, 'dragons_of_nightmare', true)
+    ach:AddCriteria(criterias:Create(ysondre.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {ysondre.id}))
+    ach:AddCriteria(criterias:Create(lethon.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {lethon.id}))
+    ach:AddCriteria(criterias:Create(emeriss.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {emeriss.id}))
+    ach:AddCriteria(criterias:Create(taerar.name, criterias.TYPE.COMPLETE_ACHIEVEMENT, {taerar.id}))
+    ach:SetRewardText(loc:Get('AR_WB_EMERALD_DRAGONS'))
 end
 
 -- local events = tab:CreateCategory('CATEGORY_EVENTS', nil, true)

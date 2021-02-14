@@ -30,7 +30,10 @@ struct.TYPE = {
     BATTLEFIELD_SCORE_MAX = 24,
     BATTLEFIELDS_SCORE = 25,
     BATTLEFIELD_WINS = 26,
-    GEAR_QUALITY = 27
+    GEAR_QUALITY = 27,
+    FISH_AN_ITEM = 28,
+    LEARN_PROFESSION_RECIPE = 29,
+    LEARN_PROFESSION_RECIPES = 30
 }
 
 struct.dataLengths = {
@@ -60,7 +63,10 @@ struct.dataLengths = {
     [struct.TYPE.BATTLEFIELD_SCORE_MAX] = 2, -- mapID, scoreID: 1 for killing blows, 2 for honorable kills, 3 for deaths
     [struct.TYPE.BATTLEFIELDS_SCORE] = 1, -- scoreID
     [struct.TYPE.BATTLEFIELD_WINS] = 1, -- mapID
-    [struct.TYPE.GEAR_QUALITY] = 2 -- first argument is slot id, second one is from Enum.ItemQuality
+    [struct.TYPE.GEAR_QUALITY] = 2, -- first argument is slot id, second one is from Enum.ItemQuality
+    [struct.TYPE.FISH_AN_ITEM] = 1, -- itemID
+    [struct.TYPE.LEARN_PROFESSION_RECIPE] = 2, -- profession index from ClassicAchievementsProfessions, itemID
+    [struct.TYPE.LEARN_PROFESSION_RECIPES] = 1 -- profession index from ClassicAchievementsProfessions
 }
 
 struct.criterias = {}

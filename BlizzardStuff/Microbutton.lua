@@ -1,7 +1,5 @@
 BINDING_NAME_CLASSIC_ACHIEVEMENT = 'Classic Achievements'
 
-local width = 24
-
 local microButtons = {}
 for _, value in pairs(MICRO_BUTTONS) do
     microButtons[#microButtons + 1] = value
@@ -11,6 +9,31 @@ for _, value in pairs(MICRO_BUTTONS) do
 end
 
 MICRO_BUTTONS = microButtons
+
+hooksecurefunc("UpdateMicroButtons", function()
+    if AchievementFrame and AchievementFrame:IsShown() then
+        AchievementMicroButton:SetButtonState('PUSHED', true)
+    else
+        AchievementMicroButton:SetButtonState('NORMAL')
+    end
+end)
+
+AchievementMicroButton:SetScript('OnClick', function(self, button)
+    if button == 'RightButton' then
+        if InterfaceOptionsFrame:IsShown() then
+            InterfaceOptionsFrame:Hide()
+        else
+            InterfaceOptionsFrame_OpenToCategory('Classic Achievements')
+            InterfaceOptionsFrame_OpenToCategory('Classic Achievements') -- not a bug, two calls required
+        end
+    else
+        AchievementFrame_ToggleAchievementFrame()
+    end
+end)
+
+if Bartender4 then return end
+
+local width = 24
 
 MainMenuBar:SetWidth(MainMenuBar:GetWidth() + width * 2)
 
@@ -37,24 +60,3 @@ end)
 move(MainMenuBarBackpackButton, -width)
 
 move(MultiBarBottomRight, width)
-
-hooksecurefunc("UpdateMicroButtons", function()
-    if AchievementFrame and AchievementFrame:IsShown() then
-        AchievementMicroButton:SetButtonState('PUSHED', true)
-    else
-        AchievementMicroButton:SetButtonState('NORMAL')
-    end
-end)
-
-AchievementMicroButton:SetScript('OnClick', function(self, button)
-    if button == 'RightButton' then
-        if InterfaceOptionsFrame:IsShown() then
-            InterfaceOptionsFrame:Hide()
-        else
-            InterfaceOptionsFrame_OpenToCategory('Classic Achievements')
-            InterfaceOptionsFrame_OpenToCategory('Classic Achievements') -- not a bug, two calls required
-        end
-    else
-        AchievementFrame_ToggleAchievementFrame()
-    end
-end)
