@@ -746,6 +746,10 @@ SexyLib:InitLocalization('Classic Achievements', {
     AD_ARATHI_BASE_ASSAULT_TOTAL = 'Take %d flags in Arathi Basin.',
     AN_ARATHI_BASE_DEFEND_TOTAL = 'To The Rescue!',
     AD_ARATHI_BASE_DEFEND_TOTAL = 'Come the the defense of a base in Arathi Basin %d times by recapping the flag.',
+    AN_ALTERAC_MOUNT_HORDE = 'Frostwolf Howler',
+    AD_ALTERAC_MOUNT_HORDE = 'Obtain a Frostwolf Howler.',
+    AN_ALTERAC_MOUNT_ALLIANCE = 'Stormpike Battle Charger',
+    AD_ALTERAC_MOUNT_ALLIANCE = 'Obtain a Stormpike Battle Charger.',
 
     AN_ALTERAC_BOSS = 'Master of Alterac Valley',
     AD_ALTERAC_BOSS = 'Complete the Alterac Valley achievements listed below.',

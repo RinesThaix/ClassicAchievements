@@ -3,7 +3,7 @@
 ## Notes: Introduces achievements for WoW Classic
 ## Notes-ruRU: Добавляет достижения в мир WoW Classic
 ## Author: Konstantin Shandurenko
-## Version: 1.0.9
+## Version: 1.0.10.2
 ## RequiredDeps: SexyLib-Network, SexyLib-Localization, LibStub, LibDeflate
 ## OptionalDeps: DBM-Core, ElvUI, Bartender4
 ## SavedVariables: CA_Settings
