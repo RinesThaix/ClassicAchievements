@@ -25,7 +25,11 @@ structures/Achievements.lua
 structures/Criterias.lua
 Triggers.lua
 ChatLink.lua
-Data.lua
+
+Data/Loader.lua
+Data/1.lua
+Data/2.lua
+Data/PostLoad.lua
 
 BlizzardStuff/ApiMocks.lua
 BlizzardStuff/NineSlice.lua

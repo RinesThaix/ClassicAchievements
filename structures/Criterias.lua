@@ -33,7 +33,12 @@ struct.TYPE = {
     GEAR_QUALITY = 27,
     FISH_AN_ITEM = 28,
     LEARN_PROFESSION_RECIPE = 29,
-    LEARN_PROFESSION_RECIPES = 30
+    LEARN_PROFESSION_RECIPES = 30,
+    DUELS = 31,
+    BATTLEFIELD_MAX_LEVEL_PARTICIPATION = 32,
+    EMOTE = 33,
+    BATTLEFIELD_FAST_WIN = 34,
+    BATTLEFIELD_STAT = 35
 }
 
 struct.dataLengths = {
@@ -66,7 +71,12 @@ struct.dataLengths = {
     [struct.TYPE.GEAR_QUALITY] = 2, -- first argument is slot id, second one is from Enum.ItemQuality
     [struct.TYPE.FISH_AN_ITEM] = 1, -- itemID
     [struct.TYPE.LEARN_PROFESSION_RECIPE] = 2, -- profession index from ClassicAchievementsProfessions, itemID
-    [struct.TYPE.LEARN_PROFESSION_RECIPES] = 1 -- profession index from ClassicAchievementsProfessions
+    [struct.TYPE.LEARN_PROFESSION_RECIPES] = 1, -- profession index from ClassicAchievementsProfessions
+    [struct.TYPE.DUELS] = 0,
+    [struct.TYPE.BATTLEFIELD_MAX_LEVEL_PARTICIPATION] = 0,
+    [struct.TYPE.EMOTE] = 2, -- emotion string id (like LOVE), target creature ID
+    [struct.TYPE.BATTLEFIELD_FAST_WIN] = 1, -- mapID
+    [struct.TYPE.BATTLEFIELD_STAT] = 2 -- mapID, statID
 }
 
 struct.criterias = {}

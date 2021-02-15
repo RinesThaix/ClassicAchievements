@@ -244,7 +244,13 @@ local ITEM_CREATION_PATTERN_MULTIPLE = LOOT_ITEM_CREATED_SELF_MULTIPLE:gsub('%%s
 local ZONE_EXPLORED_PATTERN = ERR_ZONE_EXPLORED:gsub('%%s', '%(.*%)')
 local ZONE_EXPLORED2_PATTERN = ERR_ZONE_EXPLORED_XP:gsub('%%s', '%(.*%)'):gsub('%%d', '%%d')
 
+local DUEL_VICTORY_PATTERN = DUEL_WINNER_KNOCKOUT:gsub('%%1$s', '%(.*%)'):gsub('\1243%-4%(%%2$s%)%.', '.*')
+
+local EMOTE_LOVE = loc:Get('EMOTE_LOVE'):gsub('%%s', '%(.*%)')
+local EMOTE_PAT = loc:Get('EMOTE_PAT'):gsub('%%s', '%(.*%)')
+
 local canGetBattlegroundsAchievement = false
+local alteracID, warsongID, arathiID = 1459, 1460, 1461
 
 local events = {
     COMBAT_LOG_EVENT_UNFILTERED = function()
@@ -322,7 +328,7 @@ local events = {
         canGetBattlegroundsAchievement = false
         
         local mapID = C_Map.GetBestMapForUnit('player')
-        if mapID ~= 1459 and mapID ~= 1460 and mapID ~= 1461 then return end
+        if mapID ~= alteracID and mapID ~= warsongID and mapID ~= arathiID then return end
 
         local numStats, numScores = GetNumBattlefieldStats(), GetNumBattlefieldScores()
         local myName = UnitName('player')
@@ -332,6 +338,7 @@ local events = {
                 local scores = {killingBlows, honorableKills}
                 for j = 1, numStats do
                     local stat = GetBattlefieldStatData(i, j)
+                    trigger(TYPE.BATTLEFIELD_STAT, {mapID, j}, stat)
                     trigger(TYPE.BATTLEFIELD_STAT_MAX, {mapID, j}, stat, true)
                 end
                 for j, score in pairs(scores) do
@@ -342,10 +349,20 @@ local events = {
             end
         end
 
+        local seconds = GetBattlefieldInstanceRunTime() / 1000
+
         local myFaction = UnitFactionGroup('player')
         if myFaction == 'Horde' then myFaction = 0 else myFaction = 1 end
         if winner == myFaction then
             trigger(TYPE.BATTLEFIELD_WINS, {mapID}, 1)
+            if seconds ~= 0 then
+                if (mapID == alteracID or mapID == arathiID) and seconds <= 360 or mapID == warsongID and seconds <= 420 then
+                    trigger(TYPE.BATTLEFIELD_FAST_WIN, {mapID})
+                end
+            end
+        end
+        if UnitLevel('player') == 60 then
+            trigger(TYPE.BATTLEFIELD_MAX_LEVEL_PARTICIPATION)
         end
     end,
     UI_INFO_MESSAGE = function(type, message)
@@ -385,6 +402,27 @@ local events = {
                 break
             end
         end
+    end,
+    CHAT_MSG_SYSTEM = function(msg)
+        local winner = msg:match(DUEL_VICTORY_PATTERN)
+        if winner and UnitName('player') == winner then
+            trigger(TYPE.DUELS)
+        end
+    end,
+    CHAT_MSG_TEXT_EMOTE = function(msg)
+        local guid = UnitGUID('target')
+        if not guid then return end
+        local split = SexyLib:Util():Explode(UnitGUID('target'), '-')
+        if split[1] ~= 'Creature' or not split[6] then return end
+        local unitID = floor(split[6])
+        if unitID == 0 then return end
+
+        if msg:match(EMOTE_LOVE) then
+            trigger(TYPE.EMOTE, {'LOVE', unitID})
+        elseif msg:match(EMOTE_PAT) then
+            trigger(TYPE.EMOTE, {'PAT', unitID})
+        end
+
     end
 }
 local eventsHandler = CreateFrame('FRAME', 'ClassicAchievementsEventHandlingFrame')

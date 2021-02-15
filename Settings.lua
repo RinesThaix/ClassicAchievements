@@ -16,7 +16,7 @@ local options = {
         },
         updateMapExploration = {
             name = loc:Get('OPTION_UPDATE_MAP_EXPLORATION'),
-            desc = loc:Get('OPTION_UPDATE_MAP_EXPLORATION'),
+            desc = loc:Get('OPTION_UPDATE_MAP_EXPLORATION_DESC'),
             type = 'execute',
             width = 2,
             func = function() ClassicAchievements_UpdateExploredAreas() end
