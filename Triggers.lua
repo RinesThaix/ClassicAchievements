@@ -252,13 +252,98 @@ local EMOTE_PAT = loc:Get('EMOTE_PAT'):gsub('%%s', '%(.*%)')
 local canGetBattlegroundsAchievement = false
 local alteracID, warsongID, arathiID = 1459, 1460, 1461
 
+local leeroy = {}
+local bwlDuo = {}
+local arachnophobia = 0
+local horsemen = {
+    [16062] = 0,
+    [16063] = 0,
+    [16064] = 0,
+    [16065] = 0
+}
+
+local bossesWithMobs = {
+    [15956] = {16573},
+    [15953] = {16505, 16506}
+}
+local bossesWithMobsCache = {}
+
+local bossesWithAllAlives = {
+    [15989] = 40
+}
+
 local events = {
     COMBAT_LOG_EVENT_UNFILTERED = function()
         local timestamp, type, hideCaster, sourceGUID, sourceName, sourceFlags, sourceFlags2, targetGUID, targetName, targetFlags, targetFlags2 = select(1, CombatLogGetCurrentEventInfo())
         if type == 'PARTY_KILL' then
             if isCreature(targetGUID) then
-                trigger(TYPE.KILL_NPC, {getCreatureID(targetGUID)}, 1)
+                local creatureID = getCreatureID(targetGUID)
+                trigger(TYPE.KILL_NPC, {creatureID}, 1)
                 trigger(TYPE.KILL_NPCS, nil, 1)
+                if creatureID == 10161 then
+                    local time, any = time()
+                    for t, _ in pairs(leeroy) do
+                        if time - t > 15 then leeroy[t] = nil end
+                    end
+                    leeroy[time] = (leeroy[time] or 0) + 1
+                    local total = 0
+                    for _, v in pairs(leeroy) do total = total + v end
+                    if total >= 50 then
+                        trigger(TYPE.SPECIAL, {1}, 1, true)
+                    end
+                elseif creatureID == 11981 or creatureID == 14601 then
+                    local time = time()
+                    bwlDuo[creatureID] = time
+                    if time - (bwlDuo[11981] or 0) <= 45 and time - (bwlDuo[14601] or 0) <= 45 then
+                        trigger(TYPE.SPECIAL, {2}, 1, true)
+                    end
+                elseif creatureID == 15956 then
+                    arachnophobia = time()
+                elseif creatureID == 15952 then
+                    if time() - arachnophobia < 60 * 20 then trigger(TYPE.SPECIAL, {3}, 1, true) end
+                else
+                    for horsemanID, _ in pairs(horsemen) do
+                        if creatureID == horsemanID then
+                            horsemen[creatureID] = time()
+                            local timings = {}
+                            for _, timing in pairs(horsemen) do timings[#timings + 1] = timing end
+                            if #timings == 4 then
+                                table.sort(timings, function(a, b) return a < b end)
+                                if timings[2] - timings[1] <= 15 and timings[3] - timings[2] <= 15 and timings[4] - timings[3] <= 15 then
+                                    trigger(TYPE.SPECIAL, {4}, 1, true)
+                                end
+                            end
+                            break
+                        end
+                    end
+                end
+                for bossID, mobIDs in pairs(bossesWithMobs) do
+                    if creatureID == bossID then
+                        if bossesWithMobsCache[bossID] == nil then trigger(TYPE.BOSS_WITHOUT_MOBS, {bossID}, 1, true) end
+                        break
+                    else
+                        local matched = false
+                        for _, mobID in pairs(mobIDs) do
+                            if creatureID == mobID then
+                                bossesWithMobsCache[bossID] = false
+                                matched = true
+                                break
+                            end
+                        end
+                        if matched then break end
+                    end
+                end
+                local raidMembers = bossesWithAllAlives[creatureID]
+                if raidMembers == GetNumGroupMembers() then
+                    local failed = false
+                    for i = 1, raidMembers do
+                        if UnitIsDeadOrGhost('raid' .. i) then
+                            failed = true
+                            break
+                        end
+                    end
+                    if not failed then trigger(TYPE.BOSS_WITH_ALL_ALIVE, {creatureID, raidMembers}, 1, true) end
+                end
             elseif isPlayer(targetGUID) then
                 local kills = GetPVPLifetimeStats()
                 trigger(TYPE.KILL_PLAYERS, nil, kills, true)
@@ -422,7 +507,9 @@ local events = {
         elseif msg:match(EMOTE_PAT) then
             trigger(TYPE.EMOTE, {'PAT', unitID})
         end
-
+    end,
+    PLAYER_REGEN_ENABLED = function()
+        bossesWithMobsCache = {}
     end
 }
 local eventsHandler = CreateFrame('FRAME', 'ClassicAchievementsEventHandlingFrame')

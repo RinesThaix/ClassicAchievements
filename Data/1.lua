@@ -5,7 +5,7 @@ local loc = SexyLib:Localization('Classic Achievements')
 local tab = db:GetTab(db.TAB_ID_PLAYER)
 local ach, previous = nil
 
-local L = CA_Loader
+local L = CA_Loader:ForTab(tab)
 local TYPE = criterias.TYPE
 
 local featsOfStrength = tab:CreateCategory('CATEGORY_FEATS_OF_STRENGTH', nil, true, 99)

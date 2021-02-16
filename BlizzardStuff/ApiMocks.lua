@@ -11,6 +11,7 @@ local function GetCategoryList_(id)
     for cid, _ in pairs(db:GetTab(id):GetCategories()) do
         result[#result + 1] = cid
     end
+    table.sort(result)
     return result
 end
 

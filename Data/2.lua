@@ -1,6 +1,10 @@
-local L = CA_Loader
+local L = CA_Loader:ForTab(CA_Database:GetTab(CA_Database.TAB_ID_PLAYER))
 local TYPE = CA_Criterias.TYPE
 local ach, previous
+
+local pve = L:GetCategoryByName('PvE')
+local instances = L:GetCategoryByName('CATEGORY_INSTANCES', true)
+local raids = L:GetCategoryByName('CATEGORY_RAIDS', true)
 
 local pvp = L:GetCategoryByName('PvP')
 local alterac = L:GetCategoryByName('CATEGORY_BG_ALTERAC', true)
@@ -9,6 +13,7 @@ local warsong = L:GetCategoryByName('CATEGORY_BG_WARSONG', true)
 local warsongID = 1460
 local arathi = L:GetCategoryByName('CATEGORY_BG_ARATHI', true)
 local arathiID = 1461
+
 local exploration = L:GetCategoryByName('CATEGORY_EXPLORATION', true)
 
 ach = L:Achievement(pvp, 10, 'duels')
@@ -116,4 +121,40 @@ L:Achievement(pvp, 20, 'battlemaster')
 :CompleteAchievementCriteria(warsongBoss)
 :CompleteAchievementCriteria(arathiBoss)
 :Reward('AR_BATTLEMASTER', true)
+:Build()
+
+L:Achievement(instances, 20, 'drake_red')
+:NameDesc('AN_LEEROY', 'AD_LEEROY', true)
+:Criteria(TYPE.SPECIAL, {1}):Build()
+:Reward('AR_LEEROY', true)
+:Build()
+
+L:Achievement(raids, 20, 'drake_twilight')
+:NameDesc('AN_BWL_DUO', 'AD_BWL_DUO', true)
+:Criteria(TYPE.SPECIAL, {2}):Build()
+:Build()
+
+L:Achievement(raids, 10, 'anubrekhan_without_mobs')
+:NameDesc('AN_ANUBREKHAN_WITHOUT_MOBS', 'AD_ANUBREKHAN_WITHOUT_MOBS', true)
+:Criteria(TYPE.BOSS_WITHOUT_MOBS, {15956}):Build()
+:Build()
+
+L:Achievement(raids, 10, 'faerlina_without_mobs')
+:NameDesc('AN_FAERLINA_WITHOUT_MOBS', 'AD_FAERLINA_WITHOUT_MOBS', true)
+:Criteria(TYPE.BOSS_WITHOUT_MOBS, {15953}):Build()
+:Build()
+
+L:Achievement(raids, 10, 'arachnophobia')
+:NameDesc('AN_ARACHNOPHOBIA', 'AD_ARACHNOPHOBIA', true)
+:Criteria(TYPE.SPECIAL, {3}):Build()
+:Build()
+
+L:Achievement(raids, 10, 'four_together')
+:NameDesc('AN_FOUR_TOGETHER', 'AD_FOUR_TOGETHER', true)
+:Criteria(TYPE.SPECIAL, {4}):Build()
+:Build()
+
+L:Achievement(raids, 20, 'sapphirone_with_all_alive')
+:NameDesc('AN_SAPPHIRONE_WITH_ALL_ALIVE', 'AD_SAPPHIRONE_WITH_ALL_ALIVE', true)
+:Criteria(TYPE.BOSS_WITH_ALL_ALIVE, {15989, 40}):Build()
 :Build()

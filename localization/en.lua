@@ -759,5 +759,21 @@ SexyLib:InitLocalization('Classic Achievements', {
     AD_ARATHI_BOSS = 'Complete the Arathi Basin achievements listed below.',
     AN_BATTLEMASTER = 'Battlemaster',
     AD_BATTLEMASTER = 'Complete the battleground achievements listed below.',
-    AR_BATTLEMASTER = 'The unspoken title of Battlemaster.'
+    AR_BATTLEMASTER = 'The unspoken title of Battlemaster.',
+
+    AN_LEEROY = 'Leeeeeeeeeeeeeroy!',
+    AD_LEEROY = 'Kill 50 rookery whelps within 15 seconds.',
+    AR_LEEROY = 'The unspoken title Jenkins.',
+    AN_BWL_DUO = 'Double breathing',
+    AD_BWL_DUO = 'Kill Ebonroc and Flamegor within 45 seconds.',
+    AN_ANUBREKHAN_WITHOUT_MOBS = 'One bad spider',
+    AD_ANUBREKHAN_WITHOUT_MOBS = 'Slay Anub\'Rekhan, leaving both crypt guards alive.',
+    AN_FAERLINA_WITHOUT_MOBS = 'The non-lonely widow',
+    AD_FAERLINA_WITHOUT_MOBS = 'Slay Grand Widow Faerlina, leaving all the worshipers and followers of Naxxramas alive.',
+    AN_SAPPHIRONE_WITH_ALL_ALIVE = 'We won\'t submit to ice',
+    AD_SAPPHIRONE_WITH_ALL_ALIVE = 'Defeat Sapphirone so that all 40 raid members remain alive.',
+    AN_ARACHNOPHOBIA = 'Arachnophobia',
+    AD_ARACHNOPHOBIA = 'Defeat Maexxna in Naxxramas within 20 minutes of Anub\'Rekhan\'s death.',
+    AN_FOUR_TOGETHER = 'And they would all go down together',
+    AD_FOUR_TOGETHER = 'Defeat the 4 Horsemen in Naxxramas, ensuring they all die within 15 seconds of each other.'
 })

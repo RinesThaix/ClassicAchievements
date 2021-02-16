@@ -38,7 +38,10 @@ struct.TYPE = {
     BATTLEFIELD_MAX_LEVEL_PARTICIPATION = 32,
     EMOTE = 33,
     BATTLEFIELD_FAST_WIN = 34,
-    BATTLEFIELD_STAT = 35
+    BATTLEFIELD_STAT = 35,
+    SPECIAL = 36,
+    BOSS_WITHOUT_MOBS = 37,
+    BOSS_WITH_ALL_ALIVE = 38
 }
 
 struct.dataLengths = {
@@ -76,7 +79,10 @@ struct.dataLengths = {
     [struct.TYPE.BATTLEFIELD_MAX_LEVEL_PARTICIPATION] = 0,
     [struct.TYPE.EMOTE] = 2, -- emotion string id (like LOVE), target creature ID
     [struct.TYPE.BATTLEFIELD_FAST_WIN] = 1, -- mapID
-    [struct.TYPE.BATTLEFIELD_STAT] = 2 -- mapID, statID
+    [struct.TYPE.BATTLEFIELD_STAT] = 2, -- mapID, statID
+    [struct.TYPE.SPECIAL] = 1,
+    [struct.TYPE.BOSS_WITHOUT_MOBS] = 1,
+    [struct.TYPE.BOSS_WITH_ALL_ALIVE] = 2 -- creatureID, raid members count
 }
 
 struct.criterias = {}
@@ -109,9 +115,14 @@ function struct:CreateL(localizationKey, ...)
     return struct:Create(loc:Get(localizationKey), ...)
 end
 
-function struct:Create(name, type, data, quantity)
-    lastID = lastID + 1
-    local id = lastID
+function struct:Create(name, type, data, quantity, forceID)
+    local id
+    if forceID then
+        id = forceID
+    else
+        lastID = lastID + 1
+        id = lastID
+    end
     local result = {
         id = id,
         name = name,

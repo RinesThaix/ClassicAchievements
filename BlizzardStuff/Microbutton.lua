@@ -47,6 +47,11 @@ local function move(thing, delta)
     thing:SetPoint(point, relativeTo, relativePoint, xOfs + delta, yOfs)
 end
 
+local function set(thing, xOf, yOf)
+    local point, relativeTo, relativePoint, xOfs, yOfs = thing:GetPoint()
+    thing:SetPoint(point, relativeTo, relativePoint, xOf or xOfs, yOf or yOfs)
+end
+
 move(MainMenuBarLeftEndCap, -width)
 move(MainMenuBarTexture0, -width)
 move(MainMenuBarTexture1, -width)
@@ -60,3 +65,12 @@ end)
 move(MainMenuBarBackpackButton, -width)
 
 move(MultiBarBottomRight, width)
+
+local expBarWidth = MainMenuExpBar:GetWidth() + width
+MainMenuExpBar:SetWidth(expBarWidth)
+move(MainMenuExpBar, -width / 2)
+for i, part in pairs({-0.375, -0.125, 0.125, 0.375}) do
+    local tex = _G['MainMenuXPBarTexture' .. (i - 1)]
+    tex:SetWidth(expBarWidth / 4)
+    set(tex, expBarWidth * part)
+end
