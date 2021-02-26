@@ -82,7 +82,7 @@ struct.dataLengths = {
     [struct.TYPE.BATTLEFIELD_STAT] = 2, -- mapID, statID
     [struct.TYPE.SPECIAL] = 1,
     [struct.TYPE.BOSS_WITHOUT_MOBS] = 1,
-    [struct.TYPE.BOSS_WITH_ALL_ALIVE] = 2 -- creatureID, raid members count
+    [struct.TYPE.BOSS_WITH_ALL_ALIVE] = 1 -- creatureID, raid members count
 }
 
 struct.criterias = {}

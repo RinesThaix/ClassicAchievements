@@ -184,8 +184,8 @@ hooksecurefunc('SetItemRef', function(link)
     end
 end)
 
-function ShareAchievement(achievementID)
-    if IsSharingAchievementsInChat() then
+function CA_ShareAchievement(achievementID)
+    if CA_IsSharingAchievementsInChat() then
         local gender = UnitSex('player')
         if gender > 1 then
             if gender == 2 then gender = 'MALE'

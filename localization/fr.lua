@@ -248,14 +248,14 @@ SexyLib:Localization('Classic Achievements'):Add({
     AR_DEFENDER = 'Titre factice : défenseur d\'Azeroth.',
 	
 	AN_BLACKROCK_MASTER = 'Seigneur du Mont Blackrock',
-    AD_BLACKROCK_MASTER = 'Accomplir les hauts faits dans les donjons et raids du Mont Blackrock listés ci-dessous',
+    AD_BLACKROCK_MASTER = 'Accomplir les hauts faits dans les donjons et raids du Mont Blackrock listés ci-dessous.',
     
 	AN_HERO = 'Écumeur des raids',
     AD_HERO = 'Accomplir les hauts faits dans les raids listés ci-dessous.',
     AR_HERO = 'Titre factice : héro d\'Azeroth.',
     
 	AN_GREAT_HERO = 'Grand héro d\'Azeroth',
-    AD_GREAT_HERO = 'Accomplir les hauts faits dans les donjons et raids listés ci-dessous',
+    AD_GREAT_HERO = 'Accomplir les hauts faits dans les donjons et raids listés ci-dessous.',
     AR_GREAT_HERO = 'Titre factice : grand héro d\'Azeroth.',
 	
 	-- Dungeons sub-category
@@ -335,6 +335,9 @@ SexyLib:Localization('Classic Achievements'):Add({
     AD_BLACKROCK_SPIRE_UPPER = 'Vaincre le général Drakkisath.',
     AN_BLACKROCK_SPIRE = 'Envahisseur du pic Blackrock',
     AD_BLACKROCK_SPIRE = 'Accomplir les hauts faits dans le pic Blackrock listés ci-dessous.',
+	AN_LEEROY = 'Leeeeeeeeeeeeeroy !',
+	AD_LEEROY = 'Tuer 50 dragonnets de la colonie en 15 secondes.',
+	AR_LEEROY = 'Titre factice : Jenkins.',
 	
 	AN_SCHOLOMANCE = 'Scholomance',
     AD_SCHOLOMANCE = 'Vaincre le Sombre Maître Gandling.',
@@ -353,65 +356,77 @@ SexyLib:Localization('Classic Achievements'):Add({
     AC_DIRE_MAUL3 = 'Roi Gordok',
 
     AN_YOUNG_DEFENDER = 'Jeune défenseur d\'Azeroth',
-    AD_YOUNG_DEFENDER = 'Accomplir les hauts faits dans les donjons listés ci-dessous',
+    AD_YOUNG_DEFENDER = 'Accomplir les hauts faits dans les donjons listés ci-dessous.',
     
 	-- Raids sub-category
-	AN_RAGNAROS = 'Molten Core',
-    AD_RAGNAROS = 'Defeat Ragnaros.',
+	AN_RAGNAROS = 'Cœur du Magma',
+    AD_RAGNAROS = 'Vaincre Ragnaros.',
 	
-    AN_ONYXIA = 'Onyxia\'s Lair',
-    AD_ONYXIA = 'Kill Onyxia.',
+    AN_ONYXIA = 'Le repaire d\'Onyxia',
+    AD_ONYXIA = 'Vaincre Onyxia.',
 
-	AN_BLACK_WING_LAIR = 'Black Wing Lair',
-    AD_BLACK_WING_LAIR = 'Kill Nefarian.',
+	AN_BLACK_WING_LAIR = 'Repaire de l\'Aile noire',
+    AD_BLACK_WING_LAIR = 'Vaincre Nefarian.',
+	AN_BWL_DUO = 'Double respiration',
+	AD_BWL_DUO = 'Vaincre Rochébène et Flamegor en moins de 45 secondes.',
 	
 	AN_ZULGURUB = 'Zul\'Gurub',
-    AD_ZULGURUB = 'Drive Hakkar out of this world.',
+    AD_ZULGURUB = 'Vaincre Hakkar.',
 	
-    AN_AQ20 = 'Ruins of Ahn\'Qiraj',
-    AD_AQ20 = 'Kill Ossirian the Unscarred.',
+    AN_AQ20 = 'Ruines d\'Ahn\'Qiraj',
+    AD_AQ20 = 'Vaincre Ossirian l\'Intouché.',
 	
-	AN_AQ40 = 'Temple of Ahn\'Qiraj',
-    AD_AQ40 = 'Defeat C\'thun.',
+	AN_AQ40 = 'Temple d\'Ahn\'Qiraj',
+    AD_AQ40 = 'Vaincre C\'thun.',
 	
-	AN_NAXXRAMAS_SPIDERS = 'Spider quarter of Naxxramas',
-    AD_NAXXRAMAS_SPIDERS = 'Kill Maexxna.',
-    AN_NAXXRAMAS_PLAGUE = 'Plague quarter of Naxxramas',
-    AD_NAXXRAMAS_PLAGUE = 'Kill Loatheb.',
-    AN_NAXXRAMAS_MILITARY = 'Naxxramas military quarter',
-    AD_NAXXRAMAS_MILITARY = 'Defeat four horsemen.',
-    AN_NAXXRAMAS_CONSTRUCT = 'The abomination quarter of Naxxramas',
-    AD_NAXXRAMAS_CONSTRUCT = 'Kill Thaddius.',
-    AN_NAXXRAMAS_LAIR = 'Frost Wyrm\'s Lair',
-    AD_NAXXRAMAS_LAIR = 'Defeat Kel\'Thuzad.',
-    AN_NAXXRAMAS = 'Vanquisher of Naxxramas',
-    AD_NAXXRAMAS = 'Earn following Naxxramas related achievements.',
+	AN_NAXXRAMAS_SPIDERS = 'Le quartier des Arachnides',
+    AD_NAXXRAMAS_SPIDERS = 'Vaincre Maexxna à Naxxramas.',
+    AN_NAXXRAMAS_PLAGUE = 'Le quartier de la Peste',
+    AD_NAXXRAMAS_PLAGUE = 'Vaincre Horreb à Naxxramas.',
+    AN_NAXXRAMAS_MILITARY = 'Le quartier Militaire',
+    AD_NAXXRAMAS_MILITARY = 'Vaincre les 4 cavaliers à Naxxramas.',
+    AN_NAXXRAMAS_CONSTRUCT = 'Le quartier des Assemblages',
+    AD_NAXXRAMAS_CONSTRUCT = 'Vaincre Thaddius à Naxxramas.',
+    AN_NAXXRAMAS_LAIR = 'Défaite de Kel\'Thuzad',
+    AD_NAXXRAMAS_LAIR = 'Vaincre Kel\'Thuzad à Naxxramas.',
+    AN_NAXXRAMAS = 'Vainqueur de Naxxramas',
+    AD_NAXXRAMAS = 'Accomplir les hauts faits dans Naxxramas listés ci-dessous.',
+	AN_ANUBREKHAN_WITHOUT_MOBS = 'Une mauvaise araignée',
+	AD_ANUBREKHAN_WITHOUT_MOBS = 'Vaincre Anub\'Rekhan à Naxxramas en laissant les deux gardes de la crypte en vie.',
+	AN_FAERLINA_WITHOUT_MOBS = 'La veuve non solitaire',
+	AD_FAERLINA_WITHOUT_MOBS = 'Vaincre la grande veuve Faerlina à Naxxramas en laissant en vie tous les fidèles et adeptes.',
+	AN_SAPPHIRONE_WITH_ALL_ALIVE = 'Nous ne nous soumettrons pas à la glace',
+	AD_SAPPHIRONE_WITH_ALL_ALIVE = 'Vaincre Saphiron à Naxxramas sans qu\'un seul membre du raid ne meurt.',
+	AN_ARACHNOPHOBIA = 'Arachnophobie',
+	AD_ARACHNOPHOBIA = 'Tuer Maexxna à Naxxramas dans les 20 minutes qui suivent la mort d\'Anub\'Rekhan.',
+	AN_FOUR_TOGETHER = 'Jusqu\'à ce que mort s\'ensuive',
+	AD_FOUR_TOGETHER = 'Vaincre les 4 cavaliers à Naxxramas à moins de 15 secondes d\'intervalle les uns des autres.',
 	
-    AN_YOUNG_HERO = 'Young hero of the Azeroth',
-    AD_YOUNG_HERO = 'Earn simpliest raid achievements listed below.',
+    AN_YOUNG_HERO = 'Jeune héro d\'Azeroth',
+    AD_YOUNG_HERO = 'Accomplir les hauts faits dans les raids listés ci-dessous.',
     
 	-- World boss sub-category
-	AN_WB_AZUREGOS = 'The secret of the blue dragon',
-    AD_WB_AZUREGOS = 'Defeat Azuregos.',
+	AN_WB_AZUREGOS = 'Le secret du dragon bleu',
+    AD_WB_AZUREGOS = 'Vaincre Azuregos.',
 	
-    AN_WB_KAZZAK = 'Demons will not pass',
-    AD_WB_KAZZAK = 'Defeat Lord Kazzak.',
+    AN_WB_KAZZAK = 'Les démons ne passeront pas',
+    AD_WB_KAZZAK = 'Vaincre Seigneur Kazzak.',
 	
-    AN_WB_YSONDRE = 'No room for girls in a nightmare',
-    AD_WB_YSONDRE = 'Defeat Ysondre.',
+    AN_WB_YSONDRE = 'Pas de place pour les filles dans un cauchemar',
+    AD_WB_YSONDRE = 'Vaincre Ysondre.',
 	
-    AN_WB_LETHON = 'Child of the emerald nightmare',
-    AD_WB_LETHON = 'Defeat Lethon.',
+    AN_WB_LETHON = 'Enfant du Cauchemar d\'émeraude ',
+    AD_WB_LETHON = 'Vaincre Lethon.',
 	
-    AN_WB_EMERISS = 'Emeriss, the traitor to life',
-    AD_WB_EMERISS = 'Defeat Emeriss.',
+    AN_WB_EMERISS = 'Emeriss, le traitre à la vie',
+    AD_WB_EMERISS = 'Vaincre Emeriss.',
 	
-    AN_WB_TAERAR = 'Nightmarish Taerar',
-    AD_WB_TAERAR = 'Defeat Taerar.',
+    AN_WB_TAERAR = 'Taerar cauchemardesque',
+    AD_WB_TAERAR = 'Vaincre Taerar.',
 	
-    AN_WB_EMERALD_DRAGONS = 'Emerald keeper',
-    AD_WB_EMERALD_DRAGONS = 'Defeat all dragons of emerald nightmare.',
-    AR_WB_EMERALD_DRAGONS = 'The unspoken title of Emerald keeper.',
+    AN_WB_EMERALD_DRAGONS = 'Gardien d\'émeraude',
+    AD_WB_EMERALD_DRAGONS = 'Vaincre tous les dragons du Cauchemar d\'émeraude.',
+    AR_WB_EMERALD_DRAGONS = 'Titre factice : Gardien d\'émeraude.',
     
 	-- ################
 	-- PvP achievements

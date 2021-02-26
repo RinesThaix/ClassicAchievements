@@ -278,8 +278,14 @@ local pvp = tab:CreateCategory('PvP')
 
 do
     previous = nil
+    local factionLetter
+    if UnitFactionGroup('player') == 'Horde' then
+        factionLetter = 'H'
+    else
+        factionLetter = 'A'
+    end
     for i = 1, 14 do
-        ach = pvp:CreateAchievement(loc:Get('AN_PVP_RANK', i), loc:Get('AD_PVP_RANK' .. i), 10, 'pvp_rank_' .. i)
+        ach = pvp:CreateAchievement('AN_PVP_RANK_' .. factionLetter .. i, 'AD_PVP_RANK', 10, 'pvp_rank_' .. i, true)
         ach:AddCriteria(criterias:Create(nil, TYPE.REACH_PVP_RANK, {i}))
         if previous then previous:SetNext(ach) end
         previous = ach
@@ -624,7 +630,7 @@ do
     add(85, {156, 154, 810, 157, 166, 811, 164, 159, 165, 162, 459, 167, 812, 160, 1497, 152}, 'tirisfal_glades')
     add(28, {2298, 197, 193, 813, 199, 200, 202, 192, 190, 201, 198, 2620, 2297}, 'western_plaguelands')
     add(40, {107, 108, 916, 109, 918, 111, 917, 113, 219, 20, 115, 921, 922, 920})
-    add(11, {1018, 1022, 118, 1024, 1023, 309, 205, 1036, -836, 1025, 1020, 1016, 1017, 1037, 150}, 'wetlands')
+    add(11, {1018, 1022, 118, 1024, 1023, 309, 205, 1036, -836, 1025, 1020, 1016, 1017, -1037, 150}, 'wetlands')
     exploreAzeroth:AddCriteria(criterias:Create(global.name, TYPE.COMPLETE_ACHIEVEMENT, {global.id}))
 end
 

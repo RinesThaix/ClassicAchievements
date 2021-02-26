@@ -156,5 +156,5 @@ L:Achievement(raids, 10, 'four_together')
 
 L:Achievement(raids, 20, 'sapphirone_with_all_alive')
 :NameDesc('AN_SAPPHIRONE_WITH_ALL_ALIVE', 'AD_SAPPHIRONE_WITH_ALL_ALIVE', true)
-:Criteria(TYPE.BOSS_WITH_ALL_ALIVE, {15989, 40}):Build()
+:Criteria(TYPE.BOSS_WITH_ALL_ALIVE, {15989}):Build()
 :Build()

@@ -110,7 +110,7 @@ local function Completion(data)
             AchievementAlertSystem:AddAlert(achievement.id)
             PlaySound(SOUNDKIT.UI_IG_STORE_PURCHASE_DELIVERED_TOAST_01)
 
-            ShareAchievement(achievement.id)
+            CA_ShareAchievement(achievement.id)
         end,
         CompleteCriteria = function(self, achievementID, criteriaID, withQuantity)
             local criteria = self:GetCriteria(achievementID, criteriaID, true)
@@ -191,6 +191,8 @@ local function Completion(data)
         Reset = function(self)
             CA_LocalData = {}
             data = CA_LocalData
+
+            CA_FirstLogin = true
         end
     }
 end

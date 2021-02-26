@@ -5,21 +5,8 @@ local function trigger(...)
     CA_Criterias:Trigger(...)
 end
 
-local function strstartsWith(str, prefix)
-    return str:sub(1, #prefix) == prefix
-end
-
-local function isPlayer(guid)
-    return strstartsWith(guid, 'Player-')
-end
-
-local function isCreature(guid)
-    return strstartsWith(guid, 'Creature-')
-end
-
-local function getCreatureID(guid)
-    local id = select(6, strsplit('-', guid))
-    return tonumber(id)
+local function getItemIdFromLink(link)
+    return tonumber(link:match("\124Hitem:(%d+):"))
 end
 
 local function updateQuests()
@@ -162,6 +149,13 @@ local function updateGear()
                     trigger(TYPE.GEAR_QUALITY, {idx, quality}, 1, true)
                 end
             end
+            local id = getItemIdFromLink(itemLink)
+            if id then
+                trigger(TYPE.OBTAIN_ITEM, {id}, 1, true)
+                if id == 22589 or id == 22630 or id == 22631 or id == 22632 then
+                    trigger(TYPE.ATIESH, nil, 1, true)
+                end
+            end
         end
     end
 end
@@ -252,108 +246,101 @@ local EMOTE_PAT = loc:Get('EMOTE_PAT'):gsub('%%s', '%(.*%)')
 local canGetBattlegroundsAchievement = false
 local alteracID, warsongID, arathiID = 1459, 1460, 1461
 
+local killingTracker = CA_CreatureKillingTracker
+killingTracker:AddHandler(function(targetID) return true end, function(targetID)
+    trigger(TYPE.KILL_NPC, {targetID}, 1)
+    trigger(TYPE.KILL_NPCS, nil, 1)
+end)
+
 local leeroy = {}
+killingTracker:AddHandler(10161, function(targetID)
+    local time, any = time()
+    for t, _ in pairs(leeroy) do
+        if time - t > 15 then leeroy[t] = nil end
+    end
+    leeroy[time] = (leeroy[time] or 0) + 1
+    local total = 0
+    for _, v in pairs(leeroy) do total = total + v end
+    if total >= 50 then
+        trigger(TYPE.SPECIAL, {1}, 1, true)
+    end
+end)
+
 local bwlDuo = {}
+killingTracker:AddHandler({11981, 14601}, function(targetID)
+    local time = time()
+    bwlDuo[targetID] = time
+    if time - (bwlDuo[11981] or 0) <= 45 and time - (bwlDuo[14601] or 0) <= 45 then
+        trigger(TYPE.SPECIAL, {2}, 1, true)
+    end
+end)
+
 local arachnophobia = 0
-local horsemen = {
-    [16062] = 0,
-    [16063] = 0,
-    [16064] = 0,
-    [16065] = 0
-}
+killingTracker:AddHandler(15956, function(targetID)
+    arachnophobia = time()
+end)
+killingTracker:AddHandler(15952, function(targetID)
+    if time() - arachnophobia < 60 * 20 then trigger(TYPE.SPECIAL, {3}, 1, true) end
+end)
+
+local horsemen = {}
+killingTracker:AddHandler({16062, 16063, 16064, 16065}, function(targetID)
+    horsemen[targetID] = time()
+    local timings = {}
+    for _, timing in pairs(horsemen) do timings[#timings + 1] = timing end
+    if #timings == 4 then
+        table.sort(timings, function(a, b) return a < b end)
+        if timings[2] - timings[1] <= 15 and timings[3] - timings[2] <= 15 and timings[4] - timings[3] <= 15 then
+            trigger(TYPE.SPECIAL, {4}, 1, true)
+        end
+    end
+end)
 
 local bossesWithMobs = {
     [15956] = {16573},
     [15953] = {16505, 16506}
 }
 local bossesWithMobsCache = {}
+for bossID, mobIDs in pairs(bossesWithMobs) do
+    killingTracker:AddHandler(bossID, function(targetID)
+        if bossesWithMobsCache[bossID] == nil then trigger(TYPE.BOSS_WITHOUT_MOBS, {bossID}, 1, true) end
+    end)
+    killingTracker:AddHandler(mobIDs, function(targetID)
+        bossesWithMobsCache[bossID] = false
+    end)
+end
 
 local bossesWithAllAlives = {
     [15989] = 40
 }
-
-local events = {
-    COMBAT_LOG_EVENT_UNFILTERED = function()
-        local timestamp, type, hideCaster, sourceGUID, sourceName, sourceFlags, sourceFlags2, targetGUID, targetName, targetFlags, targetFlags2 = select(1, CombatLogGetCurrentEventInfo())
-        if type == 'PARTY_KILL' then
-            if isCreature(targetGUID) then
-                local creatureID = getCreatureID(targetGUID)
-                trigger(TYPE.KILL_NPC, {creatureID}, 1)
-                trigger(TYPE.KILL_NPCS, nil, 1)
-                if creatureID == 10161 then
-                    local time, any = time()
-                    for t, _ in pairs(leeroy) do
-                        if time - t > 15 then leeroy[t] = nil end
-                    end
-                    leeroy[time] = (leeroy[time] or 0) + 1
-                    local total = 0
-                    for _, v in pairs(leeroy) do total = total + v end
-                    if total >= 50 then
-                        trigger(TYPE.SPECIAL, {1}, 1, true)
-                    end
-                elseif creatureID == 11981 or creatureID == 14601 then
-                    local time = time()
-                    bwlDuo[creatureID] = time
-                    if time - (bwlDuo[11981] or 0) <= 45 and time - (bwlDuo[14601] or 0) <= 45 then
-                        trigger(TYPE.SPECIAL, {2}, 1, true)
-                    end
-                elseif creatureID == 15956 then
-                    arachnophobia = time()
-                elseif creatureID == 15952 then
-                    if time() - arachnophobia < 60 * 20 then trigger(TYPE.SPECIAL, {3}, 1, true) end
-                else
-                    for horsemanID, _ in pairs(horsemen) do
-                        if creatureID == horsemanID then
-                            horsemen[creatureID] = time()
-                            local timings = {}
-                            for _, timing in pairs(horsemen) do timings[#timings + 1] = timing end
-                            if #timings == 4 then
-                                table.sort(timings, function(a, b) return a < b end)
-                                if timings[2] - timings[1] <= 15 and timings[3] - timings[2] <= 15 and timings[4] - timings[3] <= 15 then
-                                    trigger(TYPE.SPECIAL, {4}, 1, true)
-                                end
-                            end
-                            break
-                        end
-                    end
-                end
-                for bossID, mobIDs in pairs(bossesWithMobs) do
-                    if creatureID == bossID then
-                        if bossesWithMobsCache[bossID] == nil then trigger(TYPE.BOSS_WITHOUT_MOBS, {bossID}, 1, true) end
-                        break
-                    else
-                        local matched = false
-                        for _, mobID in pairs(mobIDs) do
-                            if creatureID == mobID then
-                                bossesWithMobsCache[bossID] = false
-                                matched = true
-                                break
-                            end
-                        end
-                        if matched then break end
-                    end
-                end
-                local raidMembers = bossesWithAllAlives[creatureID]
-                if raidMembers == GetNumGroupMembers() then
-                    local failed = false
-                    for i = 1, raidMembers do
-                        if UnitIsDeadOrGhost('raid' .. i) then
-                            failed = true
-                            break
-                        end
-                    end
-                    if not failed then trigger(TYPE.BOSS_WITH_ALL_ALIVE, {creatureID, raidMembers}, 1, true) end
-                end
-            elseif isPlayer(targetGUID) then
-                local kills = GetPVPLifetimeStats()
-                trigger(TYPE.KILL_PLAYERS, nil, kills, true)
-
-                local _, className, _, raceName = GetPlayerInfoByGUID(targetGUID)
-                trigger(TYPE.KILL_PLAYER_OF_CLASS, {string.upper(className)}, 1)
-                trigger(TYPE.KILL_PLAYER_OF_RACE, {string.upper(raceName)}, 1)
+for bossID, raidMembers in pairs(bossesWithAllAlives) do
+    killingTracker:AddHandler(bossID, function(targetID)
+        if raidMembers ~= GetNumGroupMembers() then return end
+        local failed = false
+        for i = 1, raidMembers do
+            if UnitIsDeadOrGhost('raid' .. i) then
+                failed = true
+                break
             end
         end
-    end,
+        if not failed then trigger(TYPE.BOSS_WITH_ALL_ALIVE, {creatureID}, 1, true) end
+    end)
+end
+
+local previousPvPKills = GetPVPLifetimeStats()
+killingTracker:AddPlayerHandler(function(targetGUID)
+    local kills = GetPVPLifetimeStats()
+    if kills == previousPvPKills then return end
+    trigger(TYPE.KILL_PLAYERS, nil, kills, true)
+    previousPvPKills = kills
+
+    local _, className, _, raceName = GetPlayerInfoByGUID(targetGUID)
+    trigger(TYPE.KILL_PLAYER_OF_CLASS, {string.upper(className)}, 1)
+    trigger(TYPE.KILL_PLAYER_OF_RACE, {string.upper(raceName)}, 1)
+end)
+
+local events = {
+    COMBAT_LOG_EVENT_UNFILTERED = function() killingTracker:HandleCombatEvent() end,
     PLAYER_PVP_KILLS_CHANGED = function()
         local kills = GetPVPLifetimeStats()
         trigger(TYPE.KILL_PLAYERS, nil, kills, true)
@@ -389,7 +376,7 @@ local events = {
         else
             quantity = tonumber(quantity)
         end
-        local id = tonumber(item:match("\124Hitem:(%d+):"))
+        local id = getItemIdFromLink(item)
         if not id then return end
         trigger(TYPE.CRAFT_ITEM, {id}, quantity)
     end,
@@ -400,7 +387,7 @@ local events = {
                 local _, _, quantity = GetLootSlotInfo(slot)
                 local link = GetLootSlotLink(slot)
                 if link then
-                    local id = tonumber(link:match("\124Hitem:(%d+):"))
+                    local id = getItemIdFromLink(link)
                     if id then trigger(TYPE.FISH_AN_ITEM, {id}, quantity) end
                 end
             end
@@ -478,7 +465,7 @@ local events = {
                         total = total + 1
                         local link = GetTradeSkillItemLink(i)
                         if link then
-                            local id = tonumber(link:match("\124Hitem:(%d+):"))
+                            local id = getItemIdFromLink(link)
                             if id then trigger(TYPE.LEARN_PROFESSION_RECIPE, {data[1], id}) end
                         end
                     end
