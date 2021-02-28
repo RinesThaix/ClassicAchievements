@@ -1,6 +1,4 @@
-SexyLib:Util():AfterLogin(function()
-    if not CA_IsMicrobuttonEnabled() then return end
-    
+function CA_InitializeMicrobutton()
     BINDING_NAME_CLASSIC_ACHIEVEMENT = 'Classic Achievements'
     
     local microButtons = {}
@@ -33,11 +31,14 @@ SexyLib:Util():AfterLogin(function()
             AchievementFrame_ToggleAchievementFrame()
         end
     end)
-    
-    if Bartender4 then return end
+end
+
+SexyLib:Util():AfterLogin(function()
+    if not CA_IsMicrobuttonEnabled() or Bartender4 then return end
+
+    CA_InitializeMicrobutton()
     
     local width = 24
-    
     MainMenuBar:SetWidth(MainMenuBar:GetWidth() + width * 2)
     
     do
@@ -59,7 +60,7 @@ SexyLib:Util():AfterLogin(function()
     move(MainMenuBarTexture0, -width)
     move(MainMenuBarTexture1, -width)
     move(MainMenuBarPageNumber, -width + 1.5)
-    move(MainMenuBarTexture2, -width/2)
+    move(MainMenuBarTexture2, -width / 2)
     MainMenuBarTexture2:SetWidth(MainMenuBarTexture2:GetWidth() + width)
     AchievementMicroButton:SetFrameStrata('HIGH')
     C_Timer.After(0.01, function()

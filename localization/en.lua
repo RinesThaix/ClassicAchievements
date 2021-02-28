@@ -94,8 +94,8 @@ SexyLib:InitLocalization('Classic Achievements', {
     CATEGORY_FEATS_OF_STRENGTH = 'Feats of Strength',
     CATEGORY_EVENTS = 'Game Events',
 
-    AN_LVL = '%dth level',
-    AD_LVL = 'Reach %dth level.',
+    AN_LVL = 'Level %d',
+    AD_LVL = 'Reach level %d.',
 
     AN_BANK = 'Bank cell',
     AD_BANK = 'Purchase all additional slots in the bank.',
@@ -113,7 +113,7 @@ SexyLib:InitLocalization('Classic Achievements', {
     AD_QUEST_GOLD = 'Earn %d golden coins by completing quests.',
     AC_QUEST_GOLD = 'Earned %d golden coins by completing quests.',
 
-    AN_QUESTS_ZONE = 'Wisdom of %s',
+    AN_QUESTS_ZONE = 'Wisdom Keeper of %s',
     AD_QUESTS_ZONE = 'Complete quest "%s" in %s.',
     AD_QUESTS_ZONE_MULTI = 'Complete the following quests in %s.',
     AC_QUESTS_ZONE = 'Completed quest "%s".',
@@ -380,7 +380,7 @@ SexyLib:InitLocalization('Classic Achievements', {
     AD_PVP_KILLS = 'Get %d honorable kills.',
     AC_PVP_KILLS = 'Got %d honorable kills',
 
-    AN_MOB_KILLS_1 = 'Da killar',
+    AN_MOB_KILLS_1 = 'Killer',
     AN_MOB_KILLS_2 = 'Destroyer',
     AN_MOB_KILLS_3 = 'Crusher',
     AN_MOB_KILLS_4 = 'Head hunter',
@@ -736,10 +736,10 @@ SexyLib:InitLocalization('Classic Achievements', {
     AD_PARTICIPATE_IN_BGS = 'Complete %d battlegrounds at max level.',
     AC_PARTICIPATE_IN_BGS = 'Completed %d battlegrounds at max level',
 
-    EMOTE_LOVE = 'You love %s.',
+    EMOTE_LOVE1 = 'You love %s.',
     AN_LOVE = 'To All The Squirrels I\'ve Loved Before',
     AD_LOVE = 'Show the critters of Azeroth how much you /love them.',
-    EMOTE_PAT = 'You gently pat %s.',
+    EMOTE_PAT1 = 'You gently pat %s.',
     AN_ARATHI_CATS = 'Cats first, then everything else',
     AD_ARATHI_CATS = '/pat the designated felines in Arathi Basin.',
 
@@ -791,5 +791,10 @@ SexyLib:InitLocalization('Classic Achievements', {
     AN_ARACHNOPHOBIA = 'Arachnophobia',
     AD_ARACHNOPHOBIA = 'Defeat Maexxna in Naxxramas within 20 minutes of Anub\'Rekhan\'s death.',
     AN_FOUR_TOGETHER = 'And they would all go down together',
-    AD_FOUR_TOGETHER = 'Defeat the 4 Horsemen in Naxxramas, ensuring they all die within 15 seconds of each other.'
+    AD_FOUR_TOGETHER = 'Defeat the 4 Horsemen in Naxxramas, ensuring they all die within 15 seconds of each other.',
+
+    AN_THANKS = 'I\'m myself, you know, a developer',
+    AD_THANKS = 'Was especially helpful in developing, testing, translating or promoting Classic Achievements.',
+    AR_THANKS = 'Infinite gratitude :)'
+
 })

@@ -64,14 +64,26 @@ local function Achievement(name, description, points, icon, localize, forceID)
         end,
         SetHordeOnly = function(self)
             self.faction = true
+            if not self:IsFactionValid() then self:deactivateCriterias() end
         end,
         SetAllianceOnly = function(self)
             self.faction = false
+            if not self:IsFactionValid() then self:deactivateCriterias() end
         end,
-        IsFactionValid = function(self, cachedFactionName)
-            if self.faction == nil then return true end
-            if not cachedFactionName then cachedFactionName = UnitFactionGroup('player') end
-            return (cachedFactionName == 'Horde') == self.faction
+        SetUnavailable = function(self)
+            self.unavailable = true
+            self:deactivateCriterias()
+        end,
+        IsFactionValid = function(self)
+            return self.faction == nil or self.faction == (UnitFactionGroup('player') == 'Horde')
+        end,
+        IsAvailable = function(self)
+            return self.unavailable ~= true and self:IsFactionValid()
+        end,
+        deactivateCriterias = function(self)
+            for _, criteria in pairs(self.criterias) do
+                criteria.deactivated = true
+            end
         end
     }
     struct.achievements[id] = result

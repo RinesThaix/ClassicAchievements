@@ -27,7 +27,7 @@ local options = {
             desc = loc:Get('OPTION_UPDATE_MAP_EXPLORATION_DESC'),
             type = 'execute',
             width = 2,
-            func = function() ClassicAchievements_UpdateExploredAreas() end
+            func = function() CA_UpdateExploredAreas() end
         },
         resetAchievements = {
             name = loc:Get('OPTION_RESET_ACHIEVEMENTS'),
@@ -36,7 +36,7 @@ local options = {
             width = 2,
             func = function()
                 CA_CompletionManager:GetLocal():Reset()
-                ClassicAchievements_performInitialCheck()
+                CA_performInitialCheck()
             end
         }
     }

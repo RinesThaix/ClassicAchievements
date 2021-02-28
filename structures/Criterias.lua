@@ -167,14 +167,16 @@ function struct:Trigger(type, data, count, const)
     end
     count = count or 1
     for _, criteria in pairs(criterias) do
-        if criteria.quantity then
-            if const then
-                completion:SetCriteriaProgressionGlobally(criteria.id, criteria.quantity, count)
+        if not criteria.deactivated then
+            if criteria.quantity then
+                if const then
+                    completion:SetCriteriaProgressionGlobally(criteria.id, criteria.quantity, count)
+                else
+                    completion:IncrementCriteriaProgressionGlobally(criteria.id, criteria.quantity, count)
+                end
             else
-                completion:IncrementCriteriaProgressionGlobally(criteria.id, criteria.quantity, count)
+                completion:CompleteCriteriaGlobally(criteria.id)
             end
-        else
-            completion:CompleteCriteriaGlobally(criteria.id)
         end
     end
 end

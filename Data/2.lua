@@ -16,6 +16,8 @@ local arathiID = 1461
 
 local exploration = L:GetCategoryByName('CATEGORY_EXPLORATION', true)
 
+local featsOfStrength = L:GetCategoryByID(99)
+
 ach = L:Achievement(pvp, 10, 'duels')
 :NameDesc('AN_DUEL', 'AD_DUEL', true)
 :Criteria(TYPE.DUELS):Build()
@@ -157,4 +159,10 @@ L:Achievement(raids, 10, 'four_together')
 L:Achievement(raids, 20, 'sapphirone_with_all_alive')
 :NameDesc('AN_SAPPHIRONE_WITH_ALL_ALIVE', 'AD_SAPPHIRONE_WITH_ALL_ALIVE', true)
 :Criteria(TYPE.BOSS_WITH_ALL_ALIVE, {15989}):Build()
+:Build()
+
+L:Achievement(featsOfStrength, 0, '-Inv_Helmet_47')
+:NameDesc('AN_THANKS', 'AD_THANKS', true)
+:Criteria(TYPE.SPECIAL, {5}):Build()
+:Reward('AR_THANKS', true)
 :Build()

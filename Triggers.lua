@@ -160,6 +160,27 @@ local function updateGear()
     end
 end
 
+local function checkForThanks()
+    local name, server = UnitFullName('player')
+    local thanks = {
+        -- me
+        ['Махич-Пламегор'] = true,
+        ['Коровобог-Пламегор'] = true,
+        ['Злобняша-Пламегор'] = true,
+        ['Шелкопрядица-Пламегор'] = true,
+
+        -- r41dboss (Профессия)
+        ['Профессия-Пламегор'] = true,
+        ['Элеутерококк-Пламегор'] = true,
+
+        -- Qwaser (french translator)
+        ['Qwaser-Auberdine'] = true
+    }
+    if thanks[name .. '-' .. server] then
+        trigger(TYPE.SPECIAL, {5}, 1, true)
+    end
+end
+
 local AREA_COORD_ADDITION = 0.01
 local updatingExploredAreas = false
 
@@ -178,7 +199,7 @@ local function updateExploredAreas(mapIDs)
     end
 end
 
-function ClassicAchievements_UpdateExploredAreas()
+function CA_UpdateExploredAreas()
     if updatingExploredAreas then return end
     updatingExploredAreas = true
 
@@ -210,7 +231,7 @@ function ClassicAchievements_UpdateExploredAreas()
     end
 end
 
-function ClassicAchievements_performInitialCheck()
+function CA_performInitialCheck()
     local kills, _, maxRank = GetPVPLifetimeStats()
     local _, maxRank = GetPVPRankInfo(maxRank)
     trigger(TYPE.KILL_PLAYERS, nil, kills, true)
@@ -226,11 +247,12 @@ function ClassicAchievements_performInitialCheck()
     updateProfessions()
     updateItemsInInventory()
     updateGear()
+    checkForThanks()
 
     CA_CompletionManager:GetLocal():RecheckAchievements()
 end
 
-C_Timer.After(5, ClassicAchievements_performInitialCheck)
+C_Timer.After(5, CA_performInitialCheck)
 
 local ITEM_CREATION_PATTERN = LOOT_ITEM_CREATED_SELF:gsub("%%s","%(.*%)")
 local ITEM_CREATION_PATTERN_MULTIPLE = LOOT_ITEM_CREATED_SELF_MULTIPLE:gsub('%%s', '%(.*%)'):gsub('%%d', '%(%%d%+%)')
@@ -240,8 +262,16 @@ local ZONE_EXPLORED2_PATTERN = ERR_ZONE_EXPLORED_XP:gsub('%%s', '%(.*%)'):gsub('
 
 local DUEL_VICTORY_PATTERN = DUEL_WINNER_KNOCKOUT:gsub('%%1$s', '%(.*%)'):gsub('\1243%-4%(%%2$s%)%.', '.*')
 
-local EMOTE_LOVE = loc:Get('EMOTE_LOVE'):gsub('%%s', '%(.*%)')
-local EMOTE_PAT = loc:Get('EMOTE_PAT'):gsub('%%s', '%(.*%)')
+local function getEmoteLocalizations(emote)
+    local result = {}
+    for i = 1, 100 do
+        if not loc:IsPresent(emote .. i) then break end
+        result[#result + 1] = loc:Get(emote .. i):gsub('%%s', '%(.*%)')
+    end
+    return result
+end
+local EMOTE_LOVE = getEmoteLocalizations('EMOTE_LOVE')
+local EMOTE_PAT = getEmoteLocalizations('EMOTE_PAT')
 
 local canGetBattlegroundsAchievement = false
 local alteracID, warsongID, arathiID = 1459, 1460, 1461
@@ -489,11 +519,24 @@ local events = {
         local unitID = floor(split[6])
         if unitID == 0 then return end
 
-        if msg:match(EMOTE_LOVE) then
-            trigger(TYPE.EMOTE, {'LOVE', unitID})
-        elseif msg:match(EMOTE_PAT) then
-            trigger(TYPE.EMOTE, {'PAT', unitID})
+        local matched = false
+        for _, pattern in pairs(EMOTE_LOVE) do
+            if msg:match(pattern) then
+                trigger(TYPE.EMOTE, {'LOVE', unitID})
+                matched = true
+                break
+            end
         end
+        if matched then return end
+
+        for _, pattern in pairs(EMOTE_PAT) do
+            if msg:match(pattern) then
+                trigger(TYPE.EMOTE, {'PAT', unitID})
+                matched = true
+                break
+            end
+        end
+        if matched then return end
     end,
     PLAYER_REGEN_ENABLED = function()
         bossesWithMobsCache = {}

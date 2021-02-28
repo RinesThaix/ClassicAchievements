@@ -28,7 +28,7 @@ function GetStatisticsCategoryList()
 end
 
 local function IsAchievementVisible(achievement, includeAll)
-    if not achievement:IsFactionValid() then return false end
+    if not achievement:IsAvailable() then return false end
     if includeAll then return true end
     local completion = cmanager:GetLocal()
     if achievement.points == 0 then return completion:IsAchievementCompleted(achievement.id) end

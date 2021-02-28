@@ -883,8 +883,8 @@ SexyLib:Localization('Classic Achievements'):Add({
 	
 	AN_LOVE = 'To All The Squirrels I\'ve Loved Before',
     AD_LOVE = 'Show the critters of Azeroth how much you /love them.',
-	EMOTE_LOVE = 'You love %s.',    
-    EMOTE_PAT = 'You gently pat %s.',
+	EMOTE_LOVE1 = 'You love %s.',    
+    EMOTE_PAT1 = 'You gently pat %s.',
 	NPC_3444 = 'Dig rat',
     NPC_620 = 'Chicken',
     NPC_1420 = 'Toad',
