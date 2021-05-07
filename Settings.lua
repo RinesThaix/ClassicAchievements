@@ -12,7 +12,8 @@ local options = {
             type = 'toggle',
             width = 2,
             set = function(info, val) CA_Settings.sharing = val end,
-            get = function(info) return CA_Settings.sharing end
+            get = function(info) return CA_Settings.sharing end,
+            order = 1
         },
         enableMicrobutton = {
             name = loc:Get('OPTION_MICROBUTTON'),
@@ -20,14 +21,16 @@ local options = {
             type = 'toggle',
             width = 2,
             set = function(info, val) CA_Settings.microbutton = val end,
-            get = function(info) return CA_IsMicrobuttonEnabled() end
+            get = function(info) return CA_IsMicrobuttonEnabled() end,
+            order = 2
         },
         updateMapExploration = {
             name = loc:Get('OPTION_UPDATE_MAP_EXPLORATION'),
             desc = loc:Get('OPTION_UPDATE_MAP_EXPLORATION_DESC'),
             type = 'execute',
             width = 2,
-            func = function() CA_UpdateExploredAreas() end
+            func = function() CA_UpdateExploredAreas() end,
+            order = 3
         },
         resetAchievements = {
             name = loc:Get('OPTION_RESET_ACHIEVEMENTS'),
@@ -37,7 +40,8 @@ local options = {
             func = function()
                 CA_CompletionManager:GetLocal():Reset()
                 CA_performInitialCheck()
-            end
+            end,
+            order = 4
         }
     }
 }
