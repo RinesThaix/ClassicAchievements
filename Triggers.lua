@@ -280,6 +280,10 @@ local killingTracker = CA_CreatureKillingTracker
 killingTracker:AddHandler(function(targetID) return true end, function(targetID)
     trigger(TYPE.KILL_NPC, {targetID}, 1)
     trigger(TYPE.KILL_NPCS, nil, 1)
+
+    local difficultyID = GetDungeonDifficultyID()
+    local _, _, isHeroic = GetDifficultyInfo(difficultyID)
+    if isHeroic then trigger(TYPE.KILL_NPC_HEROIC, {targetID}, 1) end
 end)
 
 local leeroy = {}
@@ -463,7 +467,7 @@ local events = {
                 end
             end
         end
-        if UnitLevel('player') == 60 then
+        if UnitLevel('player') == 70 then
             trigger(TYPE.BATTLEFIELD_MAX_LEVEL_PARTICIPATION)
         end
     end,

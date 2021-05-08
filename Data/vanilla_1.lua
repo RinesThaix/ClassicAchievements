@@ -24,7 +24,7 @@ do
 end
 
 ach = general:CreateAchievement('AN_BANK', 'AD_BANK', 10, 'bank', true)
-ach:AddCriteria(criterias:Create('AC_BANK', TYPE.BANK_SLOTS, nil, 6))
+ach:AddCriteria(criterias:Create('AC_BANK', TYPE.BANK_SLOTS, nil, 7))
 
 do
     previous = nil
@@ -119,12 +119,12 @@ do
     questsEasternKingdoms:add('EASTERN_PLAGUELANDS', {5942, 6041, 5265})
     questsEasternKingdoms:add('BLACK_ROCK', 8996, 20)
 
-    ach = quests:CreateAchievement('AN_WISDOM_KEEPER', 'AD_WISDOM_KEEPER', 30, '-Inv_Misc_Book_07', true)
+    ach = quests:CreateAchievement('AN_WISDOM_KEEPER_AZEROTH', 'AD_WISDOM_KEEPER_AZEROTH', 30, '-Inv_Misc_Book_09', true)
     ach:AddCriteria(criterias:Create(kach.name, TYPE.COMPLETE_ACHIEVEMENT, {kach.id}))
     ach:AddCriteria(criterias:Create(ekach.name , TYPE.COMPLETE_ACHIEVEMENT, {ekach.id}))
 end
 
-local pve = tab:CreateCategory('PvE')
+local pve = tab:CreateCategory('CATEGORY_PVE', nil, true)
 
 local createPvE = function(category)
     return function(instanceName, icon, npcIDs, points)
@@ -144,7 +144,7 @@ local createPvE = function(category)
     end
 end
 
-local instances = tab:CreateCategory('CATEGORY_INSTANCES', pve.id, true)
+local instances = tab:CreateCategory('CATEGORY_VANILLA', pve.id, true)
 
 local brd, brs, defender
 do
@@ -223,10 +223,10 @@ do
     defender = ach.id
 end
 
-local raids = tab:CreateCategory('CATEGORY_RAIDS', pve.id, true)
+tab:SkipCategories(1)
 
 do
-    local create = createPvE(raids)
+    local create = createPvE(instances)
 
     local onyxia = create('ONYXIA', 'onyxia', 10184).id
     local aq20 = create('AQ20', 'aq20', 15339).id
@@ -239,7 +239,7 @@ do
     local nx3 = create('NAXXRAMAS_MILITARY', '-Inv_Sword_2h_AshbringerCorrupt', {-16062, -16063, -16064, -16065}).id
     local nx4 = create('NAXXRAMAS_CONSTRUCT', '-Ability_Creature_Poison_01', 15928).id
     local nx5 = create('NAXXRAMAS_LAIR', 'kelthuzad', 15990).id
-    ach = raids:CreateAchievement('AN_NAXXRAMAS', 'AD_NAXXRAMAS', 10, 'naxxramas', true)
+    ach = instances:CreateAchievement('AN_NAXXRAMAS', 'AD_NAXXRAMAS', 10, 'naxxramas', true)
     ach:AddCriteria(criterias:CreateL('AN_NAXXRAMAS_SPIDERS', TYPE.COMPLETE_ACHIEVEMENT, {nx1}))
     ach:AddCriteria(criterias:CreateL('AN_NAXXRAMAS_PLAGUE', TYPE.COMPLETE_ACHIEVEMENT, {nx2}))
     ach:AddCriteria(criterias:CreateL('AN_NAXXRAMAS_MILITARY', TYPE.COMPLETE_ACHIEVEMENT, {nx3}))
@@ -247,13 +247,13 @@ do
     ach:AddCriteria(criterias:CreateL('AN_NAXXRAMAS_LAIR', TYPE.COMPLETE_ACHIEVEMENT, {nx5}))
     local nx = ach.id
 
-    ach = raids:CreateAchievement('AN_YOUNG_HERO', 'AD_YOUNG_HERO', 20, 'young_hero', true)
+    ach = pve:CreateAchievement('AN_YOUNG_HERO', 'AD_YOUNG_HERO', 20, 'young_hero', true)
     ach:AddCriteria(criterias:CreateL('AN_ONYXIA', TYPE.COMPLETE_ACHIEVEMENT, {onyxia}))
     ach:AddCriteria(criterias:CreateL('AN_AQ20', TYPE.COMPLETE_ACHIEVEMENT, {aq20}))
     ach:AddCriteria(criterias:CreateL('AN_ZULGURUB', TYPE.COMPLETE_ACHIEVEMENT, {zg}))
     local id = ach.id
 
-    ach = pve:CreateAchievement('AN_BLACKROCK_MASTER', 'AD_BLACKROCK_MASTER', 20, 'blackrock_master', true)
+    ach = instances:CreateAchievement('AN_BLACKROCK_MASTER', 'AD_BLACKROCK_MASTER', 20, 'blackrock_master', true)
     ach:AddCriteria(criterias:CreateL('AN_BLACKROCK_DEPTHS_FULL', TYPE.COMPLETE_ACHIEVEMENT, {brd}))
     ach:AddCriteria(criterias:CreateL('AN_BLACKROCK_SPIRE', TYPE.COMPLETE_ACHIEVEMENT, {brs}))
     ach:AddCriteria(criterias:CreateL('AN_RAGNAROS', TYPE.COMPLETE_ACHIEVEMENT, {ragnaros}))
@@ -285,7 +285,7 @@ do
         factionLetter = 'A'
     end
     for i = 1, 14 do
-        ach = pvp:CreateAchievement('AN_PVP_RANK_' .. factionLetter .. i, 'AD_PVP_RANK', 10, 'pvp_rank_' .. i, true)
+        ach = featsOfStrength:CreateAchievement('AN_PVP_RANK_' .. factionLetter .. i, 'AD_PVP_RANK', 0, 'pvp_rank_' .. i, true)
         ach:AddCriteria(criterias:Create(nil, TYPE.REACH_PVP_RANK, {i}))
         if previous then previous:SetNext(ach) end
         previous = ach
@@ -321,7 +321,6 @@ do
 
     local twoMains = professions:CreateAchievement(loc:Get('AN_PROFS_TWO'), loc:Get('AD_PROFS_TWO'), 10, '-Inv_Misc_Note_02')
     twoMains:AddCriteria(criterias:Create(loc:Get('AC_PROFS_TWO'), TYPE.REACH_MAIN_PROFESSION_LEVEL, {300}, 2))
-    ach:SetNext(twoMains)
 
     local firstAidAch = firstAid:CreateAchievement('AN_FIRST_AID_MASTER', 'AD_FIRST_AID_MASTER', 10, '-Inv_Fabric_Wool_01', true)
     firstAidAch:AddCriteria(criterias:Create(nil, TYPE.REACH_PROFESSION_LEVEL, {ClassicAchievementsProfessions.FIRST_AID[1], 300}))
@@ -343,6 +342,7 @@ do
 end
 
 local reputation = tab:CreateCategory('CATEGORY_REPUTATION', nil, true)
+local vanillaReputation = tab:CreateCategory('CATEGORY_VANILLA', reputation.id, true, 20)
 
 do
     previous = nil
@@ -355,7 +355,11 @@ do
             desc = loc:Get('AD_REPS', count)
             cname = loc:Get('AC_REPS', count)
         end
-        ach = reputation:CreateAchievement(loc:Get('AN_REPS_' .. i), desc, 10, 'reps_' .. i)
+        local icon
+        if i == 1 or i == 2 then icon = 'reps_1'
+        elseif i == 3 or i == 4 then icon = 'reps_2'
+        else icon = 'reps_' .. (i - 2) end
+        ach = reputation:CreateAchievement(loc:Get('AN_REPS_' .. i), desc, 10, icon)
         ach:AddCriteria(criterias:Create(cname, TYPE.REACH_ANY_REPUTATION, {8}, count))
         if i > 2 then ach:SetRewardText(loc:Get('AR_REPS')) end
         if previous then previous:SetNext(ach) end
@@ -375,7 +379,7 @@ do
     ach:SetAllianceOnly()
 
     local function add(factionID, factionName, points, icon, reputationLevel)
-        local ach = reputation:CreateAchievement(loc:Get('AN_' .. factionName), loc:Get('AD_' .. factionName), points or 10, icon or string.lower(factionName))
+        local ach = vanillaReputation:CreateAchievement(loc:Get('AN_' .. factionName), loc:Get('AD_' .. factionName), points or 10, icon or string.lower(factionName))
         ach:AddCriteria(criterias:Create(nil, TYPE.REACH_REPUTATION, {factionID, reputationLevel or 8}))
     end
 
@@ -557,6 +561,7 @@ end
 local exploration = tab:CreateCategory('CATEGORY_EXPLORATION', nil, true)
 
 local exploreAzeroth = exploration:CreateAchievement('AN_EXPLORE_AZEROTH', 'AD_EXPLORE_AZEROTH', 30, '-Inv_Misc_Map_01', true)
+exploreAzeroth:SetUnavailable()
 local explorationKalimdor = tab:CreateCategory('CATEGORY_KALIMDOR', exploration.id, true)
 local explorationEasternKingdoms = tab:CreateCategory('CATEGORY_EASTERN_KINGDOMS', exploration.id, true)
 
@@ -653,7 +658,7 @@ end
 
 do
     ach = general:CreateAchievement('AN_UNARMED_SKILL', 'AD_UNARMED_SKILL', 10, '-Ability_GolemThunderClap', true)
-    ach:AddCriteria(criterias:Create(nil, TYPE.REACH_PROFESSION_LEVEL, {ClassicAchievementsSkills.UNARMED[1], 300}))
+    ach:AddCriteria(criterias:Create(nil, TYPE.REACH_PROFESSION_LEVEL, {ClassicAchievementsSkills.UNARMED[1], 375}))
 
     local function add(previous, qualityName, quality, icon)
         local ach = general:CreateAchievement('AN_' .. qualityName .. '_GEAR', 'AD_' .. qualityName .. '_GEAR', 10, icon, true)
@@ -784,11 +789,11 @@ do
     add('CHOPS', '-Inv_Misc_Food_65', 21023, 20, 20)
 end
 
-local worldBosses = tab:CreateCategory('CATEGORY_WORLD_BOSSES', pve.id, true)
+tab:SkipCategories(1)
 
 do
     local function add(name, creatureID, icon)
-        return L:Achievement(worldBosses, 10, icon)
+        return L:Achievement(instances, 10, icon)
                 :NameDesc('AN_WB_' .. name, 'AD_WB_' .. name, true)
                 :Criteria(TYPE.KILL_NPC, {creatureID}):Build()
                 :Build()
@@ -800,7 +805,7 @@ do
     local lethon = add('LETHON', 14888, 'lethon')
     local emeriss = add('EMERISS', 14889, 'emeriss')
     local taerar = add('TAERAR', 14890, 'taerar')
-    ach = L:Achievement(worldBosses, 20, 'dragons_of_nightmare')
+    ach = L:Achievement(pve, 20, 'dragons_of_nightmare')
             :NameDesc('AN_WB_EMERALD_DRAGONS', 'AD_WB_EMERALD_DRAGONS', true)
             :CompleteAchievementCriteria(ysondre)
             :CompleteAchievementCriteria(lethon)
@@ -811,5 +816,4 @@ do
 end
 
 L:Call(1)
-
--- local events = tab:CreateCategory('CATEGORY_EVENTS', nil, true)
+tab:SkipCategories(1)

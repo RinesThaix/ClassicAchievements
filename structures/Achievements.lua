@@ -36,15 +36,20 @@ local function Achievement(name, description, points, icon, localize, forceID)
         points = points,
         icon = icon,
         criterias = {},
+        criteriasSorted = {},
         AddCriteria = function(self, criteria)
             if not criteria or not criteria.id then error('illegal criteria provided') end
             self.criterias[criteria.id] = criteria
+            self.criteriasSorted[#self.criteriasSorted + 1] = criteria
         end,
         GetCriteria = function(self, id)
             return self.criterias[id]
         end,
         GetCriterias = function(self)
             return self.criterias
+        end,
+        GetCriteriasSorted = function(self)
+            return self.criteriasSorted
         end,
         SetNext = function(self, achievement)
             self.nextID = achievement.id
@@ -73,6 +78,12 @@ local function Achievement(name, description, points, icon, localize, forceID)
         SetUnavailable = function(self)
             self.unavailable = true
             self:deactivateCriterias()
+        end,
+        SetAnyCompletable = function(self)
+            self.anyCompletable = true
+        end,
+        IsAnyCompletable = function(self)
+            return self.anyCompletable or false
         end,
         IsFactionValid = function(self)
             return self.faction == nil or self.faction == (UnitFactionGroup('player') == 'Horde')
@@ -158,7 +169,12 @@ local function Tab(id)
                 end
                 return result
             end
-        }
+        },
+        printCategories = function(self)
+            for id, category in pairs(self.categories) do
+                print(id, category.name)
+            end
+        end
     }
 end
 

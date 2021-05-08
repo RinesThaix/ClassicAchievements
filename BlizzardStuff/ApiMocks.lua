@@ -31,12 +31,12 @@ local function IsAchievementVisible(achievement, includeAll)
     if not achievement:IsAvailable() then return false end
     if includeAll then return true end
     local completion = cmanager:GetLocal()
-    if achievement.points == 0 then return completion:IsAchievementCompleted(achievement.id) end
     if completion:IsAchievementCompleted(achievement.id) then
         local nextID = achievement:GetNextID()
         if not nextID then return true end
         return not completion:IsAchievementCompleted(nextID)
     end
+    if achievement.points == 0 then return false end
     local previousID = achievement:GetPreviousID()
     if not previousID then return true end
     return completion:IsAchievementCompleted(previousID)
@@ -270,10 +270,9 @@ end
 function GetAchievementCriteriaInfo(achievementID, criteriaIndex)
     local achievement = db:GetAchievement(achievementID)
     if achievement then
-        local index = 0
-        for _, criteria in pairs(achievement:GetCriterias()) do
-            index = index + 1
-            if index == criteriaIndex then return _GetAchievementCriteria(achievementID, criteria) end
+        local criterias = achievement:GetCriteriasSorted()
+        if criteriaIndex <= #criterias then
+            return _GetAchievementCriteria(achievementID, criterias[criteriaIndex])
         end
     end
     return _GetAchievementCriteria()

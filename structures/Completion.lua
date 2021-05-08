@@ -65,6 +65,12 @@ local function Completion(data)
         end,
         IsCriteriaCompleted = function(self, achievementID, criteriaID)
             local criteria = self:GetCriteria(achievementID, criteriaID)
+            local realCriteria = CA_Criterias:GetCriteriaByID(criteriaID)
+            if realCriteria and realCriteria.type == CA_Criterias.TYPE.OR then
+                if self:IsCriteriaCompleted(achievementID, realCriteria.data[1].id) or self:IsCriteriaCompleted(achievementID, realCriteria.data[2].id) then
+                    return true
+                end
+            end
             if not criteria then return false end
             return criteria[1]
         end,
@@ -113,12 +119,14 @@ local function Completion(data)
             CA_ShareAchievement(achievement.id)
         end,
         CompleteCriteria = function(self, achievementID, criteriaID, withQuantity)
+            if self:IsAchievementCompleted(achievementID) then return false end
             local criteria = self:GetCriteria(achievementID, criteriaID, true)
             if not criteria or criteria[1] then return false end
             criteria[1] = true
             return true
         end,
         SetCriteriaProgression = function(self, achievementID, criteriaID, value, requiredQuantity)
+            if self:IsAchievementCompleted(achievementID) then return false end
             value = min(value, requiredQuantity)
             local criteria = self:GetCriteria(achievementID, criteriaID, true)
             if criteria and criteria[2] and (criteria[2] >= value or criteria[2] == requiredQuantity) then return false end
@@ -129,6 +137,7 @@ local function Completion(data)
             return false
         end,
         IncrementCriteriaProgression = function(self, achievementID, criteriaID, requiredQuantity, count)
+            if self:IsAchievementCompleted(achievementID) then return false end
             count = count or 0
             local criteria = self:GetCriteria(achievementID, criteriaID, true)
             criteria[2] = criteria[2] or 0
@@ -139,16 +148,20 @@ local function Completion(data)
             end
             return false
         end,
+        checkAndComplete = function(self, achievementID)
+            if self:IsAchievementCompleted(achievementID) then return end
+            local achievement = CA_Database:GetAchievement(achievementID)
+            if achievement and (achievement:IsAnyCompletable() or self:AreAllCriteriasCompleted(achievement)) then
+                self:completeAchievementGracefully(achievement)
+            end
+        end,
         CompleteCriteriaGlobally = function(self, criteriaID)
             local achievementIDs = mapping[criteriaID]
             if not achievementIDs then return end
             for _, achievementID in pairs(achievementIDs) do
                 if self:CompleteCriteria(achievementID, criteriaID) then
                     requiresUpdate = true
-                    local achievement = CA_Database:GetAchievement(achievementID)
-                    if achievement and self:AreAllCriteriasCompleted(achievement) then
-                        self:completeAchievementGracefully(achievement)
-                    end
+                    self:checkAndComplete(achievementID)
                 end
             end
         end,
@@ -158,10 +171,7 @@ local function Completion(data)
             for _, achievementID in pairs(achievementIDs) do
                 if self:SetCriteriaProgression(achievementID, criteriaID, count, requiredQuantity) then
                     requiresUpdate = true
-                    local achievement = CA_Database:GetAchievement(achievementID)
-                    if achievement and self:AreAllCriteriasCompleted(achievement) then
-                        self:completeAchievementGracefully(achievement)
-                    end
+                    self:checkAndComplete(achievementID)
                 end
             end
         end,
@@ -170,10 +180,7 @@ local function Completion(data)
             if not achievementIDs then return end
             for _, achievementID in pairs(achievementIDs) do
                 if self:IncrementCriteriaProgression(achievementID, criteriaID, requiredQuantity, count) then
-                    local achievement = CA_Database:GetAchievement(achievementID)
-                    if achievement and self:AreAllCriteriasCompleted(achievement) then
-                        self:completeAchievementGracefully(achievement)
-                    end
+                    self:checkAndComplete(achievementID)
                 end
             end
             requiresUpdate = true
@@ -181,9 +188,28 @@ local function Completion(data)
         RecheckAchievements = function(self)
             for id, data in pairs(self:getData()) do
                 if data[1] == false then
-                    local achievement = CA_Database:GetAchievement(id)
-                    if achievement and self:AreAllCriteriasCompleted(achievement) then
-                        self:completeAchievementGracefully(achievement)
+                    self:checkAndComplete(id)
+                end
+            end
+        end,
+        TakeIncompleteAchievements = function(self)
+            local function areAllCriteriasCompleted(ach)
+                for cid, _ in pairs(ach:GetCriterias()) do
+                    local cdata = self:GetCriteria(ach.id, cid)
+                    if not cdata or not cdata[1] then return false end
+                    local c = CA_Criterias:GetCriteriaByID(cid)
+                    if c.quantity and (cdata[2] or 0) < c.quantity then return false end
+                end
+                return true
+            end
+            for id, data in pairs(self:getData()) do
+                if data[1] then
+                    local ach = CA_Database:GetAchievement(id)
+                    if ach and (ach:IsAnyCompletable() or areAllCriteriasCompleted(ach)) then
+                        -- ok
+                    else
+                        data[1] = false
+                        data[2] = 0
                     end
                 end
             end

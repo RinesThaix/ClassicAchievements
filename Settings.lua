@@ -1,5 +1,6 @@
 local addon = 'Classic Achievements'
 local loc = SexyLib:Localization(addon)
+CA_Flags = CA_Flags or 0
 
 SexyLib:InitLogger(addon, '&6')
 
@@ -59,11 +60,17 @@ SexyLib:Util():AfterLogin(function()
 end)
 
 C_Timer.After(2, function()
-    CA_FirstLogin = false
+    -- CA_Flags: 0x01: Whether first login with this addon installed happened
+    --           0x02: Whether first login into TBCC with this addon installed happened
+    CA_Flags = bit.bor(CA_Flags, 1)
+    if (bit.band(CA_Flags, 2) == 0) then
+        CA_Flags = bit.bor(CA_Flags, 2)
+        CA_CompletionManager:GetLocal():TakeIncompleteAchievements()
+    end
 end)
 
 function CA_IsSharingAchievementsInChat()
-    return CA_Settings.sharing and not CA_FirstLogin
+    return CA_Settings.sharing and bit.band(CA_Flags, 1) == 1
 end
 
 function CA_IsMicrobuttonEnabled()

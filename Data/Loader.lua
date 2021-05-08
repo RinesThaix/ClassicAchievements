@@ -61,6 +61,26 @@ CA_Loader = {
                 end
                 return nil
             end,
+            Criteria = function(that, type, data, quantity)
+                return {
+                    criteria = criterias:Create(nil, type, data, quantity, offsetter:getNextCriteriaID()),
+                    Build = function(self)
+                        return self.criteria
+                    end,
+                    Name = function(self, name, localize, ...)
+                        if localize then name = loc:Get(name, ...) end
+                        self.criteria.name = name
+                        return self
+                    end,
+                    ItemName = function(self, itemID)
+                        local item = Item:CreateFromItemID(itemID)
+                        item:ContinueOnItemLoad(function()
+                            self.criteria.name = item:GetItemName()
+                        end)
+                        return self
+                    end
+                }
+            end,
             Achievement = function(self, category, points, icon, forceID)
                 return {
                     ach = category:CreateAchievement('Unknown Name', 'Unknown Description', points, icon, forceID or offsetter:getNextAchievementID()),

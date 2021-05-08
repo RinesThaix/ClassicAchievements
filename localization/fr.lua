@@ -44,9 +44,6 @@ SexyLib:Localization('Classic Achievements'):Add({
     CATEGORY_EASTERN_KINGDOMS = 'Royaumes de l\'Est',
     CATEGORY_EXPLORATION = 'Exploration',
     CATEGORY_PVE = 'Donjons et raids',
-    CATEGORY_INSTANCES = 'Donjons',
-    CATEGORY_RAIDS = 'Raids',
-	CATEGORY_WORLD_BOSSES = 'Boss de monde',
     CATEGORY_BATTLEGROUNDS = 'Joueur contre Joueur',
     CATEGORY_BG_ALTERAC = 'Vallée d\'Alterac',
     CATEGORY_BG_WARSONG = 'Goulet des Warsong',
@@ -77,7 +74,7 @@ SexyLib:Localization('Classic Achievements'):Add({
     AC_MOB_KILLS = 'A vaincu %d monstres.',
 	
 	AN_UNARMED_SKILL = 'Qui a commandé une salade de phalanges ?',
-    AD_UNARMED_SKILL = 'Obtenir un score de 300 avec la compétence Mains nues.',
+    AD_UNARMED_SKILL = 'Obtenir un score de 375 avec la compétence Mains nues.',
 	SKILL_UNARMED = 'Unarmed',
 	
 	AN_UNCOMMON_GEAR = 'Plus si ordinaire',

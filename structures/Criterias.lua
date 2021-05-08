@@ -41,7 +41,9 @@ struct.TYPE = {
     BATTLEFIELD_STAT = 35,
     SPECIAL = 36,
     BOSS_WITHOUT_MOBS = 37,
-    BOSS_WITH_ALL_ALIVE = 38
+    BOSS_WITH_ALL_ALIVE = 38,
+    OR = 39,
+    KILL_NPC_HEROIC = 40
 }
 
 struct.dataLengths = {
@@ -82,10 +84,13 @@ struct.dataLengths = {
     [struct.TYPE.BATTLEFIELD_STAT] = 2, -- mapID, statID
     [struct.TYPE.SPECIAL] = 1,
     [struct.TYPE.BOSS_WITHOUT_MOBS] = 1,
-    [struct.TYPE.BOSS_WITH_ALL_ALIVE] = 1 -- creatureID, raid members count
+    [struct.TYPE.BOSS_WITH_ALL_ALIVE] = 1, -- creatureID, raid members count
+    [struct.TYPE.OR] = 2,
+    [struct.TYPE.KILL_NPC_HEROIC] = 1
 }
 
 struct.criterias = {}
+struct.criteriasByID = {}
 for _, type in pairs(struct.TYPE) do
     struct.criterias[type] = {}
 end
@@ -115,6 +120,26 @@ function struct:CreateL(localizationKey, ...)
     return struct:Create(loc:Get(localizationKey), ...)
 end
 
+local function registerCriteriaForTriggering(criteria)
+    if type == struct.TYPE.OR then
+        for _, criteria in pairs(data) do
+            if not registerCriteriaForTriggering(criteria) then return false end
+        end
+        return true
+    end
+
+    local length = struct.dataLengths[criteria.type]
+    local criterias = struct.criterias[criteria.type]
+    local data = criteria.data
+    for i = 1, length do
+        if not data[i] then return false end
+        if not criterias[data[i]] then criterias[data[i]] = {} end
+        criterias = criterias[data[i]]
+    end
+    criterias[#criterias + 1] = criteria
+    return true
+end
+
 function struct:Create(name, type, data, quantity, forceID)
     local id
     if forceID then
@@ -134,22 +159,16 @@ function struct:Create(name, type, data, quantity, forceID)
             return self
         end
     }
+    struct.criteriasByID[id] = result
     if quantity and quantity > 0 then
         result.quantity = quantity
         result.flags = EVALUATION_TREE_FLAG_PROGRESS_BAR
     end
 
     local length = struct.dataLengths[type]
-    if not length then return nil end
-    local criterias = struct.criterias[type]
-    if not criterias then return nil end
+    if not length or not struct.criterias[type] then return nil end
     if length > 0 and not data then return nil end
-    for i = 1, length do
-        if not data[i] then return nil end
-        if not criterias[data[i]] then criterias[data[i]] = {} end
-        criterias = criterias[data[i]]
-    end
-    criterias[#criterias + 1] = result
+    if not registerCriteriaForTriggering(result) then return nil end 
 
     return result
 end
@@ -179,6 +198,10 @@ function struct:Trigger(type, data, count, const)
             end
         end
     end
+end
+
+function struct:GetCriteriaByID(criteriaID)
+    return struct.criteriasByID[criteriaID]
 end
 
 function struct:skip()
