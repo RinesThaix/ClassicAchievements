@@ -594,6 +594,7 @@ SexyLib:Localization('Classic Achievements'):Add({
     PROF_HERBALISM = 'Травничество',
     PROF_MINING = 'Горное дело',
     PROF_SKINNING = 'Снятие шкур',
+    PROF_JEWELCRAFTING = 'Ювелирное дело',
     SKILL_UNARMED = 'Рукопашный бой',
 
     AN_PROFS_JOURNEYMAN = 'Подмастерье',

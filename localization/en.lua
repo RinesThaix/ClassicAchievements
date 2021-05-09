@@ -593,6 +593,7 @@ SexyLib:InitLocalization('Classic Achievements', {
     PROF_HERBALISM = 'Herbalism',
     PROF_MINING = 'Mining',
     PROF_SKINNING = 'Skinning',
+    PROF_JEWELCRAFTING = 'Jewelcrafting',
     SKILL_UNARMED = 'Unarmed',
 
     AN_PROFS_JOURNEYMAN = 'Journeyman',

@@ -538,7 +538,6 @@ SexyLib:Localization('Classic Achievements'):Add({
 	
 	AN_ALTERAC_WIN = 'Victory in the Alterac Valley',
     AD_ALTERAC_WIN = 'Win the battle for Alterac Valley.',
-    AN_ALTERAC_WINS = '%d victories in the Alterac Valley',
     AD_ALTERAC_WINS = 'Win %d battles for Alterac Valley.',
 	
 	AN_ALTERAC_KILLING_BLOWS = 'Valley Meat Grinder',
@@ -592,7 +591,6 @@ SexyLib:Localization('Classic Achievements'):Add({
 	
 	AN_WARSONG_WIN = 'Victory in the Gulch',
     AD_WARSONG_WIN = 'Win the battle for Warsong Gulch.',
-    AN_WARSONG_WINS = '%d victories in the Gulch',
     AD_WARSONG_WINS = 'Win %d battles for Warsong Gulch.',
 	
 	AN_WARSONG_KILLS = 'Military honor',
@@ -628,7 +626,6 @@ SexyLib:Localization('Classic Achievements'):Add({
 	
 	AN_ARATHI_WIN = 'Victory in the Basin',
     AD_ARATHI_WIN = 'Win the battle for Arathi Basin.',
-    AN_ARATHI_WINS = '%d victories in the Basin',
     AD_ARATHI_WINS = 'Win %d battles for Arathi Basin.',
 	
 	AN_ARATHI_BASE_ASSAULT = 'Conquistador',
@@ -660,18 +657,19 @@ SexyLib:Localization('Classic Achievements'):Add({
 	-- Professions achievements
 	-- ########################
 	-- Main category	
-	PROF_FIRST_AID = 'First Aid',
-    PROF_FISHING = 'Fishing',
-    PROF_COOKING = 'Cooking',
-    PROF_ENCHANTING = 'Enchanting',
-    PROF_TAILORING = 'Tailoring',
-    PROF_ENGINEERING = 'Engineering',
-    PROF_LEATHERWORKING = 'Leatherworking',
-    PROF_ALCHEMY = 'Alchemy',
-    PROF_BLACKSMITHING = 'Blacksmithing',
-    PROF_HERBALISM = 'Herbalism',
-    PROF_MINING = 'Mining',
-    PROF_SKINNING = 'Skinning',
+	PROF_FIRST_AID = 'Secourisme',
+    PROF_FISHING = 'Pêche',
+    PROF_COOKING = 'Cuisine',
+    PROF_ENCHANTING = 'Enchantement',
+    PROF_TAILORING = 'Couture',
+    PROF_ENGINEERING = 'Ingénierie',
+    PROF_LEATHERWORKING = 'Travail du cuir',
+    PROF_ALCHEMY = 'Alchimie',
+    PROF_BLACKSMITHING = 'Forge',
+    PROF_HERBALISM = 'Herboristerie',
+    PROF_MINING = 'Minage',
+    PROF_SKINNING = 'Dépeçage',
+    PROF_JEWELCRAFTING = 'Joaillerie',
 	
 	AN_PROFS_SECONDARY = 'Both the priest and the reaper',
     AD_PROFS_SECONDARY = 'Raise the skill of all secondary professions to 300 at the same time.',
