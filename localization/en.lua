@@ -772,11 +772,11 @@ SexyLib:InitLocalization('Classic Achievements', {
     AR_WB_EMERALD_DRAGONS = 'The unspoken title of Emerald keeper.',
 
     AN_DUEL = 'For the first time',
-    AD_DUEL = 'Одержите победу в своей первой дуэли.',
+    AD_DUEL = 'Win in a duel.',
     AN_DUELS_10 = 'Duelist',
     AN_DUELS_25 = 'Skilled duelist',
     AN_DUELS_100 = 'Master duelist',
-    AD_DUELS = 'Win in a duel.',
+    AD_DUELS = 'Win in %d duels.',
     AC_DUELS = 'Won in %d duels',
     AN_GURUBASHI_1 = 'Gurubashi Arena Master',
     AD_GURUBASHI_1 = 'Loot the Arena Master trinket from the Gurubashi Arena.',
