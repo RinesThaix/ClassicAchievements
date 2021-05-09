@@ -53,7 +53,8 @@ ClassicAchievementsProfessions = {
     BLACKSMITHING = {9, true},
     HERBALISM = {10, true},
     MINING = {11, true},
-    SKINNING = {12, true}
+    SKINNING = {12, true},
+    JEWELCRAFTING = {14, true}
 }
 
 ClassicAchievementsSkills = {
