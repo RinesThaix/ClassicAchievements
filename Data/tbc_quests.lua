@@ -1,8 +1,10 @@
 local L = CA_Loader:ForTab(CA_Database:GetTab(CA_Database.TAB_ID_PLAYER))
 local TYPE = CA_Criterias.TYPE
+local loc = SexyLib:Localization('Classic Achievements')
 local ach, previous
 
 local quests = L:GetCategoryByName('CATEGORY_QUESTS', true)
+local featsOfStrength = L:GetCategoryByID(99)
 
 local outlandQuests = L:Category()
 :Name('CATEGORY_OUTLAND', true)
@@ -59,18 +61,52 @@ hordeOutlandQuests:SetHordeOnly()
 local allianceOutlandQuests = create({365, 367, 369, 371, 373, 374, 375})
 allianceOutlandQuests:SetAllianceOnly()
 
-L:Achievement(quests, 40, '-Inv_Misc_Book_07')
+local ach = L:Achievement(quests, 40, '-Inv_Misc_Book_07')
 :NameDesc('AN_WISDOM_KEEPER', 'AD_WISDOM_KEEPER', true)
 :Criteria(TYPE.COMPLETE_ACHIEVEMENT, {48}):Name(L:GetAchievementByID(48).name):Build()
 :Criteria(TYPE.COMPLETE_ACHIEVEMENT, {hordeOutlandQuests.id}):Name(hordeOutlandQuests.name):Build()
 :Reward('AR_WISDOM_KEEPER', true)
 :Build()
-:SetHordeOnly()
 
-L:Achievement(quests, 40, '-Inv_Misc_Book_07')
+ach:SetHordeOnly()
+ach.priority = 1
+
+ach = L:Achievement(quests, 40, '-Inv_Misc_Book_07')
 :NameDesc('AN_WISDOM_KEEPER', 'AD_WISDOM_KEEPER', true)
 :Criteria(TYPE.COMPLETE_ACHIEVEMENT, {48}):Name(L:GetAchievementByID(48).name):Build()
 :Criteria(TYPE.COMPLETE_ACHIEVEMENT, {allianceOutlandQuests.id}):Name(allianceOutlandQuests.name):Build()
 :Reward('AR_WISDOM_KEEPER', true)
 :Build()
-:SetAllianceOnly()
+
+ach:SetAllianceOnly()
+ach.priority = 1
+
+local function create(gold, previous)
+    local builder = L:Achievement(quests, 10, '-Inv_Misc_Coin_01')
+    :Name('AN_QUEST_GOLD' .. gold, true)
+    :Desc(loc:Get('AD_QUEST_GOLD', gold))
+    :Criteria(TYPE.LOOT_QUEST_GOLD, nil, gold * 10000):Name(loc:Get('AC_QUEST_GOLD', gold)):SetQuantityFormatter(function(current, required)
+        return GetCoinTextureString(current) .. ' / ' .. GetCoinTextureString(required)
+    end):Build()
+    if previous ~= nil then builder:Previous(previous) end
+    return builder:Build()
+end
+
+local ach = create(250, L:GetAchievementByID(25))
+create(500, ach)
+
+local function create(count, icon, previous)
+    local builder = L:Achievement(quests, 10, icon)
+    :NameDesc(loc:Get('AN_QUESTS', count), loc:Get('AD_QUESTS', count))
+    :Criteria(TYPE.COMPLETE_QUESTS, nil, count):Name(loc:Get('AC_QUESTS', count)):Build()
+    if previous ~= nil then builder:Previous(previous) end
+    return builder:Build()
+end
+
+local ach = create(1250, 'quests_7', L:GetAchievementByID(20))
+create(1500, 'quests_8', ach)
+
+L:Achievement(featsOfStrength, 0, 'prepatch_quest')
+:NameDesc('AN_PREPATCH_QUEST', 'AD_PREPATCH_QUEST', true)
+:Criteria(TYPE.COMPLETE_QUEST, {10259}):Build()
+:Build()

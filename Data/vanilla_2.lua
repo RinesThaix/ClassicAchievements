@@ -6,6 +6,7 @@ local pve = L:GetCategoryByName('CATEGORY_PVE', true)
 local instances = L:GetCategoryByName('CATEGORY_VANILLA', true)
 
 local pvp = L:GetCategoryByName('PvP')
+local openWorldPVP = L:GetCategoryByID(26)
 local alterac = L:GetCategoryByName('CATEGORY_BG_ALTERAC', true)
 local alteracID = 1459
 local warsong = L:GetCategoryByName('CATEGORY_BG_WARSONG', true)
@@ -31,16 +32,18 @@ for _, wins in pairs({10, 25, 100}) do
             :Build()
 end
 
-ach = L:Achievement(pvp, 10, '-Inv_Misc_ArmorKit_14')
+ach = L:Achievement(openWorldPVP, 10, '-Inv_Misc_ArmorKit_14')
 :NameDesc('AN_GURUBASHI_1', 'AD_GURUBASHI_1', true)
 :Criteria(TYPE.COMPLETE_QUEST, {7810}):Build()
 :Build()
+ach.priority = 2
 
-L:Achievement(pvp, 10, '-Inv_Misc_ArmorKit_04')
+L:Achievement(openWorldPVP, 10, '-Inv_Misc_ArmorKit_04')
 :NameDesc('AN_GURUBASHI_2', 'AD_GURUBASHI_2', true)
 :Criteria(TYPE.OBTAIN_ITEM, {19024}):Build()
 :Previous(ach)
 :Build()
+.priority = 2
 
 ach = nil
 for _, bgs in pairs({10, 50, 100}) do
@@ -57,7 +60,7 @@ ach = L:Achievement(exploration, 20, 'love')
 for _, creatureID in pairs({3444, 620, 1420, 13321, 2620, 9600, 5951, 9699, 4953, 721, 9700, 15476, 2914, 16030, 4075, 1412, 7390, 15475, 15010, 4076, 13016, 14881, 2110, 4166, 1933, 890, 2098, 2442, 6368, 10582, 385, 10685, 3300}) do
     ach:Criteria(TYPE.EMOTE, {'LOVE', creatureID}):Name('NPC_' .. creatureID, true):Build()
 end
-ach:Build()
+ach:Build().priority = 1
 
 L:Achievement(arathi, 10, 'arathi_cats')
 :NameDesc('AN_ARATHI_CATS', 'AD_ARATHI_CATS', true)

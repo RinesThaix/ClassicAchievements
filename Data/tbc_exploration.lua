@@ -4,13 +4,16 @@ local loc = SexyLib:Localization('Classic Achievements')
 
 local exploration = L:GetCategoryByID(14)
 
+local kalimdorExploration = L:GetCategoryByID(15)
+local easternKingdomsExploration = L:GetCategoryByID(16)
+
 local outlandExploration = L:Category()
 :Name('CATEGORY_OUTLAND', true)
 :Parent(exploration)
 :Build()
 
-local function create(zoneName, zoneID, subzoneIDs)
-    local builder = L:Achievement(outlandExploration, 10, zoneName)
+local function create(zoneName, zoneID, subzoneIDs, category)
+    local builder = L:Achievement(category or outlandExploration, 10, zoneName)
     :Name(loc:Get('EXPLORE_OUTLAND_NAME_PATTERN', AreaTableLocale[zoneID]))
     :Desc('AD_EXPLORE_' .. string.upper(zoneName), true)
     for _, subzoneID in pairs(subzoneIDs) do
@@ -41,6 +44,21 @@ L:Achievement(exploration, 30, '-Inv_Misc_Map_01')
 :Criteria(TYPE.COMPLETE_ACHIEVEMENT, {ach.id}):Name(ach.name):Build()
 :Reward('AR_EXPLORER', true)
 :Build()
+.priority = 2
+
+local a1 = create('eversong_woods', 3430, {3431, 3533, 3466, 3461, 3465, 3467, 3464, 3470, 3480, 3462, 3471, 3476, 3474, 3487, 3472, 3558, 3912, 3473, 3913, 3914, 3468, 3460, 3469, 3911, 3475}, easternKingdomsExploration)
+local a2 = create('ghostlands', 3433, {3488, 3489, 3490, 3491, 3494, 3493, 3495, 3496, 3502, 3500, 3517, 3508, 3492, 3501, 3856, 3861}, easternKingdomsExploration)
+
+local ach = L:GetAchievementByID(250)
+ach:AddCriteria(L:Criteria(TYPE.COMPLETE_ACHIEVEMENT, {a1.id}):Name(a1.name):Build())
+ach:AddCriteria(L:Criteria(TYPE.COMPLETE_ACHIEVEMENT, {a2.id}):Name(a2.name):Build())
+
+local a1 = create('azuremyst_isle', 3524, {3526, 3857, 3576, 3571, 3564, 3915, 3577, 3916, 3573, 3567, 3568, 3575, 3639, 3572, 3557, 3574, 3570}, kalimdorExploration)
+local a2 = create('bloodmyst_isle', 3525, {3597, 3593, 3594, 3585, 3612, 3584, 3600, 3602, 3908, 3910, 3592, 3601, 3591, 3599, 3603, 3604, 3906, 3589, 3588, 3595, 3596, 3909, 3586, 3587, 3907, 3608, 3590, 3598}, kalimdorExploration)
+
+local ach = L:GetAchievementByID(231)
+ach:AddCriteria(L:Criteria(TYPE.COMPLETE_ACHIEVEMENT, {a1.id}):Name(a1.name):Build())
+ach:AddCriteria(L:Criteria(TYPE.COMPLETE_ACHIEVEMENT, {a2.id}):Name(a2.name):Build())
 
 do
     local rareIDs = {18695, 18682, 18697, 18681, 18694, 18689, 18686, 18698, 18678, 17144, 18692, 18696, 18680, 18677, 18690, 20932, 18685, 18693, 18683, 18679}

@@ -78,6 +78,10 @@ CA_Loader = {
                             self.criteria.name = item:GetItemName()
                         end)
                         return self
+                    end,
+                    SetQuantityFormatter = function(self, formatter)
+                        self.criteria:SetQuantityFormatter(formatter)
+                        return self
                     end
                 }
             end,
@@ -131,6 +135,10 @@ CA_Loader = {
                                 item:ContinueOnItemLoad(function()
                                     self.criteria.name = item:GetItemName()
                                 end)
+                                return self
+                            end,
+                            SetQuantityFormatter = function(self, formatter)
+                                self.criteria:SetQuantityFormatter(formatter)
                                 return self
                             end
                         }

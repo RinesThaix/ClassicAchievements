@@ -106,3 +106,13 @@ do
     :Build()
 
 end
+
+L:Achievement(tbcInstances, 10, 'kazzak')
+:NameDesc('AN_WB_KAZZAK_OUTLAND', 'AD_WB_KAZZAK_OUTLAND', true)
+:Criteria(TYPE.KILL_NPC, {18728}):Build()
+:Build()
+
+L:Achievement(tbcInstances, 10, '-Inv_Misc_EngGizmos_06')
+:NameDesc('AN_WB_DOOMWALKER', 'AD_WB_DOOMWALKER', true)
+:Criteria(TYPE.KILL_NPC, {17711}):Build()
+:Build()

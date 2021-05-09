@@ -214,6 +214,24 @@ local function Completion(data)
                 end
             end
         end,
+        UpdateNewCriteriasOfOldType = function(self)
+            local data = self:getData()
+            local copies = {
+                {380, 25},
+                {381, 25}
+            }
+            for _, pair in pairs(copies) do
+                local to = pair[1]
+                local from = pair[2]
+                local cidFrom = CA_Database:GetAchievement(from):GetCriteriasSorted()[1].id
+                if data[from] and data[from][3] and data[from][3][cidFrom] and data[from][3][cidFrom][2] then
+                    local cidTo = CA_Database:GetAchievement(to):GetCriteriasSorted()[1].id
+                    if not data[to] or not data[to][3] or not data[to][3][cidTo] or data[to][3][cidTo][2] < data[from][3][cidFrom][2] then
+                        data[to] = {false, 0, {[cidTo] = {false, data[from][3][cidFrom][2]}}}
+                    end
+                end
+            end
+        end,
         Reset = function(self)
             CA_LocalData = {}
             data = CA_LocalData

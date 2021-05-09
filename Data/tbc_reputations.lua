@@ -63,3 +63,6 @@ create('amethyst_eye', 967, '-Spell_Holy_Mindsooth'):SetUnavailable() -- P3
 create('scale_of_the_sands', 990, '-Inv_Enchant_DustIllusion'):SetUnavailable() -- P4
 create('ashtongue_deathsworn', 1012):SetUnavailable() -- P4
 create('shattered_sun', 1077, '-Inv_Shield_48'):SetUnavailable() -- P5
+
+L:GetAchievementByID(130):AddCriteria(L:Criteria(TYPE.REACH_REPUTATION, {911, 8}):Name('AC_HORDE_REPS_5', true):Build())
+L:GetAchievementByID(131):AddCriteria(L:Criteria(TYPE.REACH_REPUTATION, {930, 8}):Name('AC_ALLIANCE_REPS_5', true):Build())

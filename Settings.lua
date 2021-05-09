@@ -65,7 +65,9 @@ C_Timer.After(2, function()
     CA_Flags = bit.bor(CA_Flags, 1)
     if (bit.band(CA_Flags, 2) == 0) then
         CA_Flags = bit.bor(CA_Flags, 2)
-        CA_CompletionManager:GetLocal():TakeIncompleteAchievements()
+        local cmanager = CA_CompletionManager:GetLocal()
+        cmanager:TakeIncompleteAchievements()
+        cmanager:UpdateNewCriteriasOfOldType()
     end
 end)
 

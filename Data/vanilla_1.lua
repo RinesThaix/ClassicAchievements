@@ -275,6 +275,7 @@ do
 end
 
 local pvp = tab:CreateCategory('PvP')
+local openWorldPVP = L:Category(26):Name('CATEGORY_OPEN_WORLD', true):Parent(pvp):Build()
 
 do
     previous = nil
@@ -433,7 +434,7 @@ do
     ach:SetAllianceOnly()
     
     add = function(npcID, name, icon)
-        local ach = pvp:CreateAchievement(loc:Get('AN_' .. name .. '_SLAYER'), loc:Get('AD_' .. name .. '_SLAYER'), 10, icon)
+        local ach = openWorldPVP:CreateAchievement(loc:Get('AN_' .. name .. '_SLAYER'), loc:Get('AD_' .. name .. '_SLAYER'), 10, icon)
         ach:AddCriteria(criterias:Create(nil, TYPE.KILL_NPC, {npcID}))
         return ach
     end
@@ -446,11 +447,12 @@ do
     ach3:SetHordeOnly()
     local ach4 = add(7999, 'TYRANDE', '-Spell_Arcane_TeleportDarnassus')
     ach4:SetHordeOnly()
-    ach = pvp:CreateAchievement(loc:Get('AN_ALLIANCE_KINGS_SLAYER'), loc:Get('AD_ALLIANCE_KINGS_SLAYER'), 10, '-Ability_Warrior_Warcry')
+    ach = openWorldPVP:CreateAchievement(loc:Get('AN_ALLIANCE_KINGS_SLAYER'), loc:Get('AD_ALLIANCE_KINGS_SLAYER'), 20, '-Ability_Warrior_Warcry')
     ach:AddCriteria(criterias:Create(ach1.name, TYPE.COMPLETE_ACHIEVEMENT, {ach1.id}))
     ach:AddCriteria(criterias:Create(ach2.name, TYPE.COMPLETE_ACHIEVEMENT, {ach2.id}))
     ach:AddCriteria(criterias:Create(ach3.name, TYPE.COMPLETE_ACHIEVEMENT, {ach3.id}))
     ach:AddCriteria(criterias:Create(ach4.name, TYPE.COMPLETE_ACHIEVEMENT, {ach4.id}))
+    ach.priority = 1
     ach:SetHordeOnly()
 
     ach1 = add(4949, 'THRALL', '-Spell_Arcane_TeleportOrgrimmar')
@@ -461,11 +463,12 @@ do
     ach3:SetAllianceOnly()
     ach4 = add(3057, 'CAIRNE', '-Spell_Arcane_TeleportThunderBluff')
     ach4:SetAllianceOnly()
-    ach = pvp:CreateAchievement(loc:Get('AN_HORDE_KINGS_SLAYER'), loc:Get('AD_HORDE_KINGS_SLAYER'), 10, '-Spell_Nature_Thunderclap')
+    ach = openWorldPVP:CreateAchievement(loc:Get('AN_HORDE_KINGS_SLAYER'), loc:Get('AD_HORDE_KINGS_SLAYER'), 20, '-Spell_Nature_Thunderclap')
     ach:AddCriteria(criterias:Create(ach1.name, TYPE.COMPLETE_ACHIEVEMENT, {ach1.id}))
     ach:AddCriteria(criterias:Create(ach2.name, TYPE.COMPLETE_ACHIEVEMENT, {ach2.id}))
     ach:AddCriteria(criterias:Create(ach3.name, TYPE.COMPLETE_ACHIEVEMENT, {ach3.id}))
     ach:AddCriteria(criterias:Create(ach4.name, TYPE.COMPLETE_ACHIEVEMENT, {ach4.id}))
+    ach.priority = 1
     ach:SetAllianceOnly()
 
     ach = pvp:CreateAchievement(loc:Get('AN_RACES_KILLER'), loc:Get('AD_ALLIANCE_RACES_KILLER'), 10, '-Ability_Gouge')
@@ -792,15 +795,23 @@ end
 tab:SkipCategories(1)
 
 do
-    local function add(name, creatureID, icon)
-        return L:Achievement(instances, 10, icon)
+    local function add(name, creatureID, icon, fos)
+        local category, points
+        if fos then
+            category = featsOfStrength
+            points = 0
+        else
+            category = instances
+            points = 10
+        end
+        return L:Achievement(category, points, icon)
                 :NameDesc('AN_WB_' .. name, 'AD_WB_' .. name, true)
                 :Criteria(TYPE.KILL_NPC, {creatureID}):Build()
                 :Build()
     end
 
     add('AZUREGOS', 6109, 'azuregos')
-    add('KAZZAK', 12397, 'kazzak')
+    add('KAZZAK', 12397, 'kazzak', true)
     local ysondre = add('YSONDRE', 14887, 'ysondre')
     local lethon = add('LETHON', 14888, 'lethon')
     local emeriss = add('EMERISS', 14889, 'emeriss')
