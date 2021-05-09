@@ -16,6 +16,8 @@ SexyLib:Localization('Classic Achievements'):Add({
 	-- ###############
 	-- Settings window
 	-- ###############
+    OPTION_MICROBUTTON = 'Bouton dans menu',
+    OPTION_MICROBUTTON_DESC = 'Si activé, l\'icône sera ajoutée dans la barre des menus du bas.\nAttention ! Cela peut altérer l\'interface si vous avez un addon qui la modifie.\n\nSi désactivé, l\'icône sera ajoutée à la minicarte.\n\nL\'interface doit être rechargée afin d\'être pris en compte.',
     OPTION_SHARING = 'Partager hauts faits',
     OPTION_SHARING_DESC = 'Partager la réalisation d\'un nouveau haut fait dans les discussions.',
 	GOT_ACHIEVEMENT_MESSAGE_MALE = 'Je viens d\'obtenir le haut fait %s!',
@@ -663,18 +665,18 @@ SexyLib:Localization('Classic Achievements'):Add({
 	-- Professions achievements
 	-- ########################
 	-- Main category	
-	PROF_FIRST_AID = 'First Aid',
-    PROF_FISHING = 'Fishing',
-    PROF_COOKING = 'Cooking',
-    PROF_ENCHANTING = 'Enchanting',
-    PROF_TAILORING = 'Tailoring',
-    PROF_ENGINEERING = 'Engineering',
-    PROF_LEATHERWORKING = 'Leatherworking',
-    PROF_ALCHEMY = 'Alchemy',
-    PROF_BLACKSMITHING = 'Blacksmithing',
-    PROF_HERBALISM = 'Herbalism',
-    PROF_MINING = 'Mining',
-    PROF_SKINNING = 'Skinning',
+	PROF_FIRST_AID = 'Secourisme',
+    PROF_FISHING = 'Pêche',
+    PROF_COOKING = 'Cuisine',
+    PROF_ENCHANTING = 'Enchantement',
+    PROF_TAILORING = 'Couture',
+    PROF_ENGINEERING = 'Ingénierie',
+    PROF_LEATHERWORKING = 'Travail du cuir',
+    PROF_ALCHEMY = 'Alchimie',
+    PROF_BLACKSMITHING = 'Forge',
+    PROF_HERBALISM = 'Herboristerie',
+    PROF_MINING = 'Minage',
+    PROF_SKINNING = 'Dépeçage',
 	
 	AN_PROFS_SECONDARY = 'Both the priest and the reaper',
     AD_PROFS_SECONDARY = 'Raise the skill of all secondary professions to 300 at the same time.',
@@ -872,75 +874,80 @@ SexyLib:Localization('Classic Achievements'):Add({
 	-- World Exploration achievements
 	-- ##############################
 	-- Main category
-	AN_EXPLORE_AZEROTH = 'Azeroth Explorer',
-    AD_EXPLORE_AZEROTH = 'Explore the world of Azeroth!',
-	
-    AN_EXPLORE_KALIMDOR = 'Kalimdor Explorer',
-    AD_EXPLORE_KALIMDOR = 'Explore locations of Kalimdor listed below.',
-	
-    AN_EXPLORE_EASTERN_KINGDOMS = 'Eastern Kingdoms Explorer',
-    AD_EXPLORE_EASTERN_KINGDOMS = 'Explore locations of Eastern Kingdoms listed below.',
-	
-	AN_LOVE = 'To All The Squirrels I\'ve Loved Before',
-    AD_LOVE = 'Show the critters of Azeroth how much you /love them.',
-	EMOTE_LOVE1 = 'You love %s.',    
-    EMOTE_PAT1 = 'You gently pat %s.',
-	NPC_3444 = 'Dig rat',
-    NPC_620 = 'Chicken',
-    NPC_1420 = 'Toad',
-    NPC_13321 = 'Frog',
-    NPC_2620 = 'Prairie Dog',
-    NPC_9600 = 'Parrot',
-    NPC_5951 = 'Hare',
-    NPC_9699 = 'Fire Beetle',
-    NPC_4953 = 'Moccasin',
-    NPC_721 = 'Rabbit',
-    NPC_9700 = 'Lava Crab',
+	AN_EXPLORE_AZEROTH = 'Explorateur d\'Azeroth',
+    AD_EXPLORE_AZEROTH = 'Explorer les Royaumes de l\'est et Kalimdor.',
+    
+    AN_EXPLORE_KALIMDOR = 'Exploration de Kalimdor',
+    AD_EXPLORE_KALIMDOR = 'Explorer les régions de Kalimdor.',
+    
+    AN_EXPLORE_EASTERN_KINGDOMS = 'Exploration des Royaumes de l\'est',
+    AD_EXPLORE_EASTERN_KINGDOMS = 'Explorer les régions des Royaumes de l\'est.',
+    
+    AN_LOVE = 'À tous les écureuils que j\'ai aimés, avant',
+    AD_LOVE = 'Montrer tout votre /amour aux bestioles d\'Azeroth.',
+    EMOTE_LOVE1 = 'Vous aimez %s.',    
+    EMOTE_PAT1 = 'Vous donnez une tape dans le dos de %s.',
+    EMOTE_PAT2 = 'Vous donnez une tape dans le dos d\'%s.',
+    NPC_3444 = 'Rat fouisseur',
+    NPC_620 = 'Poulet',
+    NPC_1420 = 'Crapaud',
+    NPC_13321 = 'Grenouille',
+    NPC_2620 = 'Chien de prairie',
+    NPC_9600 = 'Perroquet',
+    NPC_5951 = 'Lièvre',
+    NPC_9699 = 'Hanneton de feu',
+    NPC_4953 = 'Mocassin d\'eau',
+    NPC_721 = 'Lapin',
+    NPC_9700 = 'Crabe de lave',
     NPC_15476 = 'Scorpion',
-    NPC_2914 = 'Snake',
-    NPC_16030 = 'Maggot',
+    NPC_2914 = 'Serpent',
+    NPC_16030 = 'Asticot',
     NPC_4075 = 'Rat',
-    NPC_1412 = 'Squirrel',
+    NPC_1412 = 'Ecureuil',
     NPC_7390 = 'Cockatiel',
-    NPC_15475 = 'Beetle',
-    NPC_15010 = 'Jungle Toad',
-    NPC_4076 = 'Roach',
-    NPC_13016 = 'Deeprun Rat',
-    NPC_14881 = 'Spider',
-    NPC_2110 = 'Black Rat',
+    NPC_15475 = 'Hanneton',
+    NPC_15010 = 'Crapaud de la jungle',
+    NPC_4076 = 'Blatte',
+    NPC_13016 = 'Rat des profondeurs',
+    NPC_14881 = 'Araignée',
+    NPC_2110 = 'Rat noir',
     NPC_4166 = 'Gazelle',
-    NPC_1933 = 'Sheep',
-    NPC_890 = 'Fawn',
-    NPC_2098 = 'Ram',
-    NPC_2442 = 'Cow',
-    NPC_6368 = 'Cat',
-    NPC_10582 = 'Dog',
-    NPC_385 = 'Horse',
-    NPC_10685 = 'Swine',
-    NPC_3300 = 'Adder',
-    NPC_15066 = 'Cleo',
-    NPC_15071 = 'Underfoot',
-	
-	-- For all explore achievements
-	AD_EXPLORE = 'Explore %s.',
+    NPC_1933 = 'Mouton',
+    NPC_890 = 'Faon',
+    NPC_2098 = 'Bélier',
+    NPC_2442 = 'Vache',
+    NPC_6368 = 'Chat',
+    NPC_10582 = 'Chien',
+    NPC_385 = 'Cheval',
+    NPC_10685 = 'Pourceau',
+    NPC_3300 = 'Vipère',
+    NPC_15066 = 'Cléo',
+    NPC_15071 = 'Casse-pieds',
+    
+    -- For all explore achievements
+    AD_EXPLORE = 'Explorer %s.',
 	
 	
 	-- ##############################
 	-- Feats of Strenght achievements
 	-- ##############################
 	-- Main category
-	AN_SULFURAS = 'Sulfuras, Hand of Ragnaros',
-    AD_SULFURAS = 'Wielder of Sulfuras, Hand of Ragnaros.',
+	AN_SULFURAS = 'Sulfuras, Main de Ragnaros',
+    AD_SULFURAS = 'S\'équiper de Sulfuras, Main de Ragnaros.',
 	
-    AN_THUNDER_FURY = 'Thunderfury, Blessed Blade of the Windseeker',
-    AD_THUNDER_FURY = 'Wielder of Thunderfury, Blessed Blade of the Windseeker.',
+    AN_THUNDER_FURY = 'Lame-tonnerre, épée bénie du Cherchevent',
+    AD_THUNDER_FURY = 'S\'équiper de la Lame-tonnerre, épée bénie du Cherchevent.',
 	
-    AN_ATIESH = 'Atiesh, Greatstaff of the Guardian',
-    AD_ATIESH = 'Wielder of Atiesh, Greatstaff of the Guardian.',
+    AN_ATIESH = 'Atiesh, grand bâton du Gardien',
+    AD_ATIESH = 'S\'équiper d\'Atiesh, grand bâton du Gardien.',
 	
-    AN_BLACK_SCARAB = 'Scarab Lord',
-    AD_BLACK_SCARAB = 'Wielder of Black Qiraji Resonating Crystal.',
+    AN_BLACK_SCARAB = 'Seigneur Scarabée',
+    AD_BLACK_SCARAB = 'Obtenir un cristal de résonance qiraji noir.',
 	
-    AN_RED_SCARAB = 'Why? Because It\'s Red!',
-    AD_RED_SCARAB = 'Wielder of Red Qiraji Resonating Crystal.'
+    AN_RED_SCARAB = 'Pourquoi ? Parce que !!!',
+    AD_RED_SCARAB = 'Obtenir un cristal de résonance qiraji rouge.',
+
+    AN_THANKS = 'Je suis moi-même, tu sais, un développeur',
+    AD_THANKS = 'A été particulièrement utile pour développer, tester, traduire ou promouvoir Classic Achievements.',
+    AR_THANKS = 'Une gratitude infinie :)'
 })
