@@ -255,13 +255,27 @@ end
 
 C_Timer.After(5, CA_performInitialCheck)
 
-local ITEM_CREATION_PATTERN = LOOT_ITEM_CREATED_SELF:gsub("%%s","%(.*%)")
-local ITEM_CREATION_PATTERN_MULTIPLE = LOOT_ITEM_CREATED_SELF_MULTIPLE:gsub('%%s', '%(.*%)'):gsub('%%d', '%(%%d%+%)')
+local function toPattern(message)
+    local pattern = message:gsub('%.', '%%.')
+    :gsub('\124%d%-%d%(.*%)', '(.*)')
+    :gsub('\1244.*:.*;', '.*')
 
-local ZONE_EXPLORED_PATTERN = ERR_ZONE_EXPLORED:gsub('%%s', '%(.*%)')
-local ZONE_EXPLORED2_PATTERN = ERR_ZONE_EXPLORED_XP:gsub('%%s', '%(.*%)'):gsub('%%d', '%%d')
+    for i = 1, 100 do
+        local result, count = pattern:gsub('%%' .. i .. '$s', '(.*)')
+        if count == 0 then break end
+        pattern = result
+    end
+    pattern = pattern:gsub('%%s', '(.*)'):gsub('%%d', '(%%d%+)')
+    return pattern
+end
 
-local DUEL_VICTORY_PATTERN = DUEL_WINNER_KNOCKOUT:gsub('%%1$s', '%(.*%)'):gsub('\1243%-4%(%%2$s%)%.', '.*')
+local ITEM_CREATION_PATTERN = toPattern(LOOT_ITEM_CREATED_SELF)
+local ITEM_CREATION_PATTERN_MULTIPLE = toPattern(LOOT_ITEM_CREATED_SELF_MULTIPLE)
+
+local ZONE_EXPLORED_PATTERN = toPattern(ERR_ZONE_EXPLORED)
+local ZONE_EXPLORED2_PATTERN = toPattern(ERR_ZONE_EXPLORED_XP)
+
+local DUEL_VICTORY_PATTERN = toPattern(DUEL_WINNER_KNOCKOUT)
 
 local function getEmoteLocalizations(emote)
     local result = {}
