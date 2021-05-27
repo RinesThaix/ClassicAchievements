@@ -12,6 +12,6 @@ L:Achievement(general, 10, 'level_70')
 :Build()
 
 L:GetAchievementByID(159):AddCriteria(L:Criteria(TYPE.KILL_PLAYER_OF_RACE, {'DRAENEI'}):Name('AC_DRAENEI_KILLED', true):Build())
-L:GetAchievementByID(160):AddCriteria(L:Criteria(TYPE.KILL_PLAYER_OF_RACE, {'BLOODELF'}):Name('AC_DRAENEI_KILLED', true):Build())
+L:GetAchievementByID(160):AddCriteria(L:Criteria(TYPE.KILL_PLAYER_OF_RACE, {'BLOODELF'}):Name('AC_BLOODELF_KILLED', true):Build())
 L:GetAchievementByID(161):AddCriteria(L:Criteria(TYPE.KILL_PLAYER_OF_CLASS, {'SHAMAN'}):Name('AC_SHAMAN_KILLED', true):Build())
 L:GetAchievementByID(162):AddCriteria(L:Criteria(TYPE.KILL_PLAYER_OF_CLASS, {'PALADIN'}):Name('AC_PALADIN_KILLED', true):Build())

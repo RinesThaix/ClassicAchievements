@@ -211,15 +211,18 @@ function CA_UpdateExploredAreas()
     end
 
     local mapIDs = {}
-    for mapID = 1411, 1458 do
-        mapIDs[#mapIDs + 1] = mapID
-        if #mapIDs == 10 then
-            local batch = mapIDs
-            mapIDs = {}
-            local previous = callback
-            callback = function()
-                updateExploredAreas(batch)
-                C_Timer.After(1, previous)
+    local ranges = {{1411, 1458}, {1941, 1955}, {1957, 1957}}
+    for _, range in pairs(ranges) do
+        for mapID = range[1], range[2] do
+            mapIDs[#mapIDs + 1] = mapID
+            if #mapIDs == 10 then
+                local batch = mapIDs
+                mapIDs = {}
+                local previous = callback
+                callback = function()
+                    updateExploredAreas(batch)
+                    C_Timer.After(1, previous)
+                end
             end
         end
     end
