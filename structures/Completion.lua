@@ -151,7 +151,7 @@ local function Completion(data)
         checkAndComplete = function(self, achievementID)
             if self:IsAchievementCompleted(achievementID) then return end
             local achievement = CA_Database:GetAchievement(achievementID)
-            if achievement and (achievement:IsAnyCompletable() or self:AreAllCriteriasCompleted(achievement)) then
+            if achievement and achievement:IsAvailable() and (achievement:IsAnyCompletable() or self:AreAllCriteriasCompleted(achievement)) then
                 self:completeAchievementGracefully(achievement)
             end
         end,
@@ -258,10 +258,12 @@ end
 function struct:PostLoad(categories)
     for _, category in pairs(categories) do
         for achievementID, achievement in pairs(category:GetAchievements()) do
-            for criteriaID, _ in pairs(achievement:GetCriterias()) do
-                if not mapping[criteriaID] then mapping[criteriaID] = {} end
-                local achievementIDs = mapping[criteriaID]
-                achievementIDs[#achievementIDs + 1] = achievementID
+            if achievement:IsAvailable() then
+                for criteriaID, _ in pairs(achievement:GetCriterias()) do
+                    if not mapping[criteriaID] then mapping[criteriaID] = {} end
+                    local achievementIDs = mapping[criteriaID]
+                    achievementIDs[#achievementIDs + 1] = achievementID
+                end
             end
         end
     end

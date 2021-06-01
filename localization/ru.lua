@@ -652,7 +652,7 @@ SexyLib:Localization('Classic Achievements'):Add({
     AN_PROFS_FIVE_OUTLAND = 'Запредельный гений',
     AD_PROFS_FIVE = 'Добейтесь указанных ниже достижений, связанных с профессиями.',
     AN_UNARMED_SKILL = 'Кому зуботычину?',
-    AD_UNARMED_SKILL = 'Повысьте навык рукопашного боя до 375.',
+    AD_UNARMED_SKILL = 'Повысьте навык рукопашного боя до 350.',
 
     AN_EXPLORE_AZEROTH = 'Исследователь Азерота',
     AD_EXPLORE_AZEROTH = 'Исследуйте мир Азерота!',

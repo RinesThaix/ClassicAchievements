@@ -79,7 +79,7 @@ SexyLib:Localization('Classic Achievements'):Add({
     AC_MOB_KILLS = 'A vaincu %d monstres.',
 	
 	AN_UNARMED_SKILL = 'Qui a commandé une salade de phalanges ?',
-    AD_UNARMED_SKILL = 'Obtenir un score de 300 avec la compétence Mains nues.',
+    AD_UNARMED_SKILL = 'Obtenir un score de 350 avec la compétence Mains nues.',
 	SKILL_UNARMED = 'Unarmed',
 	
 	AN_UNCOMMON_GEAR = 'Plus si ordinaire',

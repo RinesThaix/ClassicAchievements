@@ -509,8 +509,13 @@ do
                 desc = loc:Get('AD_' .. mapName .. '_' .. typeName .. 'S', amount)
             end
             ach = category:CreateAchievement(name, desc, 10, icon)
-            local params = {mapID}
-            if additionalParam then params[2] = additionalParam end
+            local params
+            if mapID == nil then
+                params = nil
+            else
+                params = {mapID}
+                if additionalParam then params[2] = additionalParam end
+            end
             if amount == 1 then desc = nil end
             ach:AddCriteria(criterias:Create(desc, type, params, amount))
             if previous then previous:SetNext(ach) end
@@ -536,7 +541,7 @@ do
     add('GRAVEYARD_DEFEND', TYPE.BATTLEFIELD_STAT_MAX, 1, {1, 2, 5, 8}, '-Spell_Holy_Prayerofspirit')
     add('TOWER_ASSAULT', TYPE.BATTLEFIELD_STAT_MAX, 3, {1, 2, 3, 4}, '-Ability_Thunderbolt')
     add('TOWER_DEFEND', TYPE.BATTLEFIELD_STAT_MAX, 4, {1, 2, 4, 6}, '-Inv_Shield_05')
-    add('MINE_CAPTURE', TYPE.BATTLEFIELD_STAT_MAX, 5, {1, 2, 3, 4}, '-Inv_Pick_01')
+    _add(alterac, nil, 'ALTERAC', 'MINE_CAPTURE', TYPE.ALTERAC_VALLEY_MINE_CAPTURE_MAX, nil, {1, 2, 3, 4}, '-Inv_Pick_01')
 
     add = function(typeName, type, additionalParam, amounts, icon)
         return _add(warsong, warsongID, 'WARSONG', typeName, type, additionalParam, amounts, icon)
@@ -661,7 +666,7 @@ end
 
 do
     ach = general:CreateAchievement('AN_UNARMED_SKILL', 'AD_UNARMED_SKILL', 10, '-Ability_GolemThunderClap', true)
-    ach:AddCriteria(criterias:Create(nil, TYPE.REACH_PROFESSION_LEVEL, {ClassicAchievementsSkills.UNARMED[1], 375}))
+    ach:AddCriteria(criterias:Create(nil, TYPE.REACH_PROFESSION_LEVEL, {ClassicAchievementsSkills.UNARMED[1], 350}))
 
     local function add(previous, qualityName, quality, icon)
         local ach = general:CreateAchievement('AN_' .. qualityName .. '_GEAR', 'AD_' .. qualityName .. '_GEAR', 10, icon, true)

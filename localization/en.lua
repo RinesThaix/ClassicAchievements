@@ -651,7 +651,7 @@ SexyLib:InitLocalization('Classic Achievements', {
     AN_PROFS_FIVE_OUTLAND = 'Outlandish Genius',
     AD_PROFS_FIVE = 'Earn profession achievements listed below.',
     AN_UNARMED_SKILL = 'Did Somebody Order a Knuckle Sandwich?',
-    AD_UNARMED_SKILL = 'Raise the skill of unarmed combat to 375.',
+    AD_UNARMED_SKILL = 'Raise the skill of unarmed combat to 350.',
 
     AN_EXPLORE_AZEROTH = 'Azeroth Explorer',
     AD_EXPLORE_AZEROTH = 'Explore the world of Azeroth!',

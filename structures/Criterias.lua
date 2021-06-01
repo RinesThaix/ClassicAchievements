@@ -43,7 +43,8 @@ struct.TYPE = {
     BOSS_WITHOUT_MOBS = 37,
     BOSS_WITH_ALL_ALIVE = 38,
     OR = 39,
-    KILL_NPC_HEROIC = 40
+    KILL_NPC_HEROIC = 40,
+    ALTERAC_VALLEY_MINE_CAPTURE_MAX = 41
 }
 
 struct.dataLengths = {
@@ -86,7 +87,8 @@ struct.dataLengths = {
     [struct.TYPE.BOSS_WITHOUT_MOBS] = 1,
     [struct.TYPE.BOSS_WITH_ALL_ALIVE] = 1, -- creatureID, raid members count
     [struct.TYPE.OR] = 2,
-    [struct.TYPE.KILL_NPC_HEROIC] = 1
+    [struct.TYPE.KILL_NPC_HEROIC] = 1,
+    [struct.TYPE.ALTERAC_VALLEY_MINE_CAPTURE_MAX] = 0
 }
 
 struct.criterias = {}

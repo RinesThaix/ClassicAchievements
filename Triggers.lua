@@ -391,6 +391,11 @@ killingTracker:AddPlayerHandler(function(targetGUID)
     trigger(TYPE.KILL_PLAYER_OF_RACE, {string.upper(raceName)}, 1)
 end)
 
+local alteracValleyMineCaptures = 0
+killingTracker:AddHandler({11677, 13086, 13088}, function(targetID)
+    alteracValleyMineCaptures = alteracValleyMineCaptures + 1
+end)
+
 local events = {
     COMBAT_LOG_EVENT_UNFILTERED = function() killingTracker:HandleCombatEvent() end,
     PLAYER_PVP_KILLS_CHANGED = function()
@@ -473,6 +478,9 @@ local events = {
             end
         end
 
+        trigger(TYPE.ALTERAC_VALLEY_MINE_CAPTURE_MAX, nil, alteracValleyMineCaptures, true)
+        alteracValleyMineCaptures = 0
+
         local seconds = GetBattlefieldInstanceRunTime() / 1000
 
         local myFaction = UnitFactionGroup('player')
@@ -505,6 +513,7 @@ local events = {
     end,
     PLAYER_ENTERING_WORLD = function()
         canGetBattlegroundsAchievement = true
+        alteracValleyMineCaptures = 0
     end,
     TRADE_SKILL_UPDATE = function()
         local profession = GetTradeSkillLine()
