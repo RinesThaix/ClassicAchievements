@@ -937,7 +937,7 @@ SexyLib:InitLocalization('Classic Achievements', {
 
     AN_HELLFIRE_RAMPARTS = 'Hellfire Ramparts',
     AD_HELLFIRE_RAMPARTS = 'Defeat the leaders of Hellfire Ramparts',
-    AC_BOSS_17536 = 'Nazan',
+    AC_BOSS_17308 = 'Omor the Unscarred',
     AC_BOSS_17537 = 'Vazruden the Herald',
 
     AN_BLOOD_FURNACE = 'The Blood Furnace',

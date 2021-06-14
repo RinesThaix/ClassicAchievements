@@ -51,7 +51,7 @@ do
         return heroic
     end
 
-    local starting = create('hellfire_ramparts', {17536, 17537})
+    local starting = create('hellfire_ramparts', {17308, 17537})
     create('blood_furnace', 17377)
     create('slave_pens', 17942)
     create('underbog', 17882)

@@ -937,7 +937,7 @@ SexyLib:Localization('Classic Achievements'):Add({
 
     AN_HELLFIRE_RAMPARTS = 'Бастионы Адского Пламени',
     AD_HELLFIRE_RAMPARTS = 'Одолейте боссов в Бастионах Адского Пламени',
-    AC_BOSS_17536 = 'Назан',
+    AC_BOSS_17308 = 'Омор Неодолимый',
     AC_BOSS_17537 = 'Вазруден Глашатай',
 
     AN_BLOOD_FURNACE = 'Кузня Крови',

@@ -87,7 +87,7 @@ local function updateProfessions()
     for i = 1, GetNumSkillLines() do
         local skillName, isHeader, _, points, tempPoints = GetSkillLineInfo(i)
         if not isHeader then
-            points = min(300, points - tempPoints)
+            points = min(375, points - tempPoints)
             for idx, data in pairs(ClassicAchievementsProfessions) do
                 if data[3] == skillName then
                     for ps = 1, points do trigger(TYPE.REACH_PROFESSION_LEVEL, {data[1], ps}, 1, true) end
@@ -169,10 +169,14 @@ local function checkForThanks()
         ['Коровобог-Пламегор'] = true,
         ['Злобняша-Пламегор'] = true,
         ['Шелкопрядица-Пламегор'] = true,
+        ['Аъя-Пламегор'] = true,
 
         -- r41dboss (Профессия)
         ['Профессия-Пламегор'] = true,
         ['Элеутерококк-Пламегор'] = true,
+
+        -- Leonard
+        ['Фаерлайт-Хроми'] = true,
 
         -- Qwaser (french translator)
         ['Qwaser-Auberdine'] = true
