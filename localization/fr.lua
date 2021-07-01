@@ -80,7 +80,8 @@ SexyLib:Localization('Classic Achievements'):Add({
 	
 	AN_UNARMED_SKILL = 'Qui a commandé une salade de phalanges ?',
     AD_UNARMED_SKILL = 'Obtenir un score de 350 avec la compétence Mains nues.',
-	SKILL_UNARMED = 'Unarmed',
+	SKILL_UNARMED = 'Mains nues',
+    SKILL_RIDING = 'Monte',
 	
 	AN_UNCOMMON_GEAR = 'Plus si ordinaire',
     AD_UNCOMMON_GEAR = 'S\'équiper d’un objet de qualité inhabituel ou supérieure dans chaque emplacement.',
@@ -948,5 +949,14 @@ SexyLib:Localization('Classic Achievements'):Add({
 
     AN_THANKS = 'Je suis moi-même, tu sais, un développeur',
     AD_THANKS = 'A été particulièrement utile pour développer, tester, traduire ou promouvoir Classic Achievements.',
-    AR_THANKS = 'Une gratitude infinie :)'
+    AR_THANKS = 'Une gratitude infinie :)',
+
+    AN_RIDING_75 = 'En selle !',
+    AD_RIDING_75 = 'Apprendre la compétence Apprenti cavalier.',
+    AN_RIDING_150 = 'L\'équipée sauvage',
+    AD_RIDING_150 = 'Apprendre la compétence Compagnon cavalier.',
+    AN_RIDING_225 = 'La charge héroïque',
+    AD_RIDING_225 = 'Apprendre la compétence Expert cavalier.',
+    AN_RIDING_300 = 'Les fous du volant',
+    AD_RIDING_300 = 'Apprendre la compétence Maître cavalier.'
 })

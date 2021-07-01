@@ -58,7 +58,8 @@ ClassicAchievementsProfessions = {
 }
 
 ClassicAchievementsSkills = {
-    UNARMED = 13
+    UNARMED = 13,
+    RIDING = 15
 }
 
 for idx, data in pairs(ClassicAchievementsProfessions) do
@@ -113,15 +114,17 @@ end
 
 local function updateItemsInInventory()
     local items = {}
-    for i = 0, NUM_BAG_SLOTS do
-        for j = 1, GetContainerNumSlots(i) do
-            local _, quantity, _, _, _, _, _, _, _, itemID = GetContainerItemInfo(i, j)
+    local function processBag(bagID)
+        for i = 1, GetContainerNumSlots(bagID) do
+            local _, quantity, _, _, _, _, _, _, _, itemID = GetContainerItemInfo(bagID, i)
             if itemID and quantity then
                 if not items[itemID] then items[itemID] = 0 end
                 items[itemID] = items[itemID] + quantity
             end
         end
     end
+    processBag(-2)
+    for i = 0, NUM_BAG_SLOTS do processBag(i) end
     for id, quantity in pairs(items) do
         trigger(TYPE.OBTAIN_ITEM, {id}, quantity, true)
         if id == 22589 or id == 22630 or id == 22631 or id == 22632 then

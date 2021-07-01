@@ -595,6 +595,7 @@ SexyLib:InitLocalization('Classic Achievements', {
     PROF_SKINNING = 'Skinning',
     PROF_JEWELCRAFTING = 'Jewelcrafting',
     SKILL_UNARMED = 'Unarmed',
+    SKILL_RIDING = 'Riding',
 
     AN_PROFS_JOURNEYMAN = 'Journeyman',
     AD_PROFS_JOURNEYMAN = 'Raise the skill of any main profession to 75.',
@@ -1094,6 +1095,32 @@ SexyLib:InitLocalization('Classic Achievements', {
     TBC_NPC_18679 = 'Vorakem Doomspeaker',
 
     AN_PREPATCH_QUEST = 'Battle for the Dark Portal',
-    AD_PREPATCH_QUEST = 'Participant in the Battle for the Dark Portal. Wielder of the Tabard of the Protector.'
+    AD_PREPATCH_QUEST = 'Participant in the Battle for the Dark Portal. Wielder of the Tabard of the Protector.',
+
+    AN_RIDING_75 = 'Giddy Up!',
+    AD_RIDING_75 = 'Learn the Apprentice Riding skill.',
+    AN_RIDING_150 = 'Fast and Furious',
+    AD_RIDING_150 = 'Learn the Journeyman Riding skill.',
+    AN_RIDING_225 = 'Into the Wild Blue Yonder',
+    AD_RIDING_225 = 'Learn the Expert Riding skill.',
+    AN_RIDING_300 = 'Breaking the Sound Barrier',
+    AD_RIDING_300 = 'Learn the Master Riding skill.',
+
+    AN_ATTUNE_SHATTERED_HALLS = 'Hotter than Hell',
+    AD_ATTUNE_SHATTERED_HALLS = 'Obtain the Shattered Halls Key.',
+    AN_ATTUNE_ARCATRAZ = 'Infiltrating the Alcatraz',
+    AD_ATTUNE_ARCATRAZ = 'Obtain the Key to the Arcatraz.',
+    AN_ATTUNE_KARAZHAN = 'The Master\'s Touch',
+    AD_ATTUNE_KARAZHAN = 'Obtain The Master\'s Key.',
+    AN_ATTUNE_NIGHT_BANE = 'Digging Up the Past',
+    AD_ATTUNE_NIGHT_BANE = 'Obtain the Blackened Urn.',
+    AN_ATTUNE_SSC = 'Access to the Serpentshrine Cavern',
+    AD_ATTUNE_SSC = 'Get access to the Serpentshrine Cavern.',
+    AN_ATTUNE_EYE = 'The Eye',
+    AD_ATTUNE_EYE = 'Obtain The Tempest Key.',
+    AN_ATTUNE_HYJAL = 'The Vials of Eternity',
+    AD_ATTUNE_HYJAL = 'Feed Soridormi from the Vials of Eternity and gain access to the Hujal Summit.',
+    AN_ATTUNE_BLACK_TEMPLE = 'Entry Into the Black Temple',
+    AD_ATTUNE_BLACK_TEMPLE = 'Obtain the Medallion of Karabor.'
 
 })

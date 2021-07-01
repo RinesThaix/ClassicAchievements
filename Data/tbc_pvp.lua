@@ -28,3 +28,6 @@ lorthemar:SetAllianceOnly()
 
 L:GetAchievementByID(153):AddCriteria(L:Criteria(TYPE.COMPLETE_ACHIEVEMENT, {velen.id}):Name(velen.name):Build())
 L:GetAchievementByID(158):AddCriteria(L:Criteria(TYPE.COMPLETE_ACHIEVEMENT, {lorthemar.id}):Name(lorthemar.name):Build())
+
+L:Call('riding')
+L:Call('attunes')

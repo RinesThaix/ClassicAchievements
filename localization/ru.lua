@@ -596,6 +596,7 @@ SexyLib:Localization('Classic Achievements'):Add({
     PROF_SKINNING = 'Снятие шкур',
     PROF_JEWELCRAFTING = 'Ювелирное дело',
     SKILL_UNARMED = 'Рукопашный бой',
+    SKILL_RIDING = 'Верховая езда',
 
     AN_PROFS_JOURNEYMAN = 'Подмастерье',
     AD_PROFS_JOURNEYMAN = 'Повысьте навык владения любой основной профессией до 75.',
@@ -1094,6 +1095,32 @@ SexyLib:Localization('Classic Achievements'):Add({
     TBC_NPC_18679 = 'Воракем Глашатай Судьбы',
 
     AN_PREPATCH_QUEST = 'Битва за Темный Портал',
-    AD_PREPATCH_QUEST = 'Участник битвы за Темный Портал. Владелец гербовой накидки Защитника.'
+    AD_PREPATCH_QUEST = 'Участник битвы за Темный Портал. Владелец гербовой накидки Защитника.',
+
+    AN_RIDING_75 = 'Четыре ноги - лучше',
+    AD_RIDING_75 = 'Станьте учеником в деле верховой езды.',
+    AN_RIDING_150 = 'На всех парах',
+    AD_RIDING_150 = 'Станьте подмастерьем в деле верховой езды.',
+    AN_RIDING_225 = 'В голубую высь',
+    AD_RIDING_225 = 'Станьте умельцем в деле верховой езды.',
+    AN_RIDING_300 = 'Преодоление звукового барьера',
+    AD_RIDING_300 = 'Станьте мастером в деле верховой езды.',
+
+    AN_ATTUNE_SHATTERED_HALLS = 'Жарче, чем в пекле',
+    AD_ATTUNE_SHATTERED_HALLS = 'Получите ключ Разрушенных залов.',
+    AN_ATTUNE_ARCATRAZ = 'Проникновение в Аркатрац',
+    AD_ATTUNE_ARCATRAZ = 'Получите ключ от Аркатраца.',
+    AN_ATTUNE_KARAZHAN = 'Разрешение учителя',
+    AD_ATTUNE_KARAZHAN = 'Получите хозяйский ключ.',
+    AN_ATTUNE_NIGHT_BANE = 'Тайны прошлого',
+    AD_ATTUNE_NIGHT_BANE = 'Получите вороненую урну.',
+    AN_ATTUNE_SSC = 'Доступ в Змеиное Святилище',
+    AD_ATTUNE_SSC = 'Получите доступ в Змеиное Святилище.',
+    AN_ATTUNE_EYE = 'Око',
+    AD_ATTUNE_EYE = 'Получите ключ Урагана.',
+    AN_ATTUNE_HYJAL = 'Сосуды Вечности',
+    AD_ATTUNE_HYJAL = 'Насытьте Соридорми из сосудов вечности, получив доступ к Вершине Хиджала.',
+    AN_ATTUNE_BLACK_TEMPLE = 'Вход в Черный Храм',
+    AD_ATTUNE_BLACK_TEMPLE = 'Получите медальон Карабора.'
 
 })

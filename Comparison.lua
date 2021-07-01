@@ -1,3 +1,5 @@
+if true then return end
+
 UnitPopupButtons['CLASSIC_ACHIEVEMENTS_TITLE'] = {
     isSubsection = true,
     isUninteractable = true,

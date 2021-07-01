@@ -17,7 +17,11 @@ local function create(zoneName, zoneID, subzoneIDs, category)
     :Name(loc:Get('EXPLORE_OUTLAND_NAME_PATTERN', AreaTableLocale[zoneID]))
     :Desc('AD_EXPLORE_' .. string.upper(zoneName), true)
     for _, subzoneID in pairs(subzoneIDs) do
-        builder:Criteria(TYPE.EXPLORE_AREA, {subzoneID}):Name(AreaTableLocale[subzoneID]):Build()
+        if subzoneID < 0 then
+            builder:Criteria(TYPE.NOT_WORKING):Name(AreaTableLocale[-subzoneID] .. ' (' .. loc:Get('NOT_WORKING') .. ')'):Build()
+        else
+            builder:Criteria(TYPE.EXPLORE_AREA, {subzoneID}):Name(AreaTableLocale[subzoneID]):Build()
+        end
     end
     return builder:Build()
 end
@@ -27,7 +31,7 @@ create('zangarmash', 3521, {3565, 3650, 3642, 3667, 3656, 3646, 3644, 3648, 3659
 create('terrokar', 3519, {3719, 3684, 3674, 3681, 3682, 3683, 3675, 3703, 3860, 3696, 3858, 3685, 3894, 3891, 3887, 3893, 3888, 3886, 3889, 3892, 3679})
 create('nagrand', 3518, {3624, 3613, 3628, 3637, 3616, 3631, 3622, 3626, 3638, 3615, 3617, 3610, 3611, 3625, 3629, 3764, 3762, 3634, 3763})
 create('blades_edge_mtns', 3522, {3864, 3867, 3773, 3777, 3776, 3863, 3775, 3831, 3787, 3784, 3785, 3781, 3774, 3768, 3844, 3830, 3833, 3828, 3866, 3772, 3865, 3769, 3782, 3829, 3827, 3832})
-create('netherstorm', 3523, {3712, 3726, 3730, 3734, 3722, 3736, 3741, 3842, 3729, 3723, 3737, 3732, 3850, 3725, 3837, 3738, 3868, 3874, 3877, 3878, 3742, 3739})
+create('netherstorm', 3523, {3712, 3726, 3730, 3734, 3722, 3736, 3741, 3842, 3729, 3723, 3737, 3732, -3850, 3725, 3837, 3738, 3868, 3874, 3877, 3878, 3742, 3739})
 local ending = create('shadowmoon', 3520, {3750, 3822, 3743, 3759, 3744, 3840, 3748, 3746, 3821, 3745, 3754, 3752, 3758})
 
 local builder = L:Achievement(exploration, 20, 'outland')

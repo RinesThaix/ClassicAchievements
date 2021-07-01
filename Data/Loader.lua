@@ -2,6 +2,8 @@ local db = CA_Database
 local criterias = CA_Criterias
 local loc = SexyLib:Localization('Classic Achievements')
 
+local delays = {}
+
 CA_Loader = {
     ForTab = function(self, tab, offset)
         local offsetter
@@ -170,13 +172,12 @@ CA_Loader = {
                 return nil
             end,
             Delay = function(self, delayID, callback)
-                if not self.delays then self.delays = {} end
-                self.delays[delayID] = callback
+                delays[delayID] = callback
             end,
             Call = function(self, delayID)
-                if not self.delays or not self.delays[delayID] then return end
-                self.delays[delayID]()
-                self.delays[delayID] = nil
+                if not delays[delayID] then return end
+                delays[delayID]()
+                delays[delayID] = nil
             end
         }
     end
