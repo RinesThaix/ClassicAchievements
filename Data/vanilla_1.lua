@@ -275,7 +275,7 @@ do
 end
 
 local pvp = tab:CreateCategory('PvP')
-local openWorldPVP = L:Category(26):Name('CATEGORY_OPEN_WORLD', true):Parent(pvp):Build()
+local openWorldPVP = L:Category(27):Name('CATEGORY_OPEN_WORLD', true):Parent(pvp):Build()
 
 do
     previous = nil
@@ -401,6 +401,8 @@ local warsong = tab:CreateCategory('CATEGORY_BG_WARSONG', pvp.id, true)
 local warsongID = 1460
 local arathi = tab:CreateCategory('CATEGORY_BG_ARATHI', pvp.id, true)
 local arathiID = 1461
+local bgEye = tab:CreateCategory('CATEGORY_BG_EYE', pvp.id, true, 26)
+local bgEyeID = 1956
 
 do
     local function add(category, factionID, factionName, points, icon)
@@ -532,13 +534,17 @@ do
     add(warsong, warsongID, 'WARSONG', '-Inv_Axe_16')
     add(arathi, arathiID, 'ARATHI', '-Inv_Sword_39')
 
+    L:Delay('bg_eye', function()
+        _add(bgEye, bgEyeID, 'EYE', 'WIN', TYPE.BATTLEFIELD_WINS, nil, {1, 5, 10, 25, 50}, 'bg_eye_win')
+    end)
+
     add = function(typeName, type, additionalParam, amounts, icon)
         return _add(alterac, alteracID, 'ALTERAC', typeName, type, additionalParam, amounts, icon)
     end
 
     add('KILLING_BLOW', TYPE.BATTLEFIELD_SCORE_MAX, 1, {10, 25, 50, 100}, '-Spell_Shadow_Summonimp')
     add('GRAVEYARD_ASSAULT', TYPE.BATTLEFIELD_STAT_MAX, 1, {1, 2, 3, 4}, '-Spell_Holy_Divinespirit')
-    add('GRAVEYARD_DEFEND', TYPE.BATTLEFIELD_STAT_MAX, 1, {1, 2, 5, 8}, '-Spell_Holy_Prayerofspirit')
+    add('GRAVEYARD_DEFEND', TYPE.BATTLEFIELD_STAT_MAX, 2, {1, 2, 5, 8}, '-Spell_Holy_Prayerofspirit')
     add('TOWER_ASSAULT', TYPE.BATTLEFIELD_STAT_MAX, 3, {1, 2, 3, 4}, '-Ability_Thunderbolt')
     add('TOWER_DEFEND', TYPE.BATTLEFIELD_STAT_MAX, 4, {1, 2, 4, 6}, '-Inv_Shield_05')
     _add(alterac, nil, 'ALTERAC', 'MINE_CAPTURE', TYPE.ALTERAC_VALLEY_MINE_CAPTURE_MAX, nil, {1, 2, 3, 4}, '-Inv_Pick_01')

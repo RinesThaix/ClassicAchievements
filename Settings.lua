@@ -62,12 +62,18 @@ end)
 C_Timer.After(2, function()
     -- CA_Flags: 0x01: Whether first login with this addon installed happened
     --           0x02: Whether first login into TBCC with this addon installed happened
+    --           0x04: PvP achievements update
     CA_Flags = bit.bor(CA_Flags, 1)
-    if (bit.band(CA_Flags, 2) == 0) then
+    if bit.band(CA_Flags, 2) == 0 then
         CA_Flags = bit.bor(CA_Flags, 2)
+        CA_Flags = bit.bor(CA_Flags, 4)
         local cmanager = CA_CompletionManager:GetLocal()
         cmanager:TakeIncompleteAchievements()
         cmanager:UpdateNewCriteriasOfOldType()
+    elseif bit.band(CA_Flags, 4) == 0 then
+        CA_Flags = bit.bor(CA_Flags, 4)
+        local cmanager = CA_CompletionManager:GetLocal()
+        cmanager:TakeIncompleteAchievements()
     end
 end)
 

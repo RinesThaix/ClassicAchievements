@@ -299,7 +299,7 @@ local EMOTE_LOVE = getEmoteLocalizations('EMOTE_LOVE')
 local EMOTE_PAT = getEmoteLocalizations('EMOTE_PAT')
 
 local canGetBattlegroundsAchievement = false
-local alteracID, warsongID, arathiID = 1459, 1460, 1461
+local alteracID, warsongID, arathiID, bgEyeID = 1459, 1460, 1461, 1956
 
 local killingTracker = CA_CreatureKillingTracker
 killingTracker:AddHandler(function(targetID) return true end, function(targetID)
@@ -396,6 +396,22 @@ killingTracker:AddPlayerHandler(function(targetGUID)
     local _, className, _, raceName = GetPlayerInfoByGUID(targetGUID)
     trigger(TYPE.KILL_PLAYER_OF_CLASS, {string.upper(className)}, 1)
     trigger(TYPE.KILL_PLAYER_OF_RACE, {string.upper(raceName)}, 1)
+
+    local mapID = C_Map.GetBestMapForUnit('player')
+    if mapID == bgEyeID then
+        local berserker = false
+        for i = 1, 64 do
+            local name, _, _, _, _, _, _, _, _, id = UnitAura('player', i, 'HARMFUL')
+            if not name then break end
+            if id == 24378 then
+                berserker = true
+                break
+            end
+        end
+        if berserker then
+            trigger(TYPE.BG_EYE_BERSERK)
+        end
+    end
 end)
 
 local alteracValleyMineCaptures = 0
@@ -464,12 +480,12 @@ local events = {
         canGetBattlegroundsAchievement = false
         
         local mapID = C_Map.GetBestMapForUnit('player')
-        if mapID ~= alteracID and mapID ~= warsongID and mapID ~= arathiID then return end
+        if mapID ~= alteracID and mapID ~= warsongID and mapID ~= arathiID and mapID ~= bgEyeID then return end
 
         local numStats, numScores = GetNumBattlefieldStats(), GetNumBattlefieldScores()
         local myName = UnitName('player')
         for i = 1, numScores do
-            local name, killingBlows, honorableKills = GetBattlefieldScore(i)
+            local name, killingBlows, honorableKills, deaths = GetBattlefieldScore(i)
             if name == myName then
                 local scores = {killingBlows, honorableKills}
                 for j = 1, numStats do
@@ -480,6 +496,11 @@ local events = {
                 for j, score in pairs(scores) do
                     trigger(TYPE.BATTLEFIELD_SCORE_MAX, {mapID, j}, score, true)
                     trigger(TYPE.BATTLEFIELDS_SCORE, {j}, score)
+                end
+                if mapID == bgEyeID then
+                    if GetBattlefieldStatData(i, 1) >= 3 and deaths == 0 then
+                        trigger(TYPE.BG_EYE_GLORY)
+                    end
                 end
                 break
             end
@@ -492,10 +513,16 @@ local events = {
 
         local myFaction = UnitFactionGroup('player')
         if myFaction == 'Horde' then myFaction = 0 else myFaction = 1 end
+
+        local myFactionPoints = GetBattlegroundPoints(myFaction)
+        local enemyFactionPoints = GetBattlegroundPoints(1 - myFaction)
+
+        trigger(TYPE.BG_POINTS, {mapID, myFactionPoints, enemyFactionPoints})
+
         if winner == myFaction then
             trigger(TYPE.BATTLEFIELD_WINS, {mapID}, 1)
             if seconds ~= 0 then
-                if (mapID == alteracID or mapID == arathiID) and seconds <= 360 or mapID == warsongID and seconds <= 420 then
+                if (mapID == alteracID or mapID == arathiID or mapID == bgEyeID) and seconds <= 360 or mapID == warsongID and seconds <= 420 then
                     trigger(TYPE.BATTLEFIELD_FAST_WIN, {mapID})
                 end
             end

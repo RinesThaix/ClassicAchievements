@@ -6,7 +6,7 @@ local pve = L:GetCategoryByName('CATEGORY_PVE', true)
 local instances = L:GetCategoryByName('CATEGORY_VANILLA', true)
 
 local pvp = L:GetCategoryByName('PvP')
-local openWorldPVP = L:GetCategoryByID(26)
+local openWorldPVP = L:GetCategoryByID(27)
 local alterac = L:GetCategoryByName('CATEGORY_BG_ALTERAC', true)
 local alteracID = 1459
 local warsong = L:GetCategoryByName('CATEGORY_BG_WARSONG', true)

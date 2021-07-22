@@ -124,7 +124,7 @@ SexyLib:InitLocalization('Classic Achievements', {
 
     AZSHARA_1 = 'Azshara',
     AZSHARA_2 = 'Azshara',
-    QUEST_3602 = 'Азшарит',
+    QUEST_3602 = 'Azsharite',
 
     FELWOOD_1 = 'Felwood',
     FELWOOD_2 = 'Felwood',
@@ -532,6 +532,10 @@ SexyLib:InitLocalization('Classic Achievements', {
     AD_ARATHI_WIN = 'Win the battle for Arathi Basin.',
     AN_ARATHI_WINS = 'Arathi Basin Veteran',
     AD_ARATHI_WINS = 'Win %d battles for Arathi Basin.',
+    AN_EYE_WIN = 'Eye of the Storm Victory',
+    AD_EYE_WIN = 'Win Eye of the Storm.',
+    AN_EYE_WINS = 'Eye of the Storm Veteran',
+    AD_EYE_WINS = 'Complete %d victories in Eye of the Storm.',
 
     AN_ALTERAC_KILLING_BLOWS = 'Valley Meat Grinder',
     AD_ALTERAC_KILLING_BLOWS = 'Make %d killing blows in a single battle for Alterac Valley and stay to the end of the battle.',
@@ -575,6 +579,18 @@ SexyLib:InitLocalization('Classic Achievements', {
     AD_ARATHI_BASE_DEFEND = 'Defend a construction while fighting for Arathi Basin and stay before the battle is over.',
     AN_ARATHI_BASE_DEFENDS = 'Honorary sentry',
     AD_ARATHI_BASE_DEFENDS = 'Defend %d constructions in a single battle for Arathi Basin and stay to the end of the battle.',
+
+    AN_EYE_CAPTURE = 'Storm Capper',
+    AD_EYE_CAPTURE = 'Personally capture the flag in Eye of the Storm and stay to the end of the battle.',
+    AD_EYE_CAPTURES = 'Personally capture %d flags in a single battle of Eye of the Storm and stay to the end of the battle.',
+    AN_EYE_GLORY = 'Bound for Glory',
+    AD_EYE_GLORY = 'In a single Eye of the Storm match, capture the flag 3 times without dying.',
+    AN_EYE_FAST_WIN = 'Flurry',
+    AD_EYE_FAST_WIN = 'Win Eye of the Storm in under 6 minutes.',
+    AN_EYE_BERSERK = 'Bloodthirsty Berserker',
+    AD_EYE_BERSERK = 'Get a killing blow against another player while under the effects of the berserker buff in Eye of the Storm.',
+    AN_EYE_IDEAL_VICTORY = 'The Perfect Storm',
+    AD_EYE_IDEAL_VICTORY = 'Win Eye of the Storm with a score of 1500 to 0.',
 
     AN_BGS_KILLING_BLOWS = 'Deathbringer',
     AD_BGS_KILLING_BLOWS = 'Make %d killing blows on battlegrounds you did not leave.',
@@ -824,6 +840,8 @@ SexyLib:InitLocalization('Classic Achievements', {
     AD_WARSONG_BOSS = 'Complete the Warsong Gulch achievements listed below.',
     AN_ARATHI_BOSS = 'Master of Arathi Basin',
     AD_ARATHI_BOSS = 'Complete the Arathi Basin achievements listed below.',
+    AN_EYE_BOSS = 'Master of Eye of the Storm',
+    AD_EYE_BOSS = 'Complete the Eye of the Storm achievements listed below.',
     AN_BATTLEMASTER = 'Battlemaster',
     AD_BATTLEMASTER = 'Complete the battleground achievements listed below.',
     AR_BATTLEMASTER = 'The unspoken title of Battlemaster.',
@@ -1108,7 +1126,7 @@ SexyLib:InitLocalization('Classic Achievements', {
 
     AN_ATTUNE_SHATTERED_HALLS = 'Hotter than Hell',
     AD_ATTUNE_SHATTERED_HALLS = 'Obtain the Shattered Halls Key.',
-    AN_ATTUNE_ARCATRAZ = 'Infiltrating the Alcatraz',
+    AN_ATTUNE_ARCATRAZ = 'Infiltrating the Arcatraz',
     AD_ATTUNE_ARCATRAZ = 'Obtain the Key to the Arcatraz.',
     AN_ATTUNE_KARAZHAN = 'The Master\'s Touch',
     AD_ATTUNE_KARAZHAN = 'Obtain The Master\'s Key.',
