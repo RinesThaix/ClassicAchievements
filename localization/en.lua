@@ -1018,6 +1018,8 @@ SexyLib:InitLocalization('Classic Achievements', {
 
     AN_TBC_PHASE_1 = 'Outland Phase One Raider',
     AD_TBC_PHASE_1 = 'Complete the Burning Crusade phase one raid achievements listed below.',
+    AN_TBC_PHASE_2 = 'Outland Phase Two Raider',
+    AD_TBC_PHASE_2 = 'Complete the Burning Crusade phase two raid achievements listed below.',
 
     FACTION_946 = 'Honor Hold',
     FACTION_947 = 'Thrallmar',
@@ -1139,6 +1141,21 @@ SexyLib:InitLocalization('Classic Achievements', {
     AN_ATTUNE_HYJAL = 'The Vials of Eternity',
     AD_ATTUNE_HYJAL = 'Feed Soridormi from the Vials of Eternity and gain access to the Hujal Summit.',
     AN_ATTUNE_BLACK_TEMPLE = 'Entry Into the Black Temple',
-    AD_ATTUNE_BLACK_TEMPLE = 'Obtain the Medallion of Karabor.'
+    AD_ATTUNE_BLACK_TEMPLE = 'Obtain the Medallion of Karabor.',
+
+    AN_SSC = 'Serpentshrine Cavern',
+    AD_SSC = 'Defeat bosses listed below inside Serpentshrine Cavern.',
+    AC_KILL_HYDROS = 'Hydross the Unstable',
+    AC_KILL_LURKER = 'The Lurker Below',
+    AC_KILL_LEOTHERAS = 'Leotheras the Blind',
+    AC_KILL_KARATHRESS = 'Fathom-Lord Karathress',
+    AC_KILL_MOROGRIM = 'Morogrim Tidewalker',
+    AC_KILL_VASHJ = 'Lady Vashj',
+    AN_TK = 'Tempest Keep',
+    AD_TK = 'Defeat bosses listed below inside The Eye raid instance.',
+    AC_KILL_ALAR = 'Al\'ar',
+    AC_KILL_VOID_REAVER = 'Void Reader',
+    AC_KILL_SOLARIAN = 'High Astromancer Solarian',
+    AC_KILL_KAELTHAS = 'Kael\'thas Sunstrider'
 
 })

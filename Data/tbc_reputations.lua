@@ -53,12 +53,11 @@ create('sporeggar', 970, '-Inv_Mushroom_11')
 create('consortium', 933, '-Inv_Enchant_ShardPrismaticLarge')
 create('maghar', 941, '-Inv_Misc_Foot_Centaur', 15):SetHordeOnly()
 create('kurenai', 978, '-Inv_Misc_Foot_Centaur', 15):SetAllianceOnly()
-create('netherwings', 1015, '-Ability_Mount_NetherdrakePurple'):SetUnavailable() -- P2
+create('netherwings', 1015, '-Ability_Mount_NetherdrakePurple')
 L:Achievement(tbcReputations, 10, '-Ability_Mount_NetherdrakePurple')
 :NameDesc('AN_SKYSHATTERED', 'AD_SKYSHATTERED', true)
 :Criteria(TYPE.COMPLETE_QUEST, {11071}):Build()
 :Build()
-:SetUnavailable() -- P2
 create('amethyst_eye', 967, '-Spell_Holy_Mindsooth')
 create('scale_of_the_sands', 990, '-Inv_Enchant_DustIllusion'):SetUnavailable() -- P4
 create('ashtongue_deathsworn', 1012):SetUnavailable() -- P4

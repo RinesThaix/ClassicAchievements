@@ -98,7 +98,7 @@ do
     :Criteria(TYPE.KILL_NPC, {17257}):Build()
     :Build()
 
-    L:Achievement(pve, 20, '-Inv_Helmet_90')
+    L:Achievement(pve, 20, '-Inv_Helmet_89')
     :NameDesc('AN_TBC_PHASE_1', 'AD_TBC_PHASE_1', true)
     :Criteria(TYPE.COMPLETE_ACHIEVEMENT, {karazhan.id}):Name(karazhan.name):Build()
     :Criteria(TYPE.COMPLETE_ACHIEVEMENT, {gruul.id}):Name(gruul.name):Build()
@@ -116,3 +116,31 @@ L:Achievement(tbcInstances, 10, '-Inv_Misc_EngGizmos_06')
 :NameDesc('AN_WB_DOOMWALKER', 'AD_WB_DOOMWALKER', true)
 :Criteria(TYPE.KILL_NPC, {17711}):Build()
 :Build()
+
+do
+
+    local ssc = L:Achievement(tbcInstances, 20, 'ssc')
+    :NameDesc('AN_SSC', 'AD_SSC', true)
+    :Criteria(TYPE.KILL_NPC, {21216}):Name('AC_KILL_HYDROS', true):Build()
+    :Criteria(TYPE.KILL_NPC, {21217}):Name('AC_KILL_LURKER', true):Build()
+    :Criteria(TYPE.KILL_NPC, {21215}):Name('AC_KILL_LEOTHERAS', true):Build()
+    :Criteria(TYPE.KILL_NPC, {21214}):Name('AC_KILL_KARATHRESS', true):Build()
+    :Criteria(TYPE.KILL_NPC, {21213}):Name('AC_KILL_MOROGRIM', true):Build()
+    :Criteria(TYPE.KILL_NPC, {21212}):Name('AC_KILL_VASHJ', true):Build()
+    :Build()
+
+    local tk = L:Achievement(tbcInstances, 20, 'the_eye')
+    :NameDesc('AN_TK', 'AD_TK', true)
+    :Criteria(TYPE.KILL_NPC, {19514}):Name('AC_KILL_ALAR', true):Build()
+    :Criteria(TYPE.KILL_NPC, {19516}):Name('AC_KILL_VOID_REAVER', true):Build()
+    :Criteria(TYPE.KILL_NPC, {18805}):Name('AC_KILL_SOLARIAN', true):Build()
+    :Criteria(TYPE.KILL_NPC, {19622}):Name('AC_KILL_KAELTHAS', true):Build()
+    :Build()
+
+    L:Achievement(pve, 20, '-Inv_Helmet_90')
+    :NameDesc('AN_TBC_PHASE_2', 'AD_TBC_PHASE_2', true)
+    :Criteria(TYPE.COMPLETE_ACHIEVEMENT, {ssc.id}):Name(ssc.name):Build()
+    :Criteria(TYPE.COMPLETE_ACHIEVEMENT, {tk.id}):Name(tk.name):Build()
+    :Build()
+
+end

@@ -140,7 +140,6 @@ L:Delay('attunes', function()
     :NameDesc('AN_ATTUNE_HYJAL', 'AD_ATTUNE_HYJAL', true)
     :Criteria(TYPE.COMPLETE_QUEST, {10445}):Build()
     :Build()
-    :SetUnavailable() -- P2
     L:Achievement(outlandQuests, 10, 'black_temple')
     :NameDesc('AN_ATTUNE_BLACK_TEMPLE', 'AD_ATTUNE_BLACK_TEMPLE', true)
     :Criteria(TYPE.OR, {L:Criteria(TYPE.OBTAIN_ITEM, {32649}):Build(), L:Criteria(TYPE.OBTAIN_ITEM, {32757}):Build()}):Build()

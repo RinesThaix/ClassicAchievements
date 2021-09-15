@@ -1018,6 +1018,8 @@ SexyLib:Localization('Classic Achievements'):Add({
 
     AN_TBC_PHASE_1 = 'Поход по Запределью первой фазы',
     AD_TBC_PHASE_1 = 'Заработайте указанные ниже достижения в рейдах The Burning Crusade первой фазы.',
+    AN_TBC_PHASE_2 = 'Поход по Запределью второй фазы',
+    AD_TBC_PHASE_2 = 'Заработайте указанные ниже достижения в рейдах The Burning Crusade второй фазы.',
 
     FACTION_946 = 'Оплот Чести',
     FACTION_947 = 'Траллмар',
@@ -1139,6 +1141,21 @@ SexyLib:Localization('Classic Achievements'):Add({
     AN_ATTUNE_HYJAL = 'Сосуды Вечности',
     AD_ATTUNE_HYJAL = 'Насытьте Соридорми из сосудов вечности, получив доступ к Вершине Хиджала.',
     AN_ATTUNE_BLACK_TEMPLE = 'Вход в Черный Храм',
-    AD_ATTUNE_BLACK_TEMPLE = 'Получите медальон Карабора.'
+    AD_ATTUNE_BLACK_TEMPLE = 'Получите медальон Карабора.',
+
+    AN_SSC = 'Змеиное Святилище',
+    AD_SSC = 'Одолейте перечисленных боссов в Змеином Святилище.',
+    AC_KILL_HYDROS = 'Гидросс Нестабильный',
+    AC_KILL_LURKER = 'Скрытень из глубин',
+    AC_KILL_LEOTHERAS = 'Леотерас Слепец',
+    AC_KILL_KARATHRESS = 'Повелитель глубин Каратресс',
+    AC_KILL_MOROGRIM = 'Морогрим Волноступ',
+    AC_KILL_VASHJ = 'Леди Вайш',
+    AN_TK = 'Крепость Бурь',
+    AD_TK = 'Одолейте перечисленных боссов в Крепости Бурь.',
+    AC_KILL_ALAR = 'Ал\'ар',
+    AC_KILL_VOID_REAVER = 'Страж Бездны',
+    AC_KILL_SOLARIAN = 'Верховный звездочет Солариан',
+    AC_KILL_KAELTHAS = 'Кель\'тас Солнечный Скиталец'
 
 })
