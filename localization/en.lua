@@ -1020,6 +1020,8 @@ SexyLib:InitLocalization('Classic Achievements', {
     AD_TBC_PHASE_1 = 'Complete the Burning Crusade phase one raid achievements listed below.',
     AN_TBC_PHASE_2 = 'Outland Phase Two Raider',
     AD_TBC_PHASE_2 = 'Complete the Burning Crusade phase two raid achievements listed below.',
+    AN_TBC_PHASE_2 = 'Outland Phase Three Raider',
+    AD_TBC_PHASE_2 = 'Complete the Burning Crusade phase three raid achievements listed below.',
 
     FACTION_946 = 'Honor Hold',
     FACTION_947 = 'Thrallmar',
@@ -1156,6 +1158,41 @@ SexyLib:InitLocalization('Classic Achievements', {
     AC_KILL_ALAR = 'Al\'ar',
     AC_KILL_VOID_REAVER = 'Void Reader',
     AC_KILL_SOLARIAN = 'High Astromancer Solarian',
-    AC_KILL_KAELTHAS = 'Kael\'thas Sunstrider'
+    AC_KILL_KAELTHAS = 'Kael\'thas Sunstrider',
+
+    AN_HYJAL = 'The Battle for Mount Hyjal',
+    AD_HYJAL = 'Defeat Archimonde in The Battle for Mount Hyjal.',
+
+    AN_BT_ENTRANCE = 'Infiltration',
+    AD_BT_ENTRANCE = 'Make your way to the Black Temple from the sewers by defeating the listed bosses.',
+    AC_KILL_NAJENTUS = 'High Warlord Naj\'entus',
+    AC_KILL_SUPREMUS = 'Supremus',
+
+    AN_BT_SECOND_WING = 'Acolyte of Karabor',
+    AD_BT_SECOND_WING = 'Cleanse the main halls of the Black Temple from the evil that has settled in there by defeating the listed bosses.',
+    AC_KILL_SHADOW_OF_AKAMA = 'Shade of Akama',
+    AC_KILL_THERON = 'Teron Gorefiend',
+    AC_KILL_GURTOGG = 'Gurtogg Bloodboil',
+    AC_KILL_RELIQUARY = 'Reliquary of Souls',
+
+    AN_BT_LAST_WING = 'Top of the Temple',
+    AD_BT_LAST_WING = 'Infiltrate the upper floors of the Black Temple and defeat the listed bosses.',
+    AC_KILL_MOTHER_SHAHRAZ = 'Mother Shahraz',
+    AC_KILL_BT_COUNCIL = 'The Illidari Council',
+    AC_KILL_ILLIDAN = 'Illidan Stormrage',
+
+    AN_BLACK_TEMPLE = 'The Black Temple',
+    AD_BLACK_TEMPLE = 'Earn the achievements listed below by defeating all the bosses in the Black Temple.',
+    AR_BLACK_TEMPLE = 'Unspoken title "from the Black Temple" :)',
+
+    AN_AZZINOTH = 'Warglaives of Azzinoth',
+    AD_AZZINOTH = 'Wielder of the Warglaives of Azzinoth.',
+    AC_OBTAIN_MAINHAND_AZZINOTH = 'Right blade of Azzinoth',
+    AC_OBTAIN_OFFHAND_AZZINOTH = 'Left blade of Azzinoth',
+
+    AN_P3_FIRST_WEEK = 'Conqueror of the Outland',
+    AD_P3_FIRST_WEEK = 'Defeat Archimonde and Illidan Stormrage in their respective raids within the first week of the release of phase three.',
+    AC_KILL_ARCHIMONDE = 'Archimonde',
+    AR_P3_FIRST_WEEK = 'Unspoken title of the Conqueror of the Outland.'
 
 })

@@ -1,9 +1,9 @@
-## Interface: 20502
+## Interface: 20503
 ## Title: Classic Achievements
 ## Notes: Introduces achievements for WoW Classic
 ## Notes-ruRU: Добавляет достижения в мир WoW Classic
 ## Author: Konstantin Shandurenko
-## Version: 1.1.3.0
+## Version: 1.1.4.0
 ## RequiredDeps: SexyLib-Network, SexyLib-Localization
 ## OptionalDeps: DBM-Core, ElvUI, Bartender4
 ## SavedVariables: CA_Settings
@@ -42,6 +42,7 @@ Data/tbc_reputations.lua
 Data/tbc_exploration.lua
 Data/tbc_professions.lua
 Data/tbc_pvp.lua
+Data/tbc_pve_2.lua
 Data/Guild.lua
 Data/PostLoad.lua
 

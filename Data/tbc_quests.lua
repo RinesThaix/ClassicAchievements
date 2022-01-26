@@ -144,5 +144,4 @@ L:Delay('attunes', function()
     :NameDesc('AN_ATTUNE_BLACK_TEMPLE', 'AD_ATTUNE_BLACK_TEMPLE', true)
     :Criteria(TYPE.OR, {L:Criteria(TYPE.OBTAIN_ITEM, {32649}):Build(), L:Criteria(TYPE.OBTAIN_ITEM, {32757}):Build()}):Build()
     :Build()
-    :SetUnavailable() -- P3 or P4
 end)

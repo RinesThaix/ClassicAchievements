@@ -2,3 +2,4 @@ textures/icons_old
 .DS_Store
 copy.sh
 default.code-workspace
+.idea/

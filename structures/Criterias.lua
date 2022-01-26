@@ -47,7 +47,8 @@ struct.TYPE = {
     ALTERAC_VALLEY_MINE_CAPTURE_MAX = 41,
     BG_EYE_GLORY = 42,
     BG_EYE_BERSERK = 43,
-    BG_POINTS = 44
+    BG_POINTS = 44,
+    P3_FIRST_WEEK = 45
 }
 
 struct.dataLengths = {
@@ -94,7 +95,8 @@ struct.dataLengths = {
     [struct.TYPE.ALTERAC_VALLEY_MINE_CAPTURE_MAX] = 0,
     [struct.TYPE.BG_EYE_GLORY] = 0,
     [struct.TYPE.BG_EYE_BERSERK] = 0,
-    [struct.TYPE.BG_POINTS] = 3
+    [struct.TYPE.BG_POINTS] = 3,
+    [struct.TYPE.P3_FIRST_WEEK] = 1
 }
 
 struct.criterias = {}

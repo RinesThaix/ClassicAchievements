@@ -59,8 +59,8 @@ L:Achievement(tbcReputations, 10, '-Ability_Mount_NetherdrakePurple')
 :Criteria(TYPE.COMPLETE_QUEST, {11071}):Build()
 :Build()
 create('amethyst_eye', 967, '-Spell_Holy_Mindsooth')
-create('scale_of_the_sands', 990, '-Inv_Enchant_DustIllusion'):SetUnavailable() -- P4
-create('ashtongue_deathsworn', 1012):SetUnavailable() -- P4
+create('scale_of_the_sands', 990, '-Inv_Enchant_DustIllusion')
+create('ashtongue_deathsworn', 1012)
 create('shattered_sun', 1077, '-Inv_Shield_48'):SetUnavailable() -- P5
 
 L:GetAchievementByID(130):AddCriteria(L:Criteria(TYPE.REACH_REPUTATION, {911, 8}):Name('AC_HORDE_REPS_5', true):Build())

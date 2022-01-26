@@ -1020,6 +1020,8 @@ SexyLib:Localization('Classic Achievements'):Add({
     AD_TBC_PHASE_1 = 'Заработайте указанные ниже достижения в рейдах The Burning Crusade первой фазы.',
     AN_TBC_PHASE_2 = 'Поход по Запределью второй фазы',
     AD_TBC_PHASE_2 = 'Заработайте указанные ниже достижения в рейдах The Burning Crusade второй фазы.',
+    AN_TBC_PHASE_3 = 'Поход по Запределью третьей фазы',
+    AD_TBC_PHASE_3 = 'Заработайте указанные ниже достижения в рейдах The Burning Crusade третьей фазы.',
 
     FACTION_946 = 'Оплот Чести',
     FACTION_947 = 'Траллмар',
@@ -1156,6 +1158,41 @@ SexyLib:Localization('Classic Achievements'):Add({
     AC_KILL_ALAR = 'Ал\'ар',
     AC_KILL_VOID_REAVER = 'Страж Бездны',
     AC_KILL_SOLARIAN = 'Верховный звездочет Солариан',
-    AC_KILL_KAELTHAS = 'Кель\'тас Солнечный Скиталец'
+    AC_KILL_KAELTHAS = 'Кель\'тас Солнечный Скиталец',
+
+    AN_HYJAL = 'Битва за гору Хиджал',
+    AD_HYJAL = 'Одолейте Архимонда в битве за гору Хиджал.',
+
+    AN_BT_ENTRANCE = 'Проникновение',
+    AD_BT_ENTRANCE = 'Пробейтесь в Черный Храм из канализации, одолев перечисленных боссов.',
+    AC_KILL_NAJENTUS = 'Верховный полководец Надж\'ентус',
+    AC_KILL_SUPREMUS = 'Супремус',
+
+    AN_BT_SECOND_WING = 'Послушник Карабора',
+    AD_BT_SECOND_WING = 'Очистите главные залы Черного Храма от поселившегося в них зла, одолев перечисленных боссов.',
+    AC_KILL_SHADOW_OF_AKAMA = 'Тень Акамы',
+    AC_KILL_THERON = 'Терон Кровожад',
+    AC_KILL_GURTOGG = 'Гуртогг Кипящая Кровь',
+    AC_KILL_RELIQUARY = 'Реликварий Потерянных',
+
+    AN_BT_LAST_WING = 'Вершина Храма',
+    AD_BT_LAST_WING = 'Проникните на верхние этаже Черного Храма и одолейте перечисленных боссов.',
+    AC_KILL_MOTHER_SHAHRAZ = 'Матушка Шахраз',
+    AC_KILL_BT_COUNCIL = 'Совет иллидари',
+    AC_KILL_ILLIDAN = 'Иллидан Ярость Бури',
+
+    AN_BLACK_TEMPLE = 'Черный Храм',
+    AD_BLACK_TEMPLE = 'Убейте всех боссов в Черном Храме, заработав указанные ниже достижения.',
+    AR_BLACK_TEMPLE = 'Негласное звание "из Черного Храма" :)',
+
+    AN_AZZINOTH = 'Боевые клинки Аззинота',
+    AD_AZZINOTH = 'Владелец боевых клинков Аззинота.',
+    AC_OBTAIN_MAINHAND_AZZINOTH = 'Правый клинок Аззинота',
+    AC_OBTAIN_OFFHAND_AZZINOTH = 'Левый клинок Аззинота',
+
+    AN_P3_FIRST_WEEK = 'Покоритель Запределья',
+    AD_P3_FIRST_WEEK = 'Одолейте Архимонда и Иллидана Ярость Бури в соответствующих рейдовых подземельях в течение первой недели с момента выхода третьей фазы.',
+    AC_KILL_ARCHIMONDE = 'Архимонд',
+    AR_P3_FIRST_WEEK = 'Негласное звание покорителя Запределья.'
 
 })

@@ -309,6 +309,7 @@ killingTracker:AddHandler(function(targetID) return true end, function(targetID)
     local difficultyID = GetDungeonDifficultyID()
     local _, _, isHeroic = GetDifficultyInfo(difficultyID)
     if isHeroic then trigger(TYPE.KILL_NPC_HEROIC, {targetID}, 1) end
+    if time() < 1643871600 then trigger(TYPE.P3_FIRST_WEEK, {targetID}, 1) end
 end)
 
 local leeroy = {}
